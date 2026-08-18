@@ -311,6 +311,16 @@ const CHARGES = [
   { title: "Education Loan", amount: "Rs. 500", pct: "(0.5%)", perLakh: "For 1 Lakh", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
 ];
 
+// 3.0. BANKERS PAYOUT CHARGES ARRAY (For 1 Lakh Disbursal - Without Service)
+const BANKERS_CHARGES = [
+  { title: "Personal Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh", icon: <SVG.User className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Business Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh", icon: <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Home Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh", icon: <SVG.Home className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "LAP", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh", icon: <SVG.Building className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Vehicle Loan", amount: "Rs. 800", pct: "(0.8%)", perLakh: "For 1 Lakh", icon: <SVG.Car className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Education Loan", amount: "Rs. 900", pct: "(0.9%)", perLakh: "For 1 Lakh", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
+];
+
 // 3.1. INSURANCE LIST ARRAY
 const INSURANCE_LIST = [
   { 
@@ -2150,8 +2160,52 @@ function App() {
           </div>
 
           {/* ========================================================================= */}
-          {/* 8. ABOUT ANDROMEDA + OUR PROCESS & TRUST (EXACT 2ND IMAGE INFOGRAPHIC) */}
+          {/* 7.1. FOR BANKERS (WITHOUT SERVICE) - IDENTICAL GRID DESIGN */}
           {/* ========================================================================= */}
+          <div className="py-2" id="bankers-sec">
+            <div className="text-center mb-4">
+              <h2 className="text-base sm:text-xl md:text-2xl font-black text-[#0B4DA2] tracking-wide brand-font flex items-center justify-center space-x-2">
+                <span className="text-slate-300 font-light">—◇—</span>
+                <span className="uppercase">For Bankers (For 1 Lakh Disbursement)</span>
+                <span className="text-slate-300 font-light">—◇—</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 font-bold mt-1">
+                Loan Payout (Without Service) Structure for Every ₹1 Lakh Disbursed
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+              {BANKERS_CHARGES.map((ch, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                      {ch.icon}
+                    </div>
+                    <div>
+                      <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight block">
+                        {ch.title}
+                      </span>
+                      <span className="text-[11px] font-bold text-slate-500 block mt-0.5">
+                        For 1 Lakh
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="text-right shrink-0 pl-2">
+                    <div className="text-base sm:text-lg font-black text-[#D32F2F] tracking-tight leading-none">
+                      {ch.amount}
+                    </div>
+                    <div className="text-xs font-black text-[#D32F2F] mt-0.5">
+                      {ch.pct}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* ========================================================================= */}
           {/* 8. ABOUT ANDROMEDA + OUR PROCESS & TRUST (EXACT 2ND IMAGE INFOGRAPHIC) */}
