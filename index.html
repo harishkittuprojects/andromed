@@ -76,6 +76,38 @@
 
 const { useState, useEffect, useRef } = React;
 
+// TYPEWRITER ANIMATION COMPONENT
+function Typewriter({ words, delay = 100, deleteDelay = 50, pause = 2000, className = "" }) {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const word = words[currentWordIndex];
+    let timeout;
+
+    if (!isDeleting && currentText === word) {
+      timeout = setTimeout(() => setIsDeleting(true), pause);
+    } else if (isDeleting && currentText === "") {
+      setIsDeleting(false);
+      setCurrentWordIndex((prev) => (prev + 1) % words.length);
+    } else {
+      timeout = setTimeout(() => {
+        setCurrentText(word.substring(0, currentText.length + (isDeleting ? -1 : 1)));
+      }, isDeleting ? deleteDelay : delay);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, currentWordIndex, words, delay, deleteDelay, pause]);
+
+  return (
+    <span className={className}>
+      {currentText}
+      <span className="animate-pulse text-[#00E5FF] ml-0.5 font-normal select-none">|</span>
+    </span>
+  );
+}
+
 // 1. CLEAN VECTOR SVG ICONS
 const SVG = {
   LogoDelta: () => (
@@ -1828,12 +1860,22 @@ function App() {
               {/* Left Column: Heading & CTA */}
               <div className="md:col-span-7 space-y-3 sm:space-y-4 text-left">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight uppercase brand-font leading-tight">
-                  INDIA'S LARGEST
-                  <span className="block text-[#00E5FF] mt-1 text-3xl sm:text-4xl lg:text-5xl">
-                    LOAN DISTRIBUTOR'S
+                  <span className="block text-white text-xl sm:text-2xl lg:text-3xl tracking-normal opacity-95">
+                    INDIA'S LARGEST
                   </span>
-                  <span className="block text-2xl sm:text-3xl lg:text-4xl mt-0.5">
-                    COMPANY
+                  <span className="block text-[#00E5FF] mt-1 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl min-h-[1.3em]">
+                    <Typewriter
+                      words={[
+                        "LOAN DISTRIBUTOR'S COMPANY",
+                        "MULTI-BANK FINANCING NETWORK",
+                        "PERSONAL & BUSINESS LOANS",
+                        "HOME LOANS & PROPERTY MORTGAGE",
+                        "AUTHORISED CREDIT ADVISOR"
+                      ]}
+                      delay={90}
+                      deleteDelay={45}
+                      pause={2000}
+                    />
                   </span>
                 </h1>
 
