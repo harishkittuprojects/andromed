@@ -1,0 +1,2645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Andromeda | India's Largest Loan Distributor</title>
+  <meta name="description" content="Andromeda Sales & Distribution Pvt. Ltd. - India's Largest Loan Distributor. Authorised Channel Partner for Leading Banks & NBFCs." />
+  
+  <!-- Favicon using official Logo -->
+  <link rel="icon" type="image/png" href="./logo.png" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#0B4DA2',
+              dark: '#071E3D',
+              navy: '#0B2545',
+              accent: '#E65100',
+              red: '#D32F2F'
+            }
+          },
+          fontFamily: {
+            sans: ['\"Plus Jakarta Sans\"', 'sans-serif'],
+            brand: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .brand-font {
+      font-family: 'Outfit', sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    body {
+      background-image: url('background.png');
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-color: #071E3D;
+    }
+  </style>
+
+  <!-- React 18 & ReactDOM 18 Global UMD -->
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
+
+  <!-- Babel Standalone -->
+  <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
+</head>
+<body class="text-slate-800 antialiased font-sans">
+  <div id="root"></div>
+
+  <!-- Inline Unified Application Script with Process Infographic & Trust Banner -->
+  <script type="text/babel">
+// Andromeda - Modern Clean Financial Web & Mobile Platform
+// Full Integration of Process Infographic & Trust & Transparency Banner (Exact Match to 2nd Image)
+
+const { useState, useEffect, useRef } = React;
+
+// 1. CLEAN VECTOR SVG ICONS
+const SVG = {
+  LogoDelta: () => (
+    <svg className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 drop-shadow-sm" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 4L44 38H4L24 4Z" stroke="#0B4DA2" strokeWidth="4.5" strokeLinejoin="round" fill="none" />
+      <path d="M24 14L35 34H13L24 14Z" fill="#0B4DA2" />
+      <path d="M24 23L30 33H18L24 23Z" fill="#FFFFFF" />
+    </svg>
+  ),
+  Phone: ({ className = "w-4 h-4" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+    </svg>
+  ),
+  Menu: ({ className = "w-6 h-6" }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  ),
+  Close: ({ className = "w-6 h-6" }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  ),
+  Check: ({ className = "w-4 h-4 text-emerald-500" }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  ),
+  Star: ({ className = "w-5 h-5 text-amber-400" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+    </svg>
+  ),
+  WhatsApp: ({ className = "w-6 h-6" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12.031 2C6.511 2 2.016 6.494 2.016 12.016c0 1.956.568 3.784 1.554 5.334L2 22l4.82-1.53c1.493.896 3.238 1.413 5.211 1.413 5.52 0 10.015-4.494 10.015-10.016C22.046 6.494 17.551 2 12.031 2zm5.834 14.286c-.244.686-1.42 1.31-1.958 1.39-.516.077-1.18.11-3.385-.805-2.82-1.168-4.63-4.04-4.772-4.227-.14-.188-1.144-1.522-1.144-2.903 0-1.382.723-2.062.98-2.343.256-.282.56-.352.748-.352.188 0 .376.002.54.01.173.008.406-.066.634.482.235.564.8 1.95.87 2.092.07.14.118.305.024.493-.094.188-.141.305-.282.47-.14.164-.294.368-.42.494-.141.141-.288.293-.124.575.164.282.73 1.205 1.564 1.947 1.074.957 1.98 1.254 2.262 1.394.282.14.446.117.61-.07.165-.188.705-.822.893-1.104.188-.282.376-.235.634-.141.258.094 1.644.775 1.926.916.282.14.47.211.54.328.07.118.07.682-.174 1.368z"/>
+    </svg>
+  ),
+  Shield: ({ className = "w-10 h-10 text-white" }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  ),
+  ArrowLeft: () => (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+  ),
+  ArrowRight: () => (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  ),
+  StepArrow: () => (
+    <svg className="w-4 h-4 text-slate-400 shrink-0 hidden md:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  ),
+  // Step Circular Icons (from 2nd image)
+  Step1Consult: () => (
+    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#4A154B] text-white flex items-center justify-center shadow-md shrink-0">
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+      </svg>
+    </div>
+  ),
+  Step2Verify: () => (
+    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#0288D1] text-white flex items-center justify-center shadow-md shrink-0">
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+    </div>
+  ),
+  Step3Select: () => (
+    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#00897B] text-white flex items-center justify-center shadow-md shrink-0">
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+      </svg>
+    </div>
+  ),
+  Step4Apply: () => (
+    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#EF6C00] text-white flex items-center justify-center shadow-md shrink-0">
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+    </div>
+  ),
+  Step5Approve: () => (
+    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C2185B] text-white flex items-center justify-center shadow-md shrink-0">
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+      </svg>
+    </div>
+  ),
+  Step6Disburse: () => (
+    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#4A148C] text-white flex items-center justify-center shadow-md shrink-0 text-xl font-black">
+      â‚¹
+    </div>
+  ),
+  // Trust Box Icons
+  Smiley: () => (
+    <svg className="w-8 h-8 sm:w-9 sm:h-9 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="12" r="10" />
+      <path strokeLinecap="round" d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" strokeWidth="2.5" />
+    </svg>
+  ),
+  Handshake: () => (
+    <svg className="w-8 h-8 sm:w-9 sm:h-9 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M7 11.5V14m0-2.5l3-3m-3 3l-3-3m6 0l2.5 2.5a2.5 2.5 0 003.536 0l4.95-4.95a2.5 2.5 0 000-3.536L18 3.5M7 11.5L9.5 14a2.5 2.5 0 003.536 0l4.95-4.95" />
+    </svg>
+  ),
+  DocFile: () => (
+    <svg className="w-8 h-8 sm:w-9 sm:h-9 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+  ),
+  Headset: () => (
+    <svg className="w-8 h-8 sm:w-9 sm:h-9 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 18v-6a9 9 0 0118 0v6M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3v5zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3v5z" />
+    </svg>
+  ),
+  // Service Icons
+  User: ({ className = "w-9 h-9 text-[#0B4DA2]" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+    </svg>
+  ),
+  Briefcase: ({ className = "w-9 h-9 text-[#0B4DA2]" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+    </svg>
+  ),
+  Home: ({ className = "w-9 h-9 text-[#0B4DA2]" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </svg>
+  ),
+  Building: ({ className = "w-9 h-9 text-[#0B4DA2]" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z" />
+    </svg>
+  ),
+  Car: ({ className = "w-9 h-9 text-[#0B4DA2]" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
+    </svg>
+  ),
+  Graduation: ({ className = "w-9 h-9 text-[#0B4DA2]" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
+    </svg>
+  ),
+  Gold: ({ className = "w-9 h-9 text-[#D4AF37]" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z" />
+    </svg>
+  ),
+  Gear: ({ className = "w-9 h-9 text-[#0B4DA2]" }) => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+    </svg>
+  ),
+  NavHome: () => (
+    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+    </svg>
+  ),
+  NavGrid: () => (
+    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+    </svg>
+  ),
+  NavUsers: () => (
+    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+  ),
+  NavPin: () => (
+    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  )
+};
+
+// 2. SERVICES ARRAY (Exact Match to Design & Displayable in Single Row)
+const SERVICES = [
+  { id: "personal", title: "Personal Loan", icon: <SVG.User className="w-7 h-7 text-[#0B4DA2]" />, iconBg: "bg-blue-50", desc: "Quick funds for your personal needs" },
+  { id: "business", title: "Business Loan", icon: <SVG.Briefcase className="w-7 h-7 text-emerald-600" />, iconBg: "bg-emerald-50", desc: "Grow your business with easy loans" },
+  { id: "home", title: "Home Loan", icon: <SVG.Home className="w-7 h-7 text-amber-600" />, iconBg: "bg-amber-50", desc: "Make your dream home a reality" },
+  { id: "lap", title: "Loan Against Property", icon: <SVG.Building className="w-7 h-7 text-indigo-600" />, iconBg: "bg-indigo-50", desc: "Unlock the value of your property" },
+  { id: "vehicle", title: "Vehicle Loan", icon: <SVG.Car className="w-7 h-7 text-red-600" />, iconBg: "bg-red-50", desc: "Drive your dream vehicle home" },
+  { id: "education", title: "Education Loan", icon: <SVG.Graduation className="w-7 h-7 text-sky-600" />, iconBg: "bg-sky-50", desc: "Invest in your bright future" },
+  { id: "gold", title: "Gold Loan", icon: <SVG.Gold className="w-7 h-7 text-yellow-600" />, iconBg: "bg-yellow-50", desc: "Get loan against your gold" },
+  { id: "msme", title: "MSME Loan", icon: <SVG.Gear className="w-7 h-7 text-teal-600" />, iconBg: "bg-teal-50", desc: "Financial support for MSMEs" }
+];
+
+// 3. CHARGES ARRAY
+const CHARGES = [
+  { title: "Personal Loan", amount: "Rs. 1,300", pct: "(1.3%)", icon: <SVG.User className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Business Loan", amount: "Rs. 1,200", pct: "(1.2%)", icon: <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "LAP", amount: "Rs. 1,000", pct: "(1%)", icon: <SVG.Building className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Vehicle Loan", amount: "Rs. 1,000", pct: "(1%)", icon: <SVG.Car className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Home Loan", amount: "Rs. 600", pct: "(1.6%)", icon: <SVG.Home className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Education Loan", amount: "Rs. 500", pct: "(0.5%)", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
+];
+
+// 3.1. INSURANCE LIST ARRAY
+const INSURANCE_LIST = [
+  { 
+    id: "life-insurance", 
+    title: "Life Insurance", 
+    amount: "Rs. 10,000", 
+    pct: "(10%)", 
+    sub: "Per 1 Lakh Sum Assured",
+    desc: "Term life, child education & family savings plans",
+    icon: <SVG.User className="w-5 h-5 text-blue-600" />,
+    badgeBg: "bg-blue-50 text-blue-700"
+  },
+  { 
+    id: "health-insurance", 
+    title: "Health Insurance", 
+    amount: "Rs. 10,000", 
+    pct: "(10%)", 
+    sub: "Per 1 Lakh Sum Assured",
+    desc: "Cashless hospital network, family floater & mediclaim",
+    icon: <SVG.Shield className="w-5 h-5 text-emerald-600" />,
+    badgeBg: "bg-emerald-50 text-emerald-700"
+  },
+  { 
+    id: "vehicle-insurance", 
+    title: "Vehicle Insurance", 
+    amount: "Rs. 10,000", 
+    pct: "(10%)", 
+    sub: "Per 1 Lakh Sum Assured",
+    desc: "Comprehensive car, 2-wheeler & commercial vehicle policy",
+    icon: <SVG.Car className="w-5 h-5 text-red-600" />,
+    badgeBg: "bg-red-50 text-red-700"
+  },
+  { 
+    id: "general-insurance", 
+    title: "General Insurance", 
+    amount: "Rs. 10,000", 
+    pct: "(10%)", 
+    sub: "Per 1 Lakh Sum Assured",
+    desc: "Property, business assets & shop fire safety",
+    icon: <SVG.Building className="w-5 h-5 text-indigo-600" />,
+    badgeBg: "bg-indigo-50 text-indigo-700"
+  }
+];
+
+// 4. WHY CHOOSE US POINTS
+const WHY_CHOOSE_POINTS = [
+  "100+ Bank & NBFC Partners",
+  "Multiple Loan Options",
+  "Fast Processing",
+  "Expert Guidance",
+  "100% Transparent",
+  "Free Consultation"
+];
+
+// 5. 6-STEP PROCESS DATA (Exact match to 2nd image)
+const PROCESS_STEPS_INFOGRAPHIC = [
+  { num: "1", label: "Consultation", icon: <SVG.Step1Consult /> },
+  { num: "2", label: "Document Verification", icon: <SVG.Step2Verify /> },
+  { num: "3", label: "Loan Selection", icon: <SVG.Step3Select /> },
+  { num: "4", label: "Application", icon: <SVG.Step4Apply /> },
+  { num: "5", label: "Approval", icon: <SVG.Step5Approve /> },
+  { num: "6", label: "Disbursement", icon: <SVG.Step6Disburse /> }
+];
+
+// 5.1. SERVICES PAGE COMPONENT
+function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
+  const [selectedServiceId, setSelectedServiceId] = useState('personal');
+  const [calcAmount, setCalcAmount] = useState(500000);
+  const [calcRate, setCalcRate] = useState(10.5);
+  const [calcTenureYears, setCalcTenureYears] = useState(5);
+
+  const monthlyRate = (calcRate / 12) / 100;
+  const totalMonths = calcTenureYears * 12;
+  const emiValue = Math.round(
+    (calcAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / 
+    (Math.pow(1 + monthlyRate, totalMonths) - 1)
+  );
+  const totalPayment = emiValue * totalMonths;
+  const totalInterest = totalPayment - calcAmount;
+
+  const SERVICE_DETAILS = {
+    'personal': {
+      title: "Personal Loan",
+      rate: "10.49% p.a.",
+      maxAmount: "Rs. 50,00,000",
+      tenure: "Up to 5 Years",
+      processingFee: "0.5% - 1.5%",
+      minScore: "650+",
+      desc: "Fast, collateral-free personal loans for emergencies, weddings, home improvements, medical needs, or debt consolidation with minimal documentation.",
+      highlights: ["No collateral or guarantor required", "Instant in-principle approval in 15 mins", "Flexible tenures from 12 to 60 months", "Direct bank account disbursement"]
+    },
+    'business': {
+      title: "Business Loan",
+      rate: "11.25% p.a.",
+      maxAmount: "Rs. 5,00,00,000",
+      tenure: "Up to 7 Years",
+      processingFee: "Up to 2.0%",
+      minScore: "680+",
+      desc: "Customized business credit lines, working capital limits, machinery loans, and expansion capital to accelerate enterprise growth.",
+      highlights: ["High loan limits with flexible collateral options", "Overdraft & working capital facilities", "Tax-deductible interest on qualifying facilities", "Dedicated corporate loan relationship manager"]
+    },
+    'home': {
+      title: "Home Loan",
+      rate: "8.15% p.a.",
+      maxAmount: "Rs. 10,00,00,000",
+      tenure: "Up to 30 Years",
+      processingFee: "0.25% - 0.5%",
+      minScore: "700+",
+      desc: "Affordable home mortgage solutions for buying ready flats, constructing houses, purchasing plots, or balance transfer with top-up.",
+      highlights: ["Up to 90% property value financing (LTV)", "Zero prepayment penalties on floating rates", "Quick legal & technical evaluation support", "Special interest concessions for women co-applicants"]
+    },
+    'lap': {
+      title: "Loan Against Property",
+      rate: "9.20% p.a.",
+      maxAmount: "Rs. 7,50,00,000",
+      tenure: "Up to 15 Years",
+      processingFee: "1.0%",
+      minScore: "670+",
+      desc: "Unlock maximum funds at lower interest rates by mortgaging your residential, commercial, or industrial real estate equity.",
+      highlights: ["Substantially lower interest than unsecured loans", "Retain complete ownership and usage of property", "High LTV ratio up to 70% of market value", "Comfortable long-term repayment schedules"]
+    },
+    'vehicle': {
+      title: "Vehicle Loan",
+      rate: "8.75% p.a.",
+      maxAmount: "Rs. 1,00,00,000",
+      tenure: "Up to 7 Years",
+      processingFee: "0.5% - 0.75%",
+      minScore: "660+",
+      desc: "Instant on-road auto loans for purchasing new cars, certified pre-owned cars, commercial vehicles, and two-wheelers.",
+      highlights: ["Up to 100% on-road financing on select models", "Pre-approved dealer tie-ups across all brands", "Discounts on electric and hybrid vehicles", "Flexible step-up and balloon EMI structures"]
+    },
+    'education': {
+      title: "Education Loan",
+      rate: "9.10% p.a.",
+      maxAmount: "Rs. 1,50,00,000",
+      tenure: "Up to 15 Years",
+      processingFee: "0.5%",
+      minScore: "650+",
+      desc: "Comprehensive higher education funding for domestic and overseas study programs covering tuition, accommodation, books, and travel.",
+      highlights: ["Moratorium period: Course duration + 6 to 12 months grace", "Global top university coverage (USA, UK, Canada, Australia, etc.)", "Tax deduction benefits under Section 80E", "Collateral-free options for premier institutions"]
+    },
+    'gold': {
+      title: "Gold Loan",
+      rate: "7.90% p.a.",
+      maxAmount: "Rs. 1,50,00,000",
+      tenure: "Up to 3 Years",
+      processingFee: "0.25%",
+      minScore: "No Min Score",
+      desc: "Rapid liquidity in as little as 30 minutes by pledging gold ornaments with complete bank locker vault insurance.",
+      highlights: ["Fastest loan disbursal in under 30 minutes", "Zero income verification or complex paperwork", "Gold stored safely in certified bank lockers with full insurance", "Bullet repayment option"]
+    },
+    'msme': {
+      title: "MSME Loan",
+      rate: "11.50% p.a.",
+      maxAmount: "Rs. 5,00,00,000",
+      tenure: "Up to 10 Years",
+      processingFee: "1.0%",
+      minScore: "670+",
+      desc: "Specialized credit facilities and government-backed scheme financing for Micro, Small, and Medium Enterprises.",
+      highlights: ["Government subsidy & CGTMSE scheme benefits", "Quick assessment based on GST & bank inflows", "Machinery and inventory financing", "Flexible repayment aligned with business cash cycles"]
+    }
+  };
+
+  const currentDetail = SERVICE_DETAILS[selectedServiceId] || SERVICE_DETAILS['personal'];
+
+  return (
+    <div className="space-y-6 animate-fade-in p-4 sm:p-6">
+      
+      {/* Top Hero Banner */}
+      <div className="rounded-3xl text-white p-6 sm:p-8 shadow-xl relative overflow-hidden bg-cover bg-center border border-blue-400/30" style={{ backgroundImage: "linear-gradient(135deg, rgba(7, 30, 61, 0.96) 0%, rgba(11, 58, 117, 0.88) 55%, rgba(21, 101, 216, 0.75) 100%), url('background.png')" }}>
+        <div className="relative z-10 space-y-3 max-w-2xl">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-black uppercase tracking-wider">
+            <span>💼 Comprehensive Loan & Insurance Services</span>
+          </div>
+
+          <h1 className="text-2xl sm:text-4xl font-black brand-font tracking-tight leading-tight">
+            Our Loan & <span className="text-[#00E5FF]">Financial Services</span>
+          </h1>
+
+          <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
+            From quick retail financing to multi-crore commercial facilities, Andromeda connects you with 100+ partner banks & NBFCs with the best interest rates, zero hidden charges, and doorstep service.
+          </p>
+
+          <div className="pt-2 flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => onOpenApply('General Loan Inquiry')}
+              className="px-6 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95 flex items-center space-x-1.5"
+            >
+              <span>Apply for Any Loan</span>
+              <span>→</span>
+            </button>
+            <button
+              onClick={onGoToPartner}
+              className="px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-xl transition-all"
+            >
+              Become a Partner →
+            </button>
+            <button
+              onClick={onNavigateHome}
+              className="px-4 py-3 text-slate-300 hover:text-white font-bold text-xs sm:text-sm transition-all"
+            >
+              ← Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Interactive Service Detail Showcase */}
+      <div className="bg-white rounded-3xl border-2 border-slate-200 shadow-md overflow-hidden">
+        <div className="p-4 sm:p-6 border-b border-slate-100 bg-slate-50/70">
+          <div className="text-xs font-black text-slate-500 uppercase tracking-wider mb-2">
+            Select a Loan Service to View Full Specs:
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+            {SERVICES.map((srv) => (
+              <button
+                key={srv.id}
+                onClick={() => setSelectedServiceId(srv.id)}
+                className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center justify-center ${
+                  selectedServiceId === srv.id
+                    ? 'bg-[#0B4DA2] text-white border-[#0B4DA2] shadow-md font-black'
+                    : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300'
+                }`}
+              >
+                <span className="text-xs font-black leading-tight">{srv.title}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Selected Service Detailed View */}
+        <div className="p-5 sm:p-8 space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-200">
+            <div>
+              <span className="text-xs font-black text-[#0B4DA2] uppercase tracking-wider">
+                Service Breakdown
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 brand-font mt-0.5">
+                {currentDetail.title}
+              </h2>
+              <p className="text-xs text-slate-500 font-bold mt-0.5">
+                Disbursal via Top Partner Banks & NBFCs
+              </p>
+            </div>
+
+            <div className="bg-blue-50 px-5 py-2.5 rounded-2xl border border-blue-200 text-center">
+              <span className="text-[11px] text-slate-500 font-bold block uppercase">Starting Interest Rate</span>
+              <span className="text-xl font-black text-[#0B4DA2]">{currentDetail.rate}</span>
+            </div>
+          </div>
+
+          <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+            {currentDetail.desc}
+          </p>
+
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <div>
+              <span className="text-[10.5px] font-bold text-slate-400 uppercase block">Max Loan Limit</span>
+              <span className="text-sm sm:text-base font-black text-slate-900">{currentDetail.maxAmount}</span>
+            </div>
+            <div>
+              <span className="text-[10.5px] font-bold text-slate-400 uppercase block">Max Tenure</span>
+              <span className="text-sm sm:text-base font-black text-slate-900">{currentDetail.tenure}</span>
+            </div>
+            <div>
+              <span className="text-[10.5px] font-bold text-slate-400 uppercase block">Processing Fee</span>
+              <span className="text-sm sm:text-base font-black text-slate-900">{currentDetail.processingFee}</span>
+            </div>
+            <div>
+              <span className="text-[10.5px] font-bold text-slate-400 uppercase block">Min Credit Score</span>
+              <span className="text-sm sm:text-base font-black text-slate-900">{currentDetail.minScore}</span>
+            </div>
+          </div>
+
+          {/* Highlights Checklist */}
+          <div className="space-y-2">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider">
+              Key Features & Advantages
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {currentDetail.highlights.map((h, hIdx) => (
+                <div key={hIdx} className="flex items-center space-x-2 text-xs sm:text-sm text-slate-700 font-medium bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>{h}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => onOpenApply(currentDetail.title)}
+              className="px-6 py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95 flex items-center space-x-1.5"
+            >
+              <span>Apply for {currentDetail.title}</span>
+              <span>→</span>
+            </button>
+            <a
+              href="tel:7396962063"
+              className="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm rounded-xl transition-all flex items-center space-x-1.5"
+            >
+              <span>Call Advisor: 7396962063</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Insurance Products Section */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-md space-y-4">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#D32F2F] bg-red-50 px-3 py-1 rounded-full uppercase tracking-wider">
+            Protection & Coverage
+          </span>
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+            Insurance Services
+          </h3>
+          <p className="text-xs text-slate-500 font-medium">
+            Complete life, health, motor, and general insurance policies with zero paperwork hassle.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          {INSURANCE_LIST.map((ins) => (
+            <div key={ins.id} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black text-slate-900">{ins.name}</span>
+                  <span className="text-[10.5px] font-black text-[#D32F2F] bg-red-100/60 px-2 py-0.5 rounded-full">{ins.incentive}</span>
+                </div>
+                <p className="text-xs text-slate-500 font-medium mt-1">{ins.desc}</p>
+              </div>
+              <button
+                onClick={() => onOpenApply(ins.name)}
+                className="w-full py-2 bg-white hover:bg-red-50 text-[#D32F2F] font-black text-xs rounded-xl border border-red-200 transition-all mt-2"
+              >
+                Apply for {ins.name} →
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Loan Comparison Matrix Table */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-md space-y-4">
+        <h3 className="text-lg sm:text-xl font-black text-[#0B4DA2] brand-font">
+          Complete Loan Comparison Matrix
+        </h3>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs sm:text-sm">
+            <thead className="bg-slate-100 text-slate-700 font-black border-b-2 border-slate-200">
+              <tr>
+                <th className="p-3">Category</th>
+                <th className="p-3">Interest Rate</th>
+                <th className="p-3">Max Amount</th>
+                <th className="p-3">Max Tenure</th>
+                <th className="p-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
+              {SERVICES.map((item) => {
+                const det = SERVICE_DETAILS[item.id] || {};
+                return (
+                  <tr key={item.id} className="hover:bg-blue-50/30 transition-colors">
+                    <td className="p-3 font-bold text-slate-900 flex items-center space-x-2">
+                      <span>{item.title}</span>
+                    </td>
+                    <td className="p-3 font-bold text-blue-700">{det.rate || '8.5%'}</td>
+                    <td className="p-3 text-slate-700 font-bold">{det.maxAmount || 'Rs. 50L'}</td>
+                    <td className="p-3 text-slate-600">{det.tenure || '5 Years'}</td>
+                    <td className="p-3 text-right">
+                      <button
+                        onClick={() => onOpenApply(item.title)}
+                        className="px-3 py-1.5 bg-[#0B4DA2] text-white text-xs font-black rounded-lg hover:bg-blue-800 transition-colors"
+                      >
+                        Apply
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Integrated EMI Calculator */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+            Loan Planning Tool
+          </span>
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+            EMI Loan Calculator
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium">
+            Calculate your estimated monthly installment and interest schedule.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 bg-slate-50 p-5 sm:p-7 rounded-2xl border border-slate-200">
+          <div className="md:col-span-7 space-y-4">
+            <div>
+              <div className="flex justify-between items-center text-xs font-black text-slate-700 mb-1">
+                <span>Loan Amount</span>
+                <span className="text-[#0B4DA2]">Rs. {calcAmount.toLocaleString('en-IN')}</span>
+              </div>
+              <input
+                type="range"
+                min="100000"
+                max="10000000"
+                step="50000"
+                value={calcAmount}
+                onChange={(e) => setCalcAmount(Number(e.target.value))}
+                className="w-full accent-[#0B4DA2] cursor-pointer"
+              />
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center text-xs font-black text-slate-700 mb-1">
+                <span>Interest Rate (% p.a.)</span>
+                <span className="text-[#0B4DA2]">{calcRate}%</span>
+              </div>
+              <input
+                type="range"
+                min="7.5"
+                max="18"
+                step="0.1"
+                value={calcRate}
+                onChange={(e) => setCalcRate(Number(e.target.value))}
+                className="w-full accent-[#0B4DA2] cursor-pointer"
+              />
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center text-xs font-black text-slate-700 mb-1">
+                <span>Loan Tenure (Years)</span>
+                <span className="text-[#0B4DA2]">{calcTenureYears} Years</span>
+              </div>
+              <input
+                type="range"
+                min="1"
+                max="30"
+                step="1"
+                value={calcTenureYears}
+                onChange={(e) => setCalcTenureYears(Number(e.target.value))}
+                className="w-full accent-[#0B4DA2] cursor-pointer"
+              />
+            </div>
+          </div>
+
+          <div className="md:col-span-5 bg-[#071E3D] text-white p-5 rounded-2xl flex flex-col justify-between space-y-4">
+            <div>
+              <div className="text-[11px] font-bold text-blue-200 uppercase">Monthly EMI</div>
+              <div className="text-3xl sm:text-4xl font-black text-[#FFD700] brand-font mt-1">
+                Rs. {emiValue.toLocaleString('en-IN')}
+              </div>
+            </div>
+
+            <div className="space-y-1.5 pt-2 border-t border-slate-700 text-xs">
+              <div className="flex justify-between text-slate-300">
+                <span>Principal:</span>
+                <span className="font-bold text-white">Rs. {calcAmount.toLocaleString('en-IN')}</span>
+              </div>
+              <div className="flex justify-between text-slate-300">
+                <span>Total Interest:</span>
+                <span className="font-bold text-amber-300">Rs. {totalInterest.toLocaleString('en-IN')}</span>
+              </div>
+              <div className="flex justify-between text-slate-300">
+                <span>Total Payable:</span>
+                <span className="font-bold text-[#00E5FF]">Rs. {totalPayment.toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onOpenApply(`Loan Application (EMI: Rs. ${emiValue})`)}
+              className="w-full py-2.5 bg-[#0B4DA2] hover:bg-blue-600 text-white font-black text-xs rounded-xl shadow-md transition-all active:scale-95"
+            >
+              Apply with this Calculation →
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// 5.2. ABOUT US PAGE COMPONENT
+function AboutUsPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToServices }) {
+  return (
+    <div className="space-y-6 animate-fade-in p-4 sm:p-6">
+      
+      {/* Top Hero Banner */}
+      <div className="rounded-3xl text-white p-6 sm:p-8 shadow-xl relative overflow-hidden bg-cover bg-center border border-blue-400/30" style={{ backgroundImage: "linear-gradient(135deg, rgba(7, 30, 61, 0.96) 0%, rgba(11, 58, 117, 0.88) 55%, rgba(21, 101, 216, 0.75) 100%), url('background.png')" }}>
+        <div className="relative z-10 space-y-3 max-w-2xl">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-black uppercase tracking-wider">
+            <span>🛡️ Trusted Multi-Bank Network</span>
+          </div>
+
+          <h1 className="text-2xl sm:text-4xl font-black brand-font tracking-tight leading-tight">
+            About Andromeda — <span className="text-[#00E5FF]">India's Largest Loan Distributor</span>
+          </h1>
+
+          <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
+            Andromeda Sales & Distribution Pvt. Ltd. is India's leading loan distribution network. Founded with the mission to provide accessible, transparent, and seamless financial credit, we connect thousands of retail and commercial borrowers to 100+ premier banking institutions.
+          </p>
+
+          <div className="pt-2 flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => onOpenApply('Free Consultation')}
+              className="px-6 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95 flex items-center space-x-1.5"
+            >
+              <span>Get Free Consultation</span>
+              <span>→</span>
+            </button>
+            <button
+              onClick={onGoToPartner}
+              className="px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-xl transition-all"
+            >
+              Partner With Us →
+            </button>
+            <button
+              onClick={onNavigateHome}
+              className="px-4 py-3 text-slate-300 hover:text-white font-bold text-xs sm:text-sm transition-all"
+            >
+              ← Back to Home
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Stats */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 mt-6 border-t border-white/10 text-center">
+          <div className="bg-white/5 backdrop-blur-xs p-3 rounded-2xl border border-white/10">
+            <div className="text-lg sm:text-xl font-black text-amber-300">100+</div>
+            <div className="text-[10.5px] text-slate-300 font-bold">Bank & NBFC Partners</div>
+          </div>
+          <div className="bg-white/5 backdrop-blur-xs p-3 rounded-2xl border border-white/10">
+            <div className="text-lg sm:text-xl font-black text-[#00E5FF]">Rs. 1000+ Cr</div>
+            <div className="text-[10.5px] text-slate-300 font-bold">Disbursed Volume</div>
+          </div>
+          <div className="bg-white/5 backdrop-blur-xs p-3 rounded-2xl border border-white/10">
+            <div className="text-lg sm:text-xl font-black text-emerald-400">1 Lakh+</div>
+            <div className="text-[10.5px] text-slate-300 font-bold">Satisfied Borrowers</div>
+          </div>
+          <div className="bg-white/5 backdrop-blur-xs p-3 rounded-2xl border border-white/10">
+            <div className="text-lg sm:text-xl font-black text-white">15 Mins</div>
+            <div className="text-[10.5px] text-slate-300 font-bold">Quick Lead Response</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mission & Vision Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white rounded-3xl p-6 sm:p-7 border-2 border-slate-200 shadow-md space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-blue-100 text-[#0B4DA2] flex items-center justify-center font-black text-lg">
+            🎯
+          </div>
+          <h3 className="text-lg sm:text-xl font-black text-slate-900 brand-font">Our Mission</h3>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+            To democratize access to institutional credit by helping consumers and commercial enterprises discover suitable financial solutions, negotiate optimal interest rates, and receive reliable funding with 100% clarity and zero upfront fee.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-3xl p-6 sm:p-7 border-2 border-slate-200 shadow-md space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center font-black text-lg">
+            👁️
+          </div>
+          <h3 className="text-lg sm:text-xl font-black text-slate-900 brand-font">Our Vision</h3>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+            To be India's most trusted, accessible, and customer-first loan distribution platform, setting the highest standards for speed, transparency, and borrower delight through personalized advisory.
+          </p>
+        </div>
+      </div>
+
+      {/* Exact Match: 6-Step Process Flowchart */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-md space-y-5">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+            How It Works
+          </span>
+          <h3 className="text-xl sm:text-2xl font-black text-[#0B2545] brand-font mt-2">
+            Our 6-Step Loan Disbursal Process
+          </h3>
+          <p className="text-xs text-slate-500 font-medium">
+            From initial advisory to money in your bank account, we manage every single step seamlessly.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 items-start justify-between">
+          {PROCESS_STEPS_INFOGRAPHIC.map((stepItem, idx) => (
+            <div key={idx} className="flex flex-col items-center text-center p-2 rounded-2xl hover:bg-slate-50 transition-colors">
+              <div className="mb-2">
+                {stepItem.icon}
+              </div>
+              <div className="text-sm font-black text-slate-900 mt-1">
+                {stepItem.num}
+              </div>
+              <div className="text-xs sm:text-[13px] font-extrabold text-slate-800 leading-tight mt-0.5">
+                {stepItem.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Trust & Transparency 4-Pillar Box */}
+      <div className="bg-[#0A1633] text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-blue-900/60 space-y-4">
+        <h3 className="text-lg sm:text-xl font-black text-center brand-font">
+          Trust & Transparency Guaranteed
+        </h3>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-700/60">
+          <div className="flex items-center space-x-3 pt-2 sm:pt-0 sm:px-2">
+            <SVG.Smiley />
+            <div>
+              <div className="text-lg sm:text-xl font-black text-white brand-font leading-none">1000+</div>
+              <div className="text-xs text-slate-300 font-semibold mt-0.5">Happy Clients</div>
+            </div>
+          </div>
+          <div className="flex items-center space-x-3 pt-2 sm:pt-0 sm:px-3">
+            <SVG.Handshake />
+            <div>
+              <div className="text-lg sm:text-xl font-black text-white brand-font leading-none">100+</div>
+              <div className="text-xs text-slate-300 font-semibold mt-0.5">Lending Partners</div>
+            </div>
+          </div>
+          <div className="flex items-center space-x-3 pt-2 sm:pt-0 sm:px-3">
+            <SVG.DocFile />
+            <div>
+              <div className="text-base sm:text-lg font-black text-white brand-font leading-none">Multiple</div>
+              <div className="text-xs text-slate-300 font-semibold mt-0.5">Loan Products</div>
+            </div>
+          </div>
+          <div className="flex items-center space-x-3 pt-2 sm:pt-0 sm:px-3">
+            <SVG.Headset />
+            <div>
+              <div className="text-base sm:text-lg font-black text-white brand-font leading-none">Fast &</div>
+              <div className="text-xs text-slate-300 font-semibold mt-0.5">Professional Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Office Locations & Dedicated Team Contacts */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-md space-y-4">
+        <h3 className="text-lg sm:text-xl font-black text-[#0B4DA2] brand-font text-center">
+          Our Regional Offices & Leadership Team
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
+            <div className="text-xs font-black uppercase text-[#0B4DA2]">Head Office</div>
+            <div className="text-sm font-black text-slate-900">Vijayawada Regional Office</div>
+            <p className="text-xs text-slate-600 font-medium">
+              Door No: 48-13-24/3, 2nd Floor, Swarna's Sri Manikanta Enclave, Mogalarajupuram, Vijayawada - 520010.
+            </p>
+          </div>
+
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
+            <div className="text-xs font-black uppercase text-[#0B4DA2]">Branch Office</div>
+            <div className="text-sm font-black text-slate-900">Nalgonda Branch Office</div>
+            <p className="text-xs text-slate-600 font-medium">
+              Maruti Nagar, Near H.P. Petrol Bunk (Near By Jwalakanthi Indra Reddy Function Hall), Sagar Road, Nalgonda.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// 5.3. BECOME A PARTNER PAGE COMPONENT
+function BecomePartnerPage({ onOpenApply, onNavigateHome, onGoToDSA }) {
+  const [partnerType, setPartnerType] = useState('connector');
+  const [partnerFormData, setPartnerFormData] = useState({
+    fullName: '',
+    mobile: '',
+    email: '',
+    city: 'Nalgonda',
+    profession: 'Financial Consultant',
+    experience: '1-3 Years',
+    expectedVolume: '10 - 25 Lakhs'
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handlePartnerSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="space-y-6 animate-fade-in p-4 sm:p-6">
+      
+      {/* Top Hero Banner */}
+      <div className="rounded-3xl bg-gradient-to-r from-[#071E3D] via-[#0B3A75] to-[#1565D8] text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div className="relative z-10 space-y-3 max-w-2xl">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-black uppercase tracking-wider">
+            <SVG.Star className="w-4 h-4 text-amber-300" />
+            <span>Official Partner Registration Program</span>
+          </div>
+
+          <h1 className="text-2xl sm:text-4xl font-black brand-font tracking-tight leading-tight">
+            Partner with Andromeda & <span className="text-[#00E5FF]">Earn Unlimited Income</span>
+          </h1>
+
+          <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
+            Join India's Largest Loan Distribution Company. Refer loan & insurance leads, earn high slab commissions, get exclusive DSA / Connector Codes, and enjoy full door-step processing support.
+          </p>
+
+          <div className="pt-3 flex flex-wrap items-center gap-3">
+            <a
+              href="#partner-form"
+              className="px-6 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95 flex items-center space-x-1.5"
+            >
+              <span>Register as Partner Now</span>
+              <span>↓</span>
+            </a>
+            <button
+              onClick={onGoToDSA}
+              className="px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-xl transition-all"
+            >
+              View DSA Corner →
+            </button>
+            <button
+              onClick={onNavigateHome}
+              className="px-4 py-3 text-slate-300 hover:text-white font-bold text-xs sm:text-sm transition-all"
+            >
+              ← Back to Home
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Quick Stat Pills */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 mt-6 border-t border-white/10 text-center">
+          <div className="bg-white/5 backdrop-blur-xs p-3 rounded-2xl border border-white/10">
+            <div className="text-lg sm:text-xl font-black text-amber-300">100+</div>
+            <div className="text-[10.5px] text-slate-300 font-bold">Partner Banks & NBFCs</div>
+          </div>
+          <div className="bg-white/5 backdrop-blur-xs p-3 rounded-2xl border border-white/10">
+            <div className="text-lg sm:text-xl font-black text-[#00E5FF]">Rs. 1,000+</div>
+            <div className="text-[10.5px] text-slate-300 font-bold">Incentive Per 1L Disbursal</div>
+          </div>
+          <div className="bg-white/5 backdrop-blur-xs p-3 rounded-2xl border border-white/10">
+            <div className="text-lg sm:text-xl font-black text-emerald-400">100% Free</div>
+            <div className="text-[10.5px] text-slate-300 font-bold">Zero Joining Fee</div>
+          </div>
+          <div className="bg-white/5 backdrop-blur-xs p-3 rounded-2xl border border-white/10">
+            <div className="text-lg sm:text-xl font-black text-white">Doorstep</div>
+            <div className="text-[10.5px] text-slate-300 font-bold">Full Processing Support</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Partnership Model Selector (Connector Code vs DSA Code) */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-md space-y-5">
+        <div className="text-center space-y-1">
+          <h2 className="text-xl sm:text-2xl font-black text-[#0B4DA2] brand-font">
+            Choose Your Partnership Track
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium">
+            Whether you are an individual consultant or an established financial firm, we have the right program.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          {/* Card 1: Connector Partner */}
+          <div 
+            onClick={() => setPartnerType('connector')}
+            className={`p-5 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
+              partnerType === 'connector' 
+                ? 'border-[#0B4DA2] bg-blue-50/50 shadow-md' 
+                : 'border-slate-200 bg-white hover:border-slate-300'
+            }`}
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 bg-blue-100 text-[#0B4DA2] text-[11px] font-black uppercase rounded-full">
+                  Individual / Freelancer
+                </span>
+                <span className="text-xs font-black text-emerald-600">No Target Required</span>
+              </div>
+
+              <h3 className="text-lg sm:text-xl font-black text-slate-900 brand-font flex items-center space-x-2">
+                <span>CONNECTOR CODE</span>
+                {partnerType === 'connector' && <span className="text-blue-600 font-black">✓</span>}
+              </h3>
+
+              <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                Best for Insurance Agents, Accountants, Real Estate Brokers, Tax Consultants, and Individuals who want to refer leads.
+              </p>
+
+              <ul className="space-y-1.5 text-xs text-slate-700 font-bold pt-1">
+                <li className="flex items-center space-x-2">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>Instant Connector Code assigned</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>Just share lead details — our branch handles paperwork</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>Earn attractive cash incentive per Lakh disbursal</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>Weekly prompt payout into your bank account</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200/80">
+              <button
+                type="button"
+                className={`w-full py-2.5 rounded-xl font-black text-xs transition-all ${
+                  partnerType === 'connector' 
+                    ? 'bg-[#0B4DA2] text-white shadow-sm' 
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                {partnerType === 'connector' ? 'Selected: Connector Code' : 'Select Connector Model'}
+              </button>
+            </div>
+          </div>
+
+          {/* Card 2: DSA Channel Partner */}
+          <div 
+            onClick={() => setPartnerType('dsa')}
+            className={`p-5 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
+              partnerType === 'dsa' 
+                ? 'border-[#0B4DA2] bg-blue-50/50 shadow-md' 
+                : 'border-slate-200 bg-white hover:border-slate-300'
+            }`}
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 bg-amber-100 text-amber-900 text-[11px] font-black uppercase rounded-full">
+                  Business / Agency
+                </span>
+                <span className="text-xs font-black text-[#D32F2F]">Highest Commission Slab</span>
+              </div>
+
+              <h3 className="text-lg sm:text-xl font-black text-slate-900 brand-font flex items-center space-x-2">
+                <span>DSA CHANNEL CODE</span>
+                {partnerType === 'dsa' && <span className="text-blue-600 font-black">✓</span>}
+              </h3>
+
+              <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                Best for DSA Owners, Financial Offices, Loan Agencies, and full-time Loan Sourcing professionals with volume business.
+              </p>
+
+              <ul className="space-y-1.5 text-xs text-slate-700 font-bold pt-1">
+                <li className="flex items-center space-x-2">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>Official Andromeda Corporate DSA Code</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>Direct multi-bank login access (100+ Banks & NBFCs)</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>Highest commission payouts (Up to 1.3% - 1.6%+ on loans)</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-emerald-500 font-black">✓</span>
+                  <span>Dedicated Area Relationship Manager & CRM Login</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200/80">
+              <button
+                type="button"
+                className={`w-full py-2.5 rounded-xl font-black text-xs transition-all ${
+                  partnerType === 'dsa' 
+                    ? 'bg-[#0B4DA2] text-white shadow-sm' 
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                {partnerType === 'dsa' ? 'Selected: DSA Code' : 'Select DSA Model'}
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 6 Key Benefits */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-md space-y-4">
+        <div className="text-center mb-2">
+          <h2 className="text-lg sm:text-2xl font-black text-[#0B4DA2] brand-font">
+            Why Partner with Andromeda?
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">
+            Everything you need to build a high-earning, sustainable loan distribution enterprise.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1.5">
+            <div className="text-2xl">💰</div>
+            <h4 className="text-sm font-black text-slate-900">Highest Industry Payouts</h4>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
+              Earn top commission slabs on Personal, Business, Home, LAP & Insurance products with timely payout disbursement.
+            </p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1.5">
+            <div className="text-2xl">🏦</div>
+            <h4 className="text-sm font-black text-slate-900">100+ Banking Partners</h4>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
+              Empaneled with all major Public, Private Banks & NBFCs, ensuring no lead is rejected due to lack of options.
+            </p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1.5">
+            <div className="text-2xl">🎁</div>
+            <h4 className="text-sm font-black text-slate-900">Gifts, Contests & Tours</h4>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
+              Participate in periodic business contests to win international tour packages, cash rewards, and electronic gifts.
+            </p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1.5">
+            <div className="text-2xl">🛵</div>
+            <h4 className="text-sm font-black text-slate-900">Doorstep Customer Pickup</h4>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
+              Our branch ground team visits customer locations for document collection and KYC verification at zero cost.
+            </p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1.5">
+            <div className="text-2xl">👥</div>
+            <h4 className="text-sm font-black text-slate-900">Dedicated Branch Manager</h4>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
+              Get 1-on-1 guidance from our senior sales and branch managers in Nalgonda & Vijayawada for quick approvals.
+            </p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1.5">
+            <div className="text-2xl">🚀</div>
+            <h4 className="text-sm font-black text-slate-900">Zero Investment</h4>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
+              100% free registration. No security deposit, setup fees, or hidden recurring charges ever.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Partner Registration Form */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-lg space-y-6" id="partner-form">
+        <div className="text-center space-y-1">
+          <span className="px-3.5 py-1 rounded-full bg-blue-50 text-[#0B4DA2] text-xs font-black uppercase tracking-wider">
+            Online Registration
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 brand-font mt-2">
+            Register as Andromeda Partner
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium max-w-lg mx-auto">
+            Fill out the form below to receive your official Connector Code or DSA Code. Our Channel Manager will contact you within 24 hours.
+          </p>
+        </div>
+
+        {submitted ? (
+          <div className="p-6 bg-emerald-50 border-2 border-emerald-300 rounded-2xl text-center space-y-3">
+            <div className="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto text-2xl font-black">
+              ✓
+            </div>
+            <h3 className="text-lg font-black text-emerald-900">Partner Application Submitted Successfully!</h3>
+            <p className="text-xs sm:text-sm text-emerald-700 font-medium max-w-md mx-auto">
+              Thank you, <strong>{partnerFormData.fullName}</strong>! Your request for <strong>{partnerType === 'connector' ? 'Connector Code' : 'DSA Channel Code'}</strong> has been registered. Our Area Sales Manager will call you at <strong>{partnerFormData.mobile}</strong>.
+            </p>
+            <button
+              onClick={() => setSubmitted(false)}
+              className="mt-2 px-5 py-2 bg-[#0B4DA2] text-white font-bold text-xs rounded-xl hover:bg-blue-800"
+            >
+              Submit Another Partner Request
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handlePartnerSubmit} className="space-y-4 max-w-xl mx-auto">
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Full Name *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Suresh Reddy"
+                  value={partnerFormData.fullName}
+                  onChange={(e) => setPartnerFormData({ ...partnerFormData, fullName: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Mobile Number *</label>
+                <input
+                  type="tel"
+                  required
+                  placeholder="9876543210"
+                  value={partnerFormData.mobile}
+                  onChange={(e) => setPartnerFormData({ ...partnerFormData, mobile: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Email Address</label>
+                <input
+                  type="email"
+                  placeholder="partner@gmail.com"
+                  value={partnerFormData.email}
+                  onChange={(e) => setPartnerFormData({ ...partnerFormData, email: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">City / District *</label>
+                <input
+                  type="text"
+                  required
+                  value={partnerFormData.city}
+                  onChange={(e) => setPartnerFormData({ ...partnerFormData, city: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Current Profession</label>
+                <select
+                  value={partnerFormData.profession}
+                  onChange={(e) => setPartnerFormData({ ...partnerFormData, profession: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                >
+                  <option>Financial Consultant</option>
+                  <option>Insurance Advisor / Agent</option>
+                  <option>Real Estate Consultant</option>
+                  <option>Chartered Accountant / Tax Auditor</option>
+                  <option>Existing Loan DSA</option>
+                  <option>Business Owner / Freelancer</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Partnership Program</label>
+                <select
+                  value={partnerType}
+                  onChange={(e) => setPartnerType(e.target.value)}
+                  className="w-full px-3.5 py-2.5 bg-blue-50 border-2 border-blue-300 text-[#0B4DA2] rounded-xl text-sm font-black focus:outline-none focus:border-[#0B4DA2]"
+                >
+                  <option value="connector">Connector Code (Individual / Referral)</option>
+                  <option value="dsa">DSA Channel Code (Business / Volume)</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-black text-slate-700 uppercase mb-1">Expected Monthly Lead Volume</label>
+              <select
+                value={partnerFormData.expectedVolume}
+                onChange={(e) => setPartnerFormData({ ...partnerFormData, expectedVolume: e.target.value })}
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+              >
+                <option>5 - 10 Lakhs</option>
+                <option>10 - 25 Lakhs</option>
+                <option>25 - 50 Lakhs</option>
+                <option>50 Lakhs - 1 Crore</option>
+                <option>Above 1 Crore</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3.5 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm sm:text-base shadow-lg transition-all active:scale-95 flex items-center justify-center space-x-2"
+            >
+              <span>Submit Partner Application</span>
+              <span>→</span>
+            </button>
+          </form>
+        )}
+      </div>
+
+    </div>
+  );
+}
+
+// 5.2. DSA CORNER PAGE COMPONENT
+function DSACornerPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
+  const [calcCategory, setCalcCategory] = useState('Home Loan');
+  const [loanVolume, setLoanVolume] = useState(5000000);
+
+  const rates = {
+    'Personal Loan': 0.013,
+    'Business Loan': 0.012,
+    'Home Loan': 0.016,
+    'LAP': 0.010,
+    'Vehicle Loan': 0.010,
+    'Insurance': 0.10
+  };
+
+  const estimatedPayout = Math.round(loanVolume * (rates[calcCategory] || 0.01));
+
+  return (
+    <div className="space-y-6 animate-fade-in p-4 sm:p-6">
+      
+      {/* Top Hero Banner */}
+      <div className="rounded-3xl bg-gradient-to-r from-[#071E3D] via-[#0B2545] to-[#0A1633] text-white p-6 sm:p-8 shadow-xl relative overflow-hidden border border-blue-900">
+        <div className="space-y-3 max-w-2xl">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-black uppercase tracking-wider">
+            <span>⭐ ANDROMEDA DSA CORNER</span>
+          </div>
+
+          <h1 className="text-2xl sm:text-4xl font-black brand-font tracking-tight leading-tight">
+            Direct Selling Agent <span className="text-[#00E5FF]">(DSA) Resource Portal</span>
+          </h1>
+
+          <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
+            Welcome to the dedicated Andromeda DSA Hub. Calculate your monthly commission payouts, access multi-bank rate matrices, review eligibility guidelines, and connect directly with your dedicated Area Channel Managers.
+          </p>
+
+          <div className="pt-2 flex flex-wrap items-center gap-3">
+            <button
+              onClick={onGoToPartner}
+              className="px-6 py-3 bg-[#0B4DA2] hover:bg-blue-600 text-white font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95"
+            >
+              Apply for DSA Code →
+            </button>
+            <button
+              onClick={onNavigateHome}
+              className="px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-xl transition-all"
+            >
+              ← Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* DSA Commission & Payout Calculator */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+            Live Earnings Simulator
+          </span>
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+            DSA Payout & Commission Calculator
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-md mx-auto">
+            See how much you can earn based on your monthly disbursed loan volume.
+          </p>
+        </div>
+
+        <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 sm:p-7 space-y-5">
+          {/* Category Tabs */}
+          <div>
+            <label className="block text-xs font-black text-slate-700 uppercase mb-2">1. Select Loan Category</label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+              {['Home Loan', 'Personal Loan', 'Business Loan', 'LAP', 'Vehicle Loan', 'Insurance'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setCalcCategory(cat)}
+                  className={`py-2 px-2.5 rounded-xl text-xs font-black transition-all text-center border ${
+                    calcCategory === cat 
+                      ? 'bg-[#0B4DA2] text-white border-[#0B4DA2] shadow-sm' 
+                      : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Volume Preset Buttons */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-xs font-black text-slate-700 uppercase">2. Disbursed Loan Volume</label>
+              <span className="text-sm font-black text-[#0B4DA2]">
+                Rs. {(loanVolume / 100000).toLocaleString('en-IN')} Lakhs
+              </span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+              {[
+                { label: 'Rs. 10 Lakhs', val: 1000000 },
+                { label: 'Rs. 25 Lakhs', val: 2500000 },
+                { label: 'Rs. 50 Lakhs', val: 5000000 },
+                { label: 'Rs. 1 Crore', val: 10000000 },
+                { label: 'Rs. 3 Crores', val: 30000000 }
+              ].map((item) => (
+                <button
+                  key={item.val}
+                  onClick={() => setLoanVolume(item.val)}
+                  className={`py-2 px-2 rounded-xl text-xs font-bold transition-all border ${
+                    loanVolume === item.val
+                      ? 'bg-amber-400 text-slate-950 font-black border-amber-500 shadow-xs'
+                      : 'bg-white text-slate-700 border-slate-200 hover:border-slate-400'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Payout Result Banner */}
+          <div className="bg-gradient-to-r from-[#071E3D] to-[#0B4DA2] text-white rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+            <div>
+              <div className="text-xs font-bold text-blue-200 uppercase tracking-wider">
+                Estimated Monthly Commission ({calcCategory})
+              </div>
+              <div className="text-3xl sm:text-4xl font-black text-[#FFD700] brand-font mt-1">
+                Rs. {estimatedPayout.toLocaleString('en-IN')}
+              </div>
+              <div className="text-[11px] text-slate-300 font-semibold mt-0.5">
+                Commission Slab: {((rates[calcCategory] || 0.01) * 100).toFixed(1)}% of Disbursal Amount
+              </div>
+            </div>
+
+            <button
+              onClick={onGoToPartner}
+              className="px-6 py-3 bg-[#D32F2F] hover:bg-red-700 text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95 shrink-0"
+            >
+              Get DSA Code to Claim →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Connector Code vs DSA Code Comparison Matrix */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-md space-y-4">
+        <h3 className="text-lg sm:text-xl font-black text-[#0B4DA2] brand-font text-center">
+          Connector Code vs. DSA Code Comparison
+        </h3>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs sm:text-sm">
+            <thead className="bg-slate-100 text-slate-700 font-black border-b-2 border-slate-200">
+              <tr>
+                <th className="p-3">Feature</th>
+                <th className="p-3 text-[#0B4DA2]">Connector Code</th>
+                <th className="p-3 text-[#D32F2F]">DSA Channel Code</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
+              <tr className="hover:bg-slate-50">
+                <td className="p-3 font-bold">Eligibility</td>
+                <td className="p-3">Individuals, Freelancers, Advisors</td>
+                <td className="p-3">Firms, Agencies & Full-time DSAs</td>
+              </tr>
+              <tr className="hover:bg-slate-50">
+                <td className="p-3 font-bold">Minimum Monthly Target</td>
+                <td className="p-3 text-emerald-600 font-bold">Zero (No Target)</td>
+                <td className="p-3">Minimum Volume Commitment</td>
+              </tr>
+              <tr className="hover:bg-slate-50">
+                <td className="p-3 font-bold">Commission Slab</td>
+                <td className="p-3">Rs. 1,000 / Lakh Disbursal</td>
+                <td className="p-3 font-black text-[#D32F2F]">Highest Slabs (1.2% - 1.6%+)</td>
+              </tr>
+              <tr className="hover:bg-slate-50">
+                <td className="p-3 font-bold">File Processing</td>
+                <td className="p-3">100% Handled by Andromeda</td>
+                <td className="p-3">Self-Logged or Handled by Andromeda</td>
+              </tr>
+              <tr className="hover:bg-slate-50">
+                <td className="p-3 font-bold">Relationship Manager</td>
+                <td className="p-3">Branch Support</td>
+                <td className="p-3 text-blue-700 font-bold">Dedicated Area Sales Manager</td>
+              </tr>
+              <tr className="hover:bg-slate-50">
+                <td className="p-3 font-bold">Payout Frequency</td>
+                <td className="p-3">Prompt Weekly / Monthly</td>
+                <td className="p-3">Direct Bank Transfer with MIS</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Direct Branch Team Contact Cards */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-blue-200 shadow-md space-y-4">
+        <div className="text-center space-y-1">
+          <h3 className="text-lg sm:text-xl font-black text-[#0B4DA2] brand-font">
+            Andromeda Branch Team & DSA Support
+          </h3>
+          <p className="text-xs text-slate-500 font-medium">
+            Contact our managers directly for immediate file login and status tracking.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-center space-y-1">
+            <div className="text-xs font-black text-slate-900">M. Swapna</div>
+            <div className="text-[11px] font-bold text-blue-600">Branch Manager</div>
+            <a href="tel:7396962063" className="block text-sm font-black text-[#0B4DA2] hover:underline pt-1">
+              📞 7396962063
+            </a>
+          </div>
+
+          <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-center space-y-1">
+            <div className="text-xs font-black text-slate-900">P. Swapna</div>
+            <div className="text-[11px] font-bold text-blue-600">Sales Manager</div>
+            <a href="tel:7036105549" className="block text-sm font-black text-[#0B4DA2] hover:underline pt-1">
+              📞 7036105549
+            </a>
+          </div>
+
+          <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-center space-y-1">
+            <div className="text-xs font-black text-slate-900">K. Mounika</div>
+            <div className="text-[11px] font-bold text-blue-600">Area Sales Manager</div>
+            <a href="tel:7036090991" className="block text-sm font-black text-[#0B4DA2] hover:underline pt-1">
+              📞 7036090991
+            </a>
+          </div>
+
+          <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-center space-y-1">
+            <div className="text-xs font-black text-slate-900">P. Pavan Kumar</div>
+            <div className="text-[11px] font-bold text-blue-600">Management Head</div>
+            <a href="tel:9963909220" className="block text-sm font-black text-[#0B4DA2] hover:underline pt-1">
+              📞 9963909220
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// 6. MAIN APP COMPONENT
+function App() {
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'partner', 'dsa'
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedLoan, setSelectedLoan] = useState('Personal Loan');
+  const [toast, setToast] = useState(null);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    mobile: '',
+    city: 'Nalgonda',
+    amount: 'Rs. 5,00,000'
+  });
+
+  const openApply = (loanName) => {
+    setSelectedLoan(loanName);
+    setModalOpen(true);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setModalOpen(false);
+    setToast(`Thank you, ${formData.name}! Your application for ${selectedLoan} has been received. Our team will contact you at ${formData.mobile}.`);
+    setTimeout(() => setToast(null), 5000);
+  };
+
+  const scrollTo = (id) => {
+    if (currentView !== 'home') {
+      setCurrentView('home');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMenuOpen(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-900/30 backdrop-blur-xs text-slate-800 font-sans antialiased pb-24 md:pb-8">
+      
+      {/* Toast Alert */}
+      {toast && (
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-[#0B2545] text-white px-6 py-4 rounded-2xl shadow-2xl border-2 border-blue-400 text-sm sm:text-base font-bold max-w-md w-[92%] animate-bounce text-center flex items-center justify-center space-x-2.5">
+          <span className="text-emerald-400 font-black text-xl">✓</span>
+          <span>{toast}</span>
+        </div>
+      )}
+
+      {/* Main Container */}
+      <div className="max-w-[520px] md:max-w-[880px] lg:max-w-[1180px] xl:max-w-[1360px] mx-auto bg-white/95 backdrop-blur-md min-h-screen shadow-2xl overflow-hidden border-x border-slate-200/60">
+        
+        {/* ========================================================================= */}
+        {/* 1. TOP HEADER */}
+        {/* ========================================================================= */}
+        <header className="px-4 sm:px-6 py-3.5 bg-white flex items-center justify-between border-b-2 border-slate-100 sticky top-0 z-40">
+          
+          <div
+            className="flex items-center space-x-3 cursor-pointer select-none"
+            onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          >
+            <SVG.LogoDelta />
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-[#0B4DA2] tracking-tight leading-none brand-font">
+                ANDROMEDA
+              </div>
+              <div className="text-xs sm:text-sm font-extrabold text-[#0B4DA2] tracking-normal leading-tight mt-0.5">
+                India's Largest Loan Distributor
+              </div>
+              <div className="text-[10px] sm:text-xs text-slate-500 font-bold leading-tight">
+                Andromeda Sales & Distribution Pvt. Ltd.
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-2 text-xs lg:text-sm font-bold text-slate-700">
+            <button 
+              onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 rounded-xl transition-all ${currentView === 'home' ? 'text-[#0B4DA2] bg-blue-50 font-black' : 'hover:text-[#0B4DA2] hover:bg-slate-50'}`}
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => { setCurrentView('services'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 rounded-xl transition-all ${currentView === 'services' ? 'text-[#0B4DA2] bg-blue-50 font-black' : 'hover:text-[#0B4DA2] hover:bg-slate-50'}`}
+            >
+              Our Services
+            </button>
+            <button 
+              onClick={() => { setCurrentView('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 rounded-xl transition-all ${currentView === 'about' ? 'text-[#0B4DA2] bg-blue-50 font-black' : 'hover:text-[#0B4DA2] hover:bg-slate-50'}`}
+            >
+              About Us
+            </button>
+            <button 
+              onClick={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 rounded-xl transition-all ${currentView === 'partner' ? 'text-[#0B4DA2] bg-blue-50 font-black' : 'hover:text-[#0B4DA2] hover:bg-slate-50'}`}
+            >
+              Become a Partner
+            </button>
+            <button 
+              onClick={() => { setCurrentView('dsa'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 rounded-xl transition-all ${currentView === 'dsa' ? 'text-[#0B4DA2] bg-blue-50 font-black' : 'hover:text-[#0B4DA2] hover:bg-slate-50'}`}
+            >
+              DSA Corner
+            </button>
+            <button 
+              onClick={() => scrollTo('charges-sec')}
+              className="px-3 py-1.5 rounded-xl hover:text-[#0B4DA2] hover:bg-slate-50 transition-all"
+            >
+              Charges
+            </button>
+            <button 
+              onClick={() => scrollTo('contact-sec')}
+              className="px-3 py-1.5 rounded-xl hover:text-[#0B4DA2] hover:bg-slate-50 transition-all"
+            >
+              Contact
+            </button>
+          </div>
+
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            <a
+              href="tel:7396962063"
+              className="flex items-center space-x-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#0B4DA2] hover:bg-[#083a7c] text-white text-xs sm:text-sm font-black shadow-md active:scale-95 transition-all"
+            >
+              <SVG.Phone className="w-4 h-4" />
+              <span>Call</span>
+            </a>
+
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="w-10 h-10 rounded-full bg-[#0B4DA2] text-white flex items-center justify-center shadow-md active:scale-95 transition-all md:hidden"
+              aria-label="Toggle navigation"
+            >
+              {menuOpen ? <SVG.Close className="w-5 h-5" /> : <SVG.Menu className="w-5 h-5" />}
+            </button>
+          </div>
+
+        </header>
+
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="bg-white border-b-2 border-slate-200 px-6 py-4 space-y-2 text-sm font-bold text-slate-800 animate-fade-in shadow-inner md:hidden">
+            <button onClick={() => { setCurrentView('home'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base font-extrabold">🏠 Home</button>
+            <button onClick={() => { setCurrentView('services'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">💼 Our Services</button>
+            <button onClick={() => { setCurrentView('about'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base font-extrabold">👥 About Andromeda</button>
+            <button onClick={() => { setCurrentView('partner'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">🤝 Become a Partner</button>
+            <button onClick={() => { setCurrentView('dsa'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#D32F2F] font-black text-base">⭐ DSA Corner</button>
+            <button onClick={() => { setCurrentView('home'); scrollTo('charges-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">💰 Our Charges (Per Lead)</button>
+            <button onClick={() => { setCurrentView('home'); scrollTo('contact-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">📞 Contact Details</button>
+          </div>
+        )}
+
+        {/* Main Content Pages */}
+        {currentView === 'services' && (
+          <ServicesPage
+            onOpenApply={openApply}
+            onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          />
+        )}
+
+        {currentView === 'about' && (
+          <AboutUsPage
+            onOpenApply={openApply}
+            onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToServices={() => { setCurrentView('services'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          />
+        )}
+
+        {currentView === 'partner' && (
+          <BecomePartnerPage
+            onOpenApply={openApply}
+            onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToDSA={() => { setCurrentView('dsa'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          />
+        )}
+
+        {currentView === 'dsa' && (
+          <DSACornerPage
+            onOpenApply={openApply}
+            onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          />
+        )}
+
+        {currentView === 'home' && (
+        <div className="p-4 sm:p-6 space-y-4 sm:space-y-6" id="hero-sec">
+
+          {/* ========================================================================= */}
+          {/* 2. HERO BANNER CARD WITH TEAM PICTURE */}
+          {/* ========================================================================= */}
+          <div 
+            className="rounded-3xl overflow-hidden text-white p-5 sm:p-7 md:p-8 shadow-xl relative border border-blue-400/40 bg-cover bg-center" 
+            style={{ backgroundImage: "linear-gradient(135deg, rgba(7, 30, 61, 0.95) 0%, rgba(11, 58, 117, 0.90) 50%, rgba(21, 101, 216, 0.78) 100%), url('background.png')" }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center relative z-10">
+              
+              {/* Left Column: Heading & CTA */}
+              <div className="md:col-span-7 space-y-3 sm:space-y-4 text-left">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight uppercase brand-font leading-tight">
+                  INDIA'S LARGEST
+                  <span className="block text-[#00E5FF] mt-1 text-3xl sm:text-4xl lg:text-5xl">
+                    LOAN DISTRIBUTOR'S
+                  </span>
+                  <span className="block text-2xl sm:text-3xl lg:text-4xl mt-0.5">
+                    COMPANY
+                  </span>
+                </h1>
+
+                <div className="flex items-center space-x-2 text-xs sm:text-sm font-extrabold text-amber-300">
+                  <SVG.Star className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 shrink-0" />
+                  <span>Authorised Channel Partner for Leading Banks & NBFCs</span>
+                </div>
+
+                <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={() => openApply('General Loan Application')}
+                    className="px-6 py-3 bg-white text-[#0B4DA2] hover:bg-blue-50 font-black text-sm sm:text-base rounded-2xl shadow-lg transition-all active:scale-95 flex items-center space-x-2"
+                  >
+                    <span>Apply Now</span>
+                    <span>→</span>
+                  </button>
+                  <a
+                    href="tel:7396962063"
+                    className="px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-2xl transition-all flex items-center space-x-1.5"
+                  >
+                    <SVG.Phone className="w-4 h-4" />
+                    <span>7396962063</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Right Column: Andromeda Team Photo */}
+              <div className="md:col-span-5 flex justify-center md:justify-end">
+                <div className="rounded-2xl overflow-hidden border-2 border-white/40 shadow-2xl bg-slate-900/50 max-w-[280px] sm:max-w-[320px] md:max-w-full">
+                  <img
+                    src="team_banner.png"
+                    alt="Andromeda Team - India's Largest Loan Distributor"
+                    className="w-full h-auto object-cover block"
+                  />
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 3. SPECIAL OFFER CARD */}
+          {/* ========================================================================= */}
+          <div className="rounded-3xl border-2 border-amber-300 bg-[#FFF9E6] p-4 sm:p-5 shadow-sm flex items-center space-x-4">
+            <div className="shrink-0">
+              <div className="w-22 h-22 sm:w-26 sm:h-26 rounded-full bg-gradient-to-tr from-[#D4AF37] via-[#FFD700] to-[#F3E5AB] p-1.5 shadow-md flex items-center justify-center text-center">
+                <div className="w-full h-full rounded-full border-2 border-dashed border-[#8B6508] bg-gradient-to-b from-[#FFFDF0] to-[#FFE8A3] flex flex-col items-center justify-center p-1.5 text-[#5C4033]">
+                  <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider leading-tight">TRUST</span>
+                  <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-tight leading-tight">TRANSPARENCY</span>
+                  <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-tight leading-tight">SPEED SERVICE</span>
+                  <div className="flex space-x-0.5 mt-0.5">
+                    <SVG.Star className="w-3 h-3 text-[#8B6508]" />
+                    <SVG.Star className="w-3 h-3 text-[#8B6508]" />
+                    <SVG.Star className="w-3 h-3 text-[#8B6508]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1 space-y-1 text-left">
+              <div className="text-xs sm:text-sm font-extrabold text-slate-700">
+                For 1 Lakh Disbursement
+              </div>
+
+              <div className="flex flex-wrap items-baseline gap-2">
+                <span className="text-3xl sm:text-4xl font-black text-[#D32F2F] tracking-tight brand-font">
+                  Rs. 1000
+                </span>
+                <span className="text-sm sm:text-base font-black text-[#D32F2F]">
+                  Cash Incentive
+                </span>
+              </div>
+
+              <p className="text-xs text-slate-600 font-bold leading-snug">
+                On Personal Loans, Home Loans, Business Loans & Other Non-Finance Leads
+              </p>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 4. PARTNER WITH US & EARN MORE! CARD */}
+          {/* ========================================================================= */}
+          <div className="rounded-3xl bg-gradient-to-r from-[#071E3D] via-[#0B3A75] to-[#071E3D] text-white p-4 sm:p-6 shadow-md flex items-center space-x-4">
+            <div className="w-13 h-13 rounded-full bg-[#D32F2F] text-white flex items-center justify-center shrink-0 shadow-md">
+              <SVG.Phone className="w-6 h-6" />
+            </div>
+
+            <div className="flex-1 space-y-1">
+              <h3 className="text-base sm:text-lg font-black text-white brand-font leading-tight">
+                Partner With Us & Earn More!
+              </h3>
+              <div className="text-xs sm:text-sm font-black text-[#FFD700]">
+                Unlimited Earning Opportunities!
+              </div>
+              <div className="text-[11px] sm:text-xs text-slate-200 font-semibold leading-tight">
+                Refer leads & earn high incentives... More leads, more income!
+              </div>
+            </div>
+
+            <button
+              onClick={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="shrink-0 px-4 py-2.5 bg-[#0B4DA2] hover:bg-blue-600 text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95 flex items-center space-x-1"
+            >
+              <span>Partner Now</span>
+              <span>→</span>
+            </button>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 5. OUR SERVICES (Visible in a Single Row) */}
+          {/* ========================================================================= */}
+          <div className="py-2" id="services-sec">
+            
+            <div className="text-center mb-4 px-1">
+              <h2 className="text-base sm:text-xl md:text-2xl font-black text-[#0B4DA2] tracking-wide brand-font inline-flex items-center space-x-2">
+                <span className="text-slate-300 font-light">—◇—</span>
+                <span className="uppercase">Our Loan Services</span>
+                <span className="text-slate-300 font-light">—◇—</span>
+              </h2>
+            </div>
+
+            {/* All 8 services visible in a single row */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 sm:gap-2.5">
+              {SERVICES.map((srv) => (
+                <div
+                  key={srv.id}
+                  onClick={() => openApply(srv.title)}
+                  className="bg-white rounded-2xl border-2 border-slate-200/90 hover:border-[#0B4DA2] p-2.5 sm:p-3 flex flex-col justify-between items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer group active:scale-95 shadow-xs"
+                >
+                  <div className="flex flex-col items-center w-full">
+                    <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-2 group-hover:scale-110 transition-transform ${srv.iconBg}`}>
+                      {srv.icon}
+                    </div>
+                    <h3 className="text-xs sm:text-[13px] font-black text-slate-900 group-hover:text-[#0B4DA2] transition-colors leading-tight mb-1">
+                      {srv.title}
+                    </h3>
+                    <p className="text-[10px] sm:text-[10.5px] text-slate-500 font-semibold leading-tight line-clamp-2">
+                      {srv.desc}
+                    </p>
+                  </div>
+
+                  <div className="mt-2.5 pt-1.5 border-t border-slate-100 w-full flex items-center justify-center text-[11px] font-black text-[#0B4DA2] group-hover:text-blue-700 space-x-0.5">
+                    <span>Apply Now</span>
+                    <span className="group-hover:translate-x-0.5 transition-transform text-xs">→</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 6. 100% FREE SERVICE BANNER */}
+          {/* ========================================================================= */}
+          <div className="rounded-2xl bg-[#0B3A75] text-white p-4 sm:p-5 shadow-md flex items-center space-x-3.5 sm:space-x-4">
+            <div className="shrink-0">
+              <SVG.Shield />
+            </div>
+            <div>
+              <div className="text-base sm:text-lg font-black text-[#FFD700] brand-font uppercase">
+                100% FREE SERVICE
+              </div>
+              <div className="text-xs sm:text-sm text-blue-100 font-semibold leading-tight mt-0.5">
+                Free Lead, Processing, Pre-Disbursal, Disbursal & Post Disbursal Support
+              </div>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 7. OUR CHARGES (PER LEAD) */}
+          {/* ========================================================================= */}
+          <div className="py-2" id="charges-sec">
+            <div className="text-center mb-4">
+              <h2 className="text-base sm:text-xl md:text-2xl font-black text-[#0B4DA2] tracking-wide brand-font flex items-center justify-center space-x-2">
+                <span className="text-slate-300 font-light">—◇—</span>
+                <span className="uppercase">Our Charges (Per Lead)</span>
+                <span className="text-slate-300 font-light">—◇—</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {CHARGES.map((ch, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl bg-white border-2 border-slate-200 p-3.5 sm:p-4 flex flex-col justify-between hover:shadow-md hover:border-blue-300 transition-all"
+                >
+                  <div className="flex items-center space-x-2">
+                    {ch.icon}
+                    <span className="text-xs sm:text-sm font-extrabold text-slate-800 leading-none">{ch.title}</span>
+                  </div>
+
+                  <div className="mt-2.5 text-center">
+                    <div className="text-lg sm:text-xl font-black text-[#D32F2F] tracking-tight">
+                      {ch.amount}
+                    </div>
+                    <div className="text-xs font-black text-[#D32F2F]">
+                      {ch.pct}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Detailed Insurance Services List */}
+            <div className="mt-4 pt-4 border-t border-slate-200">
+              <div className="flex items-center justify-between mb-3 px-1">
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 rounded-xl bg-blue-100 text-[#0B4DA2] flex items-center justify-center">
+                    <SVG.Shield className="w-5 h-5 text-[#0B4DA2]" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-black text-slate-900 leading-tight">
+                      All Types of Insurance
+                    </h3>
+                    <span className="text-[10.5px] sm:text-xs text-slate-500 font-bold">
+                      Per 1 Lakh Sum Assured
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-black px-3 py-1 bg-red-50 text-[#D32F2F] rounded-full border border-red-200">
+                  Rs. 10,000 (10%)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+                {INSURANCE_LIST.map((ins) => (
+                  <div
+                    key={ins.id}
+                    onClick={() => openApply(ins.title)}
+                    className="rounded-2xl bg-white border-2 border-slate-200 p-3.5 flex flex-col justify-between hover:shadow-lg hover:border-[#0B4DA2] hover:-translate-y-0.5 transition-all cursor-pointer group active:scale-95"
+                  >
+                    <div>
+                      <div className="flex items-center space-x-2.5 mb-2">
+                        <div className={`p-2 rounded-xl shrink-0 ${ins.badgeBg}`}>
+                          {ins.icon}
+                        </div>
+                        <span className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-[#0B4DA2] transition-colors leading-tight">
+                          {ins.title}
+                        </span>
+                      </div>
+                      <p className="text-[10.5px] text-slate-500 font-semibold leading-tight mb-3 line-clamp-2">
+                        {ins.desc}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-black text-[#D32F2F] leading-none">
+                          {ins.amount}
+                        </div>
+                        <div className="text-[10px] font-bold text-[#D32F2F]">
+                          {ins.pct}
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        className="px-3 py-1.5 text-xs font-black text-[#0B4DA2] bg-blue-50 group-hover:bg-[#0B4DA2] group-hover:text-white rounded-lg transition-colors flex items-center space-x-1"
+                      >
+                        <span>Apply</span>
+                        <span>→</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 8. ABOUT ANDROMEDA + OUR PROCESS & TRUST (EXACT 2ND IMAGE INFOGRAPHIC) */}
+          {/* ========================================================================= */}
+          <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-md space-y-6" id="about-sec">
+            
+            {/* Header / Intro */}
+            <div className="text-center space-y-2">
+              <div className="inline-block px-3 py-1 bg-blue-50 text-[#0B4DA2] rounded-full text-xs font-black uppercase tracking-wider">
+                Who We Are
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-[#0B4DA2] brand-font">
+                About Andromeda
+              </h2>
+              <h3 className="text-base sm:text-lg font-black text-slate-800">
+                Your Trusted Loan Partner
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto leading-relaxed">
+                We connect you with the right loan solutions from leading Banks & NBFCs, with simple and transparent support.
+              </p>
+            </div>
+
+            {/* Our Mission */}
+            <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 rounded-2xl p-4 sm:p-5 border border-blue-200 text-center space-y-1.5">
+              <div className="text-xs font-black text-[#0B4DA2] uppercase tracking-wider">Our Mission</div>
+              <div className="text-base sm:text-lg font-black text-slate-900 brand-font">
+                Simple. Transparent. Hassle-Free.
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                Helping you choose the right loan and guiding you from application to approval.
+              </p>
+            </div>
+
+            {/* Why Choose Us? (6 Points) */}
+            <div className="space-y-3">
+              <h4 className="text-base sm:text-lg font-black text-[#0B4DA2] text-center brand-font">
+                Why Choose Us?
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
+                {WHY_CHOOSE_POINTS.map((pt, idx) => (
+                  <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center space-x-2">
+                    <SVG.Check />
+                    <span className="text-xs sm:text-sm font-bold text-slate-800 leading-tight">{pt}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Our Loan Solutions */}
+            <div className="space-y-2.5">
+              <h4 className="text-base sm:text-lg font-black text-[#0B4DA2] text-center brand-font">
+                Our Loan & Insurance Solutions
+              </h4>
+              <div className="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-bold text-slate-700">
+                <span className="px-3 py-1.5 bg-slate-100 rounded-lg">Personal Loans</span>
+                <span>•</span>
+                <span className="px-3 py-1.5 bg-slate-100 rounded-lg">Business Loans</span>
+                <span>•</span>
+                <span className="px-3 py-1.5 bg-slate-100 rounded-lg">Home Loans</span>
+                <span>•</span>
+                <span className="px-3 py-1.5 bg-slate-100 rounded-lg">LAP</span>
+                <span>•</span>
+                <span className="px-3 py-1.5 bg-slate-100 rounded-lg">Vehicle Loans</span>
+                <span>•</span>
+                <span className="px-3 py-1.5 bg-slate-100 rounded-lg">Education Loans</span>
+                <span>•</span>
+                <span className="px-3 py-1.5 bg-blue-50 text-blue-700 font-black rounded-lg">Life Insurance</span>
+                <span>•</span>
+                <span className="px-3 py-1.5 bg-emerald-50 text-emerald-700 font-black rounded-lg">Health Insurance</span>
+                <span>•</span>
+                <span className="px-3 py-1.5 bg-red-50 text-red-700 font-black rounded-lg">Vehicle Insurance</span>
+              </div>
+            </div>
+
+            {/* ========================================================================= */}
+            {/* EXACT MATCH: OUR PROCESS INFOGRAPHIC (6 CIRCULAR STEPS WITH ARROWS) */}
+            {/* ========================================================================= */}
+            <div className="pt-4 border-t border-slate-200 space-y-4">
+              
+              <h3 className="text-xl sm:text-2xl font-black text-[#0B2545] brand-font text-left sm:text-center">
+                Our Process
+              </h3>
+
+              {/* Responsive Flow: 6 Circular Steps with connecting arrows */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-2 items-start justify-between">
+                {PROCESS_STEPS_INFOGRAPHIC.map((stepItem, idx) => (
+                  <div key={idx} className="flex flex-col items-center text-center p-2 rounded-2xl hover:bg-slate-50 transition-colors">
+                    
+                    {/* Circle Icon */}
+                    <div className="mb-2">
+                      {stepItem.icon}
+                    </div>
+
+                    {/* Step Number */}
+                    <div className="text-sm font-black text-slate-900 mt-1">
+                      {stepItem.num}
+                    </div>
+
+                    {/* Step Label */}
+                    <div className="text-xs sm:text-[13px] font-extrabold text-slate-800 leading-tight mt-0.5">
+                      {stepItem.label}
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
+            {/* ========================================================================= */}
+            {/* EXACT MATCH: TRUST & TRANSPARENCY DARK NAVY 4-COLUMN BOX */}
+            {/* ========================================================================= */}
+            <div className="pt-2 space-y-3">
+              
+              <h3 className="text-lg sm:text-xl font-black text-[#0B2545] brand-font text-center">
+                Trust & Transparency
+              </h3>
+
+              {/* Dark Navy 4-Pillar Box matching 2nd image */}
+              <div className="bg-[#0A1633] text-white rounded-3xl p-5 sm:p-6 shadow-xl border border-blue-900/60">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-700/60">
+                  
+                  {/* Pillar 1: 1000+ Happy Clients */}
+                  <div className="flex items-center space-x-3 pt-2 sm:pt-0 sm:px-2">
+                    <SVG.Smiley />
+                    <div>
+                      <div className="text-lg sm:text-xl font-black text-white brand-font leading-none">
+                        1000+
+                      </div>
+                      <div className="text-xs text-slate-300 font-semibold mt-0.5 leading-tight">
+                        Happy Clients
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pillar 2: 100+ Lending Partners */}
+                  <div className="flex items-center space-x-3 pt-2 sm:pt-0 sm:px-3">
+                    <SVG.Handshake />
+                    <div>
+                      <div className="text-lg sm:text-xl font-black text-white brand-font leading-none">
+                        100+
+                      </div>
+                      <div className="text-xs text-slate-300 font-semibold mt-0.5 leading-tight">
+                        Lending Partners
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pillar 3: Multiple Loan Products */}
+                  <div className="flex items-center space-x-3 pt-2 sm:pt-0 sm:px-3">
+                    <SVG.DocFile />
+                    <div>
+                      <div className="text-base sm:text-lg font-black text-white brand-font leading-none">
+                        Multiple
+                      </div>
+                      <div className="text-xs text-slate-300 font-semibold mt-0.5 leading-tight">
+                        Loan Products
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pillar 4: Fast & Professional Support */}
+                  <div className="flex items-center space-x-3 pt-2 sm:pt-0 sm:px-3">
+                    <SVG.Headset />
+                    <div>
+                      <div className="text-base sm:text-lg font-black text-white brand-font leading-none">
+                        Fast &
+                      </div>
+                      <div className="text-xs text-slate-300 font-semibold mt-0.5 leading-tight">
+                        Professional Support
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            {/* Our Team */}
+            <div className="text-center space-y-1 bg-slate-50 rounded-2xl p-4 border border-slate-200">
+              <h4 className="text-base sm:text-lg font-black text-slate-900 brand-font">Our Team</h4>
+              <p className="text-xs sm:text-sm text-slate-600 font-medium">
+                Experienced professionals dedicated to helping you find the right loan.
+              </p>
+            </div>
+
+            {/* Get Started CTA */}
+            <div className="bg-gradient-to-r from-[#D32F2F] to-[#B71C1C] text-white rounded-2xl p-5 text-center space-y-2 shadow-lg">
+              <h4 className="text-lg sm:text-xl font-black brand-font">Get Started</h4>
+              <div className="text-sm sm:text-base font-bold text-yellow-200">Need a Loan? Weâ€™re Here to Help.</div>
+              <p className="text-xs text-white/90">Get your Free Consultation today.</p>
+              <button
+                onClick={() => openApply('Free Consultation')}
+                className="mt-2 px-6 py-2.5 bg-white text-[#B71C1C] hover:bg-yellow-50 font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95"
+              >
+                Get Free Consultation Now â†’
+              </button>
+            </div>
+
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 9. CALL FOR MORE DETAILS ACTION CARD */}
+          {/* ========================================================================= */}
+          <div className="rounded-2xl bg-white border-2 border-blue-300 p-4 sm:p-5 shadow-sm" id="contact-sec">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 rounded-full bg-[#0B4DA2] text-white flex items-center justify-center shrink-0 shadow-sm">
+                  <SVG.Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-sm sm:text-base font-black text-[#0B4DA2]">Call for More Details</div>
+                  <div className="text-xs text-slate-500 font-bold">We're Here to Help!</div>
+                </div>
+              </div>
+
+              <div className="h-10 w-px bg-slate-200 mx-2 sm:mx-4"></div>
+
+              <div className="text-right">
+                <a
+                  href="tel:7396962063"
+                  className="text-lg sm:text-2xl font-black text-[#0B4DA2] hover:underline brand-font block leading-tight tracking-tight"
+                >
+                  7396962063
+                </a>
+                <div className="text-xs font-extrabold text-slate-700 mt-0.5">
+                  M. Swapna (Branch Manager)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 10. OUR TRUSTED PARTNERS (Exact Match to Image) */}
+          {/* ========================================================================= */}
+          <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-slate-200 shadow-sm space-y-4">
+            <div className="text-center">
+              <h3 className="text-base sm:text-lg font-black text-[#0B4DA2] brand-font uppercase tracking-wider inline-flex items-center space-x-2">
+                <span className="text-slate-300">—◇—</span>
+                <span>Our Trusted Lending Partners</span>
+                <span className="text-slate-300">—◇—</span>
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-3 text-center">
+              {[
+                { name: "SBI", sub: "State Bank of India", color: "text-[#280071]" },
+                { name: "HDFC BANK", sub: "We understand your world", color: "text-[#004c8f]" },
+                { name: "ICICI Bank", sub: "Khayaal Aapka", color: "text-[#b02a30]" },
+                { name: "AXIS BANK", sub: "Badhti Ka Naam Zindagi", color: "text-[#97144d]" },
+                { name: "Kotak Mahindra", sub: "Let's make money simple", color: "text-[#ed1c24]" },
+                { name: "BAJAJ FINSERV", sub: "Finance with Speed", color: "text-[#0072bc]" },
+                { name: "TATA CAPITAL", sub: "Count On Us", color: "text-[#00529b]" },
+                { name: "IDFC FIRST Bank", sub: "Always You First", color: "text-[#9d2235]" },
+                { name: "PNB", sub: "Punjab National Bank", color: "text-[#a21d22]" },
+                { name: "& 100+ More", sub: "Leading Banks & NBFCs", color: "text-[#0B4DA2]" }
+              ].map((bank, bIdx) => (
+                <div key={bIdx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-blue-300 hover:bg-blue-50/30 transition-all flex flex-col justify-center items-center">
+                  <div className={`text-xs sm:text-sm font-black tracking-tight ${bank.color}`}>
+                    {bank.name}
+                  </div>
+                  <div className="text-[9.5px] text-slate-500 font-semibold mt-0.5 leading-tight">
+                    {bank.sub}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 11. COMPREHENSIVE FOOTER (Exact Match to Image) */}
+          {/* ========================================================================= */}
+          <footer className="rounded-3xl bg-[#071E3D] text-white p-6 sm:p-8 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs text-slate-300">
+              
+              {/* Col 1: About Andromeda */}
+              <div className="space-y-2">
+                <h4 className="text-sm font-black text-white uppercase tracking-wider brand-font">
+                  About Andromeda
+                </h4>
+                <p className="leading-relaxed text-slate-300 font-medium">
+                  Andromeda Sales & Distribution Pvt. Ltd. — India's Largest Loan Distributor. We connect borrowers to premier multi-bank credit solutions with transparent guidance.
+                </p>
+                <div className="text-[11px] text-amber-300 font-bold">
+                  Authorised Channel Partner for Leading Banks & NBFCs
+                </div>
+              </div>
+
+              {/* Col 2: Registered Offices */}
+              <div className="space-y-2">
+                <h4 className="text-sm font-black text-white uppercase tracking-wider brand-font">
+                  Office Locations
+                </h4>
+                <div className="space-y-2 font-medium">
+                  <div>
+                    <div className="text-white font-bold text-[11px]">📍 Vijayawada Head Office:</div>
+                    <p className="text-[11px] leading-snug text-slate-300">
+                      Door No: 48-13-24/3, 2nd Floor, Swarna's Sri Manikanta Enclave, Mogalarajupuram, Vijayawada - 520010.
+                    </p>
+                  </div>
+                  <div>
+                    <div className="text-white font-bold text-[11px]">📍 Nalgonda Branch:</div>
+                    <p className="text-[11px] leading-snug text-slate-300">
+                      Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Col 3: Quick Links */}
+              <div className="space-y-2">
+                <h4 className="text-sm font-black text-white uppercase tracking-wider brand-font">
+                  Quick Links
+                </h4>
+                <ul className="space-y-1.5 font-bold">
+                  <li>
+                    <button onClick={() => { setCurrentView('home'); window.scrollTo({top:0, behavior:'smooth'}); }} className="hover:text-amber-300 transition-colors">
+                      › Home
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => { setCurrentView('partner'); window.scrollTo({top:0, behavior:'smooth'}); }} className="hover:text-amber-300 transition-colors">
+                      › Become a Partner
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => { setCurrentView('dsa'); window.scrollTo({top:0, behavior:'smooth'}); }} className="hover:text-amber-300 transition-colors">
+                      › DSA Corner
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => scrollTo('services-sec')} className="hover:text-amber-300 transition-colors">
+                      › Our Loan Services
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => scrollTo('charges-sec')} className="hover:text-amber-300 transition-colors">
+                      › Lead Charges & Commissions
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Col 4: Contact Us & Helpline */}
+              <div className="space-y-2">
+                <h4 className="text-sm font-black text-white uppercase tracking-wider brand-font">
+                  Contact Us
+                </h4>
+                <div className="space-y-1.5 font-bold">
+                  <a href="tel:7396962063" className="block text-sm text-[#00E5FF] hover:underline">
+                    📞 7396962063
+                  </a>
+                  <div className="text-[11px] text-slate-300 font-medium">
+                    ✉️ contact@andromedaloans.com
+                  </div>
+                  <div className="text-[11px] text-slate-300 font-medium">
+                    🌐 www.andromeda.co.in
+                  </div>
+                  <div className="pt-2 flex items-center space-x-2">
+                    <span className="px-2 py-1 bg-blue-600/40 rounded text-[10px] text-white">FB</span>
+                    <span className="px-2 py-1 bg-pink-600/40 rounded text-[10px] text-white">IG</span>
+                    <span className="px-2 py-1 bg-emerald-600/40 rounded text-[10px] text-white">WA</span>
+                    <span className="px-2 py-1 bg-red-600/40 rounded text-[10px] text-white">YT</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="pt-4 border-t border-slate-700/60 text-center text-[10.5px] text-slate-400 font-medium flex flex-col sm:flex-row items-center justify-between gap-2">
+              <div>© 2026 Andromeda Sales & Distribution Pvt. Ltd. All rights reserved.</div>
+              <div>India's Largest Multi-Bank Loan Distribution Network</div>
+            </div>
+          </footer>
+
+        </div>
+        )}
+
+      </div>
+
+      {/* ========================================================================= */}
+      {/* 10. MOBILE BOTTOM FIXED DOCK */}
+      {/* ========================================================================= */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t-2 border-slate-200 shadow-2xl px-3 py-2 flex items-center justify-between max-w-[520px] md:max-w-[880px] lg:max-w-[1180px] xl:max-w-[1360px] mx-auto">
+        <button
+          onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          className={`flex flex-col items-center justify-center text-xs font-black ${currentView === 'home' ? 'text-[#0B4DA2]' : 'text-slate-500'}`}
+        >
+          <SVG.NavHome />
+          <span className="mt-0.5 text-[10.5px]">Home</span>
+        </button>
+
+        <button
+          onClick={() => { setCurrentView('services'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          className={`flex flex-col items-center justify-center text-xs font-black ${currentView === 'services' ? 'text-[#0B4DA2]' : 'text-slate-500'}`}
+        >
+          <SVG.NavGrid className="w-5 h-5" />
+          <span className="mt-0.5 text-[10.5px]">Services</span>
+        </button>
+
+        <div className="-mt-8">
+          <a
+            href="tel:7396962063"
+            className="w-14 h-14 rounded-full bg-[#0B4DA2] hover:bg-[#083a7c] text-white flex flex-col items-center justify-center shadow-2xl border-4 border-white active:scale-95 transition-transform"
+          >
+            <SVG.Phone className="w-4 h-4" />
+            <span className="text-[9px] font-black uppercase mt-0.5">Call</span>
+          </a>
+        </div>
+
+        <button
+          onClick={() => { setCurrentView('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          className={`flex flex-col items-center justify-center text-xs font-black ${currentView === 'about' ? 'text-[#0B4DA2]' : 'text-slate-500'}`}
+        >
+          <SVG.NavUsers className="w-5 h-5" />
+          <span className="mt-0.5 text-[10.5px]">About</span>
+        </button>
+
+        <button
+          onClick={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          className={`flex flex-col items-center justify-center text-xs font-black ${currentView === 'partner' ? 'text-[#0B4DA2]' : 'text-slate-500'}`}
+        >
+          <SVG.Handshake className="w-5 h-5" />
+          <span className="mt-0.5 text-[10.5px]">Partner</span>
+        </button>
+      </nav>
+
+      {/* ========================================================================= */}
+      {/* 10.1. FLOATING WHATSAPP BUTTON (With Pulse & Direct Chat) */}
+      {/* ========================================================================= */}
+      <a
+        href="https://wa.me/917396962063?text=Hello%20Andromeda%2C%20I%20want%20to%20inquire%20about%20a%20Loan%20%2F%20Partnership%20service."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Andromeda on WhatsApp"
+        className="fixed bottom-20 right-3.5 sm:right-5 md:bottom-7 md:right-7 z-50 flex items-center group transition-transform duration-300 hover:scale-105 active:scale-95"
+      >
+        <span className="hidden sm:flex items-center px-3.5 py-1.5 mr-2 bg-white text-slate-800 text-xs font-black rounded-full shadow-2xl border border-slate-200 group-hover:border-emerald-400 transition-all">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-ping"></span>
+          <span>Chat on WhatsApp</span>
+        </span>
+        <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#1DA851] via-[#25D366] to-[#2BE572] text-white flex items-center justify-center shadow-2xl border-2 border-white ring-4 ring-emerald-400/30 group-hover:ring-emerald-500/50 transition-all">
+          <SVG.WhatsApp className="w-7 h-7 sm:w-8 sm:h-8 drop-shadow" />
+        </div>
+      </a>
+
+      {/* ========================================================================= */}
+      {/* 11. LEAD APPLICATION MODAL */}
+      {/* ========================================================================= */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-200 relative">
+            <button
+              onClick={() => setModalOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-700"
+            >
+              <SVG.Close className="w-5 h-5" />
+            </button>
+
+            <div className="mb-4">
+              <span className="text-xs font-black uppercase tracking-wider text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full">
+                Instant Loan Lead Form
+              </span>
+              <h3 className="text-2xl font-black text-slate-900 brand-font mt-2">
+                Apply for {selectedLoan}
+              </h3>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-3.5">
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Full Name</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Ramesh Kumar"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Mobile Number</label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="9876543210"
+                    value={formData.mobile}
+                    onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">City</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.city}
+                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Loan Amount</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.amount}
+                  onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3.5 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm sm:text-base shadow-lg transition-all mt-2 active:scale-95"
+              >
+                Submit Application
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
+
+// 7. MOUNT ROOT
+const rootEl = document.getElementById('root');
+if (rootEl) {
+  const root = ReactDOM.createRoot(rootEl);
+  root.render(<App />);
+}
+
+  </script>
+</body>
+</html>

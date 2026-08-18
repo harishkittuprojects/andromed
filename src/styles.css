@@ -1,0 +1,134 @@
+/* Andromeda Financial Design System & Custom UI Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary-blue: #1565D8;
+  --dark-blue: #0B3A75;
+  --dark-navy: #0B192C;
+  --text-main: #111111;
+  --text-secondary: #555555;
+  --bg-main: #FFFFFF;
+  --bg-soft: #F8FAFD;
+  --bg-accent: #EBF3FE;
+  --border-light: #E2E8F0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-font {
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Subtle Glassmorphism */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Fintech subtle grid pattern */
+.fintech-grid-bg {
+  background-color: #ffffff;
+  background-image: radial-gradient(#1565d8 0.75px, transparent 0.75px), radial-gradient(#1565d8 0.75px, #ffffff 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  background-opacity: 0.03;
+}
+
+.fintech-mesh-gradient {
+  background: radial-gradient(circle at 10% 20%, rgba(21, 101, 216, 0.05) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(11, 58, 117, 0.05) 0%, transparent 40%);
+}
+
+/* Floating badge animation */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatSlow 5s ease-in-out 1.5s infinite;
+}
+
+/* Custom Range Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 9999px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background: #1565D8;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(21, 101, 216, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Interactive card hover transitions */
+.loan-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.loan-card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 30px -10px rgba(21, 101, 216, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Pulse badge */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.pulse-badge {
+  animation: pulseSubtle 2.5s infinite;
+}
