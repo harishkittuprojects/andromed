@@ -2187,13 +2187,13 @@ function App() {
           <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 py-3.5 flex items-center justify-between">
           
           <div
-            className="flex items-center space-x-3 cursor-pointer select-none"
+            className="flex items-center space-x-3 cursor-pointer select-none py-1"
             onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
             <img 
               src="logo.png" 
               alt="Andromeda Nalgonda Official Logo" 
-              className="h-12 sm:h-14 md:h-16 w-auto object-contain rounded-xl shadow-sm border border-slate-200"
+              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-all"
             />
           </div>
 
@@ -2963,9 +2963,9 @@ function App() {
                 <img 
                   src="logo.png" 
                   alt="Andromeda Nalgonda Official Logo" 
-                  className="h-16 w-auto object-contain bg-white p-1 rounded-xl shadow-md"
+                  className="h-20 sm:h-24 md:h-28 w-auto object-contain bg-white p-2 rounded-2xl shadow-lg border border-slate-200"
                 />
-                <p className="leading-relaxed text-slate-300 font-medium">
+                <p className="leading-relaxed text-slate-300 font-medium text-xs">
                   Andromeda Sales & Distribution Pvt. Ltd. — India's Largest Loan Distributor. Branch Nalgonda.
                 </p>
                 <div className="text-[11px] text-amber-300 font-bold">
