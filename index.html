@@ -303,12 +303,12 @@ const SERVICES = [
 
 // 3. CHARGES ARRAY
 const CHARGES = [
-  { title: "Personal Loan", amount: "Rs. 1,300", pct: "(1.3%)", icon: <SVG.User className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Business Loan", amount: "Rs. 1,200", pct: "(1.2%)", icon: <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "LAP", amount: "Rs. 1,000", pct: "(1%)", icon: <SVG.Building className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Vehicle Loan", amount: "Rs. 1,000", pct: "(1%)", icon: <SVG.Car className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Home Loan", amount: "Rs. 600", pct: "(1.6%)", icon: <SVG.Home className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Education Loan", amount: "Rs. 500", pct: "(0.5%)", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
+  { title: "Personal Loan", amount: "Rs. 1,300", pct: "(1.3%)", perLakh: "For 1 Lakh", icon: <SVG.User className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Business Loan", amount: "Rs. 1,200", pct: "(1.2%)", perLakh: "For 1 Lakh", icon: <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "LAP", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh", icon: <SVG.Building className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Vehicle Loan", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh", icon: <SVG.Car className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Home Loan", amount: "Rs. 600", pct: "(1.6%)", perLakh: "For 1 Lakh", icon: <SVG.Home className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Education Loan", amount: "Rs. 500", pct: "(0.5%)", perLakh: "For 1 Lakh", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
 ];
 
 // 3.1. INSURANCE LIST ARRAY
@@ -2038,33 +2038,45 @@ function App() {
           </div>
 
           {/* ========================================================================= */}
-          {/* 7. OUR CHARGES (PER LEAD) */}
+          {/* 7. OUR CHARGES (PER LEAD / FOR 1 LAKH) */}
           {/* ========================================================================= */}
           <div className="py-2" id="charges-sec">
             <div className="text-center mb-4">
               <h2 className="text-base sm:text-xl md:text-2xl font-black text-[#0B4DA2] tracking-wide brand-font flex items-center justify-center space-x-2">
                 <span className="text-slate-300 font-light">—◇—</span>
-                <span className="uppercase">Our Charges (Per Lead)</span>
+                <span className="uppercase">Our Charges (For 1 Lakh Disbursement)</span>
                 <span className="text-slate-300 font-light">—◇—</span>
               </h2>
+              <p className="text-xs sm:text-sm text-slate-500 font-bold mt-1">
+                Payout & Incentive Structure for Every ₹1 Lakh Disbursed
+              </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
               {CHARGES.map((ch, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl bg-white border-2 border-slate-200 p-3.5 sm:p-4 flex flex-col justify-between hover:shadow-md hover:border-blue-300 transition-all"
+                  className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
                 >
-                  <div className="flex items-center space-x-2">
-                    {ch.icon}
-                    <span className="text-xs sm:text-sm font-extrabold text-slate-800 leading-none">{ch.title}</span>
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                      {ch.icon}
+                    </div>
+                    <div>
+                      <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight block">
+                        {ch.title}
+                      </span>
+                      <span className="text-[11px] font-bold text-slate-500 block mt-0.5">
+                        For 1 Lakh
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="mt-2.5 text-center">
-                    <div className="text-lg sm:text-xl font-black text-[#D32F2F] tracking-tight">
+                  <div className="text-right shrink-0 pl-2">
+                    <div className="text-base sm:text-lg font-black text-[#D32F2F] tracking-tight leading-none">
                       {ch.amount}
                     </div>
-                    <div className="text-xs font-black text-[#D32F2F]">
+                    <div className="text-xs font-black text-[#D32F2F] mt-0.5">
                       {ch.pct}
                     </div>
                   </div>
