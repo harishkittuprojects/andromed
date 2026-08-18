@@ -2190,18 +2190,11 @@ function App() {
             className="flex items-center space-x-3 cursor-pointer select-none"
             onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
-            <SVG.LogoDelta />
-            <div>
-              <div className="text-2xl sm:text-3xl font-black text-[#0B4DA2] tracking-tight leading-none brand-font">
-                ANDROMEDA
-              </div>
-              <div className="text-xs sm:text-sm font-extrabold text-[#0B4DA2] tracking-normal leading-tight mt-0.5">
-                India's Largest Loan Distributor
-              </div>
-              <div className="text-[10px] sm:text-xs text-slate-500 font-bold leading-tight">
-                Andromeda Sales & Distribution Pvt. Ltd.
-              </div>
-            </div>
+            <img 
+              src="logo.png" 
+              alt="Andromeda Nalgonda Official Logo" 
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain rounded-xl shadow-sm border border-slate-200"
+            />
           </div>
 
           {/* Desktop Navigation Links */}
@@ -2966,12 +2959,14 @@ function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs text-slate-300">
               
               {/* Col 1: About Andromeda */}
-              <div className="space-y-2">
-                <h4 className="text-sm font-black text-white uppercase tracking-wider brand-font">
-                  About Andromeda
-                </h4>
+              <div className="space-y-3">
+                <img 
+                  src="logo.png" 
+                  alt="Andromeda Nalgonda Official Logo" 
+                  className="h-16 w-auto object-contain bg-white p-1 rounded-xl shadow-md"
+                />
                 <p className="leading-relaxed text-slate-300 font-medium">
-                  Andromeda Sales & Distribution Pvt. Ltd. — India's Largest Loan Distributor. We connect borrowers to premier multi-bank credit solutions with transparent guidance.
+                  Andromeda Sales & Distribution Pvt. Ltd. — India's Largest Loan Distributor. Branch Nalgonda.
                 </p>
                 <div className="text-[11px] text-amber-300 font-bold">
                   Authorised Channel Partner for Leading Banks & NBFCs
