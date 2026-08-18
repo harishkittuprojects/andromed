@@ -2178,59 +2178,83 @@ function App() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
               
               {/* Left Column: 4-Step Process */}
-              <div className="lg:col-span-6 space-y-3.5 flex flex-col justify-between">
-                <div className="space-y-3">
-                  {/* Step 1 */}
-                  <div className="rounded-2xl bg-white border-2 border-emerald-200 p-4 shadow-sm flex items-center space-x-4 hover:border-emerald-400 transition-all">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-emerald-600 to-emerald-800 text-white flex flex-col items-center justify-center shrink-0 font-black shadow-md">
-                      <span className="text-[9px] uppercase tracking-wider text-emerald-200">STEP</span>
-                      <span className="text-lg leading-none">01</span>
-                    </div>
-                    <div className="text-xs sm:text-sm font-black text-slate-800 leading-snug">
-                      Do Loan Login in your name with <span className="text-emerald-700">ANDROMEDA ID</span> in just a few minutes
-                    </div>
+              <div className="lg:col-span-6 grid grid-cols-1 gap-3.5 h-full">
+                
+                {/* Step 1 */}
+                <div className="rounded-2xl bg-white border-2 border-emerald-200 p-3.5 sm:p-4 shadow-sm flex items-center space-x-3.5 hover:border-emerald-400 hover:shadow-md transition-all">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-emerald-600 to-emerald-800 text-white flex flex-col items-center justify-center shrink-0 font-black shadow-md">
+                    <span className="text-[9px] uppercase tracking-wider text-emerald-200 leading-none">STEP</span>
+                    <span className="text-xl leading-tight font-black">01</span>
                   </div>
-
-                  {/* Step 2 */}
-                  <div className="rounded-2xl bg-white border-2 border-blue-200 p-4 shadow-sm flex items-center space-x-4 hover:border-blue-400 transition-all">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col items-center justify-center shrink-0 font-black shadow-md">
-                      <span className="text-[9px] uppercase tracking-wider text-blue-200">STEP</span>
-                      <span className="text-lg leading-none">02</span>
-                    </div>
-                    <div className="text-xs sm:text-sm font-black text-slate-800 leading-snug">
-                      Submit the Loan Application Form
-                    </div>
+                  <div className="w-11 h-11 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0 text-emerald-700">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                      <line x1="8" y1="21" x2="16" y2="21" />
+                      <line x1="12" y1="17" x2="12" y2="21" />
+                      <circle cx="10" cy="9" r="2" />
+                      <path d="M7 14a3 3 0 0 1 6 0" />
+                    </svg>
                   </div>
-
-                  {/* Step 3 */}
-                  <div className="rounded-2xl bg-white border-2 border-purple-200 p-4 shadow-sm flex items-center space-x-4 hover:border-purple-400 transition-all">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-purple-600 to-purple-800 text-white flex flex-col items-center justify-center shrink-0 font-black shadow-md">
-                      <span className="text-[9px] uppercase tracking-wider text-purple-200">STEP</span>
-                      <span className="text-lg leading-none">03</span>
-                    </div>
-                    <div className="text-xs sm:text-sm font-black text-slate-800 leading-snug">
-                      Submit the Lead Details to Loan Counsellor
-                    </div>
-                  </div>
-
-                  {/* Step 4 */}
-                  <div className="rounded-2xl bg-white border-2 border-amber-200 p-4 shadow-sm flex items-center space-x-4 hover:border-amber-400 transition-all">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-amber-600 to-amber-800 text-white flex flex-col items-center justify-center shrink-0 font-black shadow-md">
-                      <span className="text-[9px] uppercase tracking-wider text-amber-200">STEP</span>
-                      <span className="text-lg leading-none">04</span>
-                    </div>
-                    <div className="text-xs sm:text-sm font-black text-slate-800 leading-snug">
-                      Loan Counsellor will Contact the Lead and Process the Application
-                    </div>
+                  <div className="text-xs sm:text-sm font-black text-slate-800 leading-snug">
+                    Do Loan Login in your name with <span className="text-emerald-700">ANDROMEDA ID</span> in just a few minutes
                   </div>
                 </div>
+
+                {/* Step 2 */}
+                <div className="rounded-2xl bg-white border-2 border-blue-200 p-3.5 sm:p-4 shadow-sm flex items-center space-x-3.5 hover:border-blue-400 hover:shadow-md transition-all">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col items-center justify-center shrink-0 font-black shadow-md">
+                    <span className="text-[9px] uppercase tracking-wider text-blue-200 leading-none">STEP</span>
+                    <span className="text-xl leading-tight font-black">02</span>
+                  </div>
+                  <div className="w-11 h-11 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0 text-blue-700">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <div className="text-xs sm:text-sm font-black text-slate-800 leading-snug">
+                    Submit the Loan Application Form
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="rounded-2xl bg-white border-2 border-purple-200 p-3.5 sm:p-4 shadow-sm flex items-center space-x-3.5 hover:border-purple-400 hover:shadow-md transition-all">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-purple-600 to-purple-800 text-white flex flex-col items-center justify-center shrink-0 font-black shadow-md">
+                    <span className="text-[9px] uppercase tracking-wider text-purple-200 leading-none">STEP</span>
+                    <span className="text-xl leading-tight font-black">03</span>
+                  </div>
+                  <div className="w-11 h-11 rounded-full bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0 text-purple-700">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="text-xs sm:text-sm font-black text-slate-800 leading-snug">
+                    Submit the Lead Details to Loan Counsellor
+                  </div>
+                </div>
+
+                {/* Step 4 */}
+                <div className="rounded-2xl bg-white border-2 border-amber-200 p-3.5 sm:p-4 shadow-sm flex items-center space-x-3.5 hover:border-amber-400 hover:shadow-md transition-all">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-amber-600 to-amber-800 text-white flex flex-col items-center justify-center shrink-0 font-black shadow-md">
+                    <span className="text-[9px] uppercase tracking-wider text-amber-200 leading-none">STEP</span>
+                    <span className="text-xl leading-tight font-black">04</span>
+                  </div>
+                  <div className="w-11 h-11 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0 text-amber-700">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div className="text-xs sm:text-sm font-black text-slate-800 leading-snug">
+                    Loan Counsellor will Contact the Lead and Process the Application
+                  </div>
+                </div>
+
               </div>
 
               {/* Right Column: LOAN PAYOUT (WITHOUT SERVICE) Table */}
-              <div className="lg:col-span-6 rounded-2xl bg-white border-2 border-red-200 shadow-md overflow-hidden flex flex-col">
+              <div className="lg:col-span-6 rounded-2xl bg-white border-2 border-red-200 shadow-md overflow-hidden flex flex-col justify-between">
                 <div className="bg-[#8B0000] text-white p-3.5 sm:p-4 text-center">
                   <h3 className="text-base sm:text-xl font-black uppercase tracking-wide brand-font">
-                    LOAN PAYOUT <span className="text-amber-300 text-xs sm:text-sm font-bold lowercase">(WITHOUT SERVICE)</span>
+                    LOAN PAYOUT <span className="text-amber-300 text-xs sm:text-sm font-bold lowercase">(without service)</span>
                   </h3>
                   <div className="text-[11px] text-slate-200 font-semibold mt-0.5">
                     Direct Payout & Commission Structure for Bankers
