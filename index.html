@@ -1655,6 +1655,467 @@ function DSACornerPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
         </div>
       </div>
 
+// 5.4. BANKERS DEDICATED PAGE COMPONENT
+function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) {
+  const [calcType, setCalcType] = useState('Personal Loan');
+  const [calcVolume, setCalcVolume] = useState(2500000); // 25 Lakhs default
+  const [leadForm, setLeadForm] = useState({
+    name: '',
+    mobile: '',
+    bankName: '',
+    city: 'Nalgonda',
+    volume: '₹ 25 Lakhs'
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const ratesMap = {
+    'Personal Loan': 0.02,
+    'Business Loan': 0.02,
+    'Home Loan': 0.02,
+    'LAP': 0.01,
+    'Vehicle Loan': 0.008,
+    'Education Loan': 0.009
+  };
+
+  const calculatedPayout = Math.round(calcVolume * (ratesMap[calcType] || 0.02));
+
+  const handleBankerSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => setFormSubmitted(false), 6000);
+  };
+
+  return (
+    <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-6 sm:space-y-8 py-6 animate-fade-in">
+      
+      {/* 1. HERO BANNER */}
+      <div className="rounded-3xl overflow-hidden bg-gradient-to-r from-[#071E3D] via-[#0B3A75] to-[#1565D8] text-white p-6 sm:p-8 lg:p-10 shadow-xl relative">
+        <div className="max-w-4xl space-y-4 relative z-10">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-red-600/90 text-white text-xs font-black uppercase tracking-wider shadow-sm">
+            <span>📢 BE A BUSINESS OWNER</span>
+          </div>
+
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black brand-font tracking-tight leading-tight">
+            Do Loan Login in Your Name with <span className="text-[#00E5FF]">ANDROMEDA ID</span>
+          </h1>
+
+          <p className="text-xs sm:text-base text-slate-200 font-medium leading-relaxed max-w-2xl">
+            Direct Loan Login Portal for Bankers, Financial Advisors, and Direct Partners. Generate high-margin payouts without service overhead across Personal, Business, Home, LAP, Vehicle, and Educational loans.
+          </p>
+
+          <div className="pt-2 flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => onOpenApply('Bankers Direct Login ID')}
+              className="px-6 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95 flex items-center space-x-2"
+            >
+              <span>Get Andromeda Login ID</span>
+              <span>→</span>
+            </button>
+            <button
+              onClick={onNavigateHome}
+              className="px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-xl transition-all"
+            >
+              ← Back to Home
+            </button>
+            <button
+              onClick={onGoToDSA}
+              className="px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-xl transition-all"
+            >
+              ⭐ DSA Corner
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. 4-STEP WORKFLOW INFOGRAPHIC */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+            Fast 4-Step Process
+          </span>
+          <h2 className="text-xl sm:text-3xl font-black text-slate-900 brand-font mt-2">
+            How Andromeda Direct Login Works
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto">
+            From registration to disbursal, manage leads seamlessly with our dedicated support team.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          {/* Step 1 */}
+          <div className="p-5 rounded-2xl bg-slate-50 border-2 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all space-y-3 shadow-sm">
+            <div className="flex items-center justify-between">
+              <span className="px-3 py-1 bg-emerald-600 text-white font-black text-xs rounded-lg uppercase">STEP 01</span>
+              <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                  <circle cx="10" cy="9" r="2" />
+                  <path d="M7 14a3 3 0 0 1 6 0" />
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-sm font-black text-slate-900 leading-snug">
+              Do Loan Login with Andromeda ID
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              Create your official Andromeda ID in just a few minutes and get direct login access.
+            </p>
+          </div>
+
+          {/* Step 2 */}
+          <div className="p-5 rounded-2xl bg-slate-50 border-2 border-blue-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all space-y-3 shadow-sm">
+            <div className="flex items-center justify-between">
+              <span className="px-3 py-1 bg-blue-600 text-white font-black text-xs rounded-lg uppercase">STEP 02</span>
+              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-sm font-black text-slate-900 leading-snug">
+              Submit Loan Application Form
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              Fill out the applicant details and upload KYC and financial documents online.
+            </p>
+          </div>
+
+          {/* Step 3 */}
+          <div className="p-5 rounded-2xl bg-slate-50 border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50/30 transition-all space-y-3 shadow-sm">
+            <div className="flex items-center justify-between">
+              <span className="px-3 py-1 bg-purple-600 text-white font-black text-xs rounded-lg uppercase">STEP 03</span>
+              <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-sm font-black text-slate-900 leading-snug">
+              Submit Lead to Loan Counsellor
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              Hand over lead details to our dedicated Andromeda Loan Counsellor for processing.
+            </p>
+          </div>
+
+          {/* Step 4 */}
+          <div className="p-5 rounded-2xl bg-slate-50 border-2 border-amber-200 hover:border-amber-400 hover:bg-amber-50/30 transition-all space-y-3 shadow-sm">
+            <div className="flex items-center justify-between">
+              <span className="px-3 py-1 bg-amber-600 text-white font-black text-xs rounded-lg uppercase">STEP 04</span>
+              <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-sm font-black text-slate-900 leading-snug">
+              Processing & Instant Payout
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              Loan Counsellor connects with the lead, completes sanctioning, and disburses your payout.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 3. LOAN PAYOUT (WITHOUT SERVICE) CARDS MATRIX */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-red-600 bg-red-50 px-3 py-1 rounded-full uppercase tracking-wider border border-red-200">
+            Official Commission Table
+          </span>
+          <h2 className="text-xl sm:text-3xl font-black text-slate-900 brand-font mt-2">
+            Loan Payout (Without Service)
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto">
+            Direct Payout & Commission Structure configured for every ₹1 Lakh disbursed.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          {BANKERS_CHARGES.map((ch, idx) => (
+            <div
+              key={idx}
+              className="rounded-2xl bg-slate-50 border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 hover:bg-white transition-all"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="p-2.5 rounded-xl bg-blue-100 text-[#0B4DA2] shrink-0">
+                  {ch.icon}
+                </div>
+                <div>
+                  <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight block">
+                    {ch.title}
+                  </span>
+                  <span className="text-[11px] font-bold text-slate-500 block mt-0.5">
+                    For 1 Lakh
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-right shrink-0 pl-2">
+                <div className="text-base sm:text-lg font-black text-[#D32F2F] tracking-tight leading-none">
+                  {ch.amount}
+                </div>
+                <div className="text-xs font-black text-[#D32F2F] mt-0.5">
+                  {ch.pct}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 4. INTERACTIVE BANKERS PAYOUT CALCULATOR */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+            Real-Time Earnings Simulator
+          </span>
+          <h2 className="text-xl sm:text-3xl font-black text-slate-900 brand-font mt-2">
+            Calculate Your Monthly Bankers Payout
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-md mx-auto">
+            Select your loan type and monthly disbursal volume to estimate your net payout.
+          </p>
+        </div>
+
+        <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 sm:p-7 space-y-6 max-w-3xl mx-auto">
+          {/* Loan Type Selection */}
+          <div>
+            <label className="block text-xs font-black text-slate-700 uppercase mb-2">1. Select Loan Category</label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {['Personal Loan', 'Business Loan', 'Home Loan', 'LAP', 'Vehicle Loan', 'Education Loan'].map((type) => (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() => setCalcType(type)}
+                  className={`py-2.5 px-3 rounded-xl text-xs font-black transition-all text-center border ${
+                    calcType === type
+                      ? 'bg-[#0B4DA2] text-white border-[#0B4DA2] shadow-md'
+                      : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300'
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Volume Slider */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-xs font-black text-slate-700 uppercase">2. Monthly Disbursed Volume</label>
+              <span className="text-sm sm:text-base font-black text-[#0B4DA2] bg-blue-100 px-3 py-1 rounded-lg">
+                ₹ {(calcVolume / 100000).toLocaleString('en-IN', { maximumFractionDigits: 2 })} Lakhs
+              </span>
+            </div>
+            <input
+              type="range"
+              min="100000"
+              max="20000000"
+              step="100000"
+              value={calcVolume}
+              onChange={(e) => setCalcVolume(Number(e.target.value))}
+              className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#0B4DA2]"
+            />
+            <div className="flex justify-between text-[11px] text-slate-400 font-bold mt-1">
+              <span>₹ 1 Lakh</span>
+              <span>₹ 50 Lakhs</span>
+              <span>₹ 1 Crore</span>
+              <span>₹ 2 Crore</span>
+            </div>
+          </div>
+
+          {/* Payout Display Box */}
+          <div className="bg-gradient-to-r from-[#071E3D] to-[#0B4DA2] text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+            <div>
+              <span className="text-xs text-blue-200 uppercase font-black tracking-wider block">Estimated Monthly Payout</span>
+              <div className="text-2xl sm:text-4xl font-black text-[#FFD700] brand-font mt-0.5">
+                ₹ {calculatedPayout.toLocaleString('en-IN')}
+              </div>
+              <span className="text-[11px] text-slate-300 font-medium">
+                Rate applied: {((ratesMap[calcType] || 0.02) * 100).toFixed(1)}% ({calcType})
+              </span>
+            </div>
+            <button
+              onClick={() => onOpenApply(`Banker ID (${calcType})`)}
+              className="w-full sm:w-auto px-6 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95 text-center shrink-0"
+            >
+              Start Earning Now →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 5. COVERAGE SCOPE BANNER */}
+      <div className="bg-[#071E3D] text-white p-5 sm:p-6 rounded-3xl flex items-center space-x-4 shadow-md">
+        <div className="w-12 h-12 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center shrink-0 font-black text-xl shadow-md">
+          📍
+        </div>
+        <p className="text-xs sm:text-sm font-bold leading-relaxed">
+          You can process leads in <span className="text-[#00E5FF]">all Mandals, Villages, Cities, and in Apartments</span>. Refer your joinings too and earn attractive Payout <span className="text-amber-300 font-extrabold underline">without any Investment</span>.
+        </p>
+      </div>
+
+      {/* 6. DIRECT BANKERS REGISTRATION FORM & BRANCH CONTACTS */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        {/* Left: Quick Registration Card */}
+        <div className="lg:col-span-6 bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-4">
+          <div className="space-y-1">
+            <span className="text-xs font-black text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-200">
+              Direct Onboarding
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-1">
+              Apply for Andromeda ID
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 font-medium">
+              Fill in your contact details to receive your official login credentials.
+            </p>
+          </div>
+
+          {formSubmitted ? (
+            <div className="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-300 text-emerald-900 text-center space-y-2 animate-fade-in">
+              <div className="text-2xl">🎉</div>
+              <div className="text-sm font-black">Application Submitted Successfully!</div>
+              <p className="text-xs font-medium">
+                Our Branch Head will reach out within 2 hours to finalize your Andromeda Direct ID.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleBankerSubmit} className="space-y-3">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter your full name"
+                  value={leadForm.name}
+                  onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-bold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Mobile Number *</label>
+                <input
+                  type="tel"
+                  required
+                  placeholder="10-digit mobile number"
+                  value={leadForm.mobile}
+                  onChange={(e) => setLeadForm({ ...leadForm, mobile: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-bold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Current Bank / Org</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. HDFC / Axis / DSA"
+                    value={leadForm.bankName}
+                    onChange={(e) => setLeadForm({ ...leadForm, bankName: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-bold focus:outline-none focus:border-[#0B4DA2]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">City / Location</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Nalgonda"
+                    value={leadForm.city}
+                    onChange={(e) => setLeadForm({ ...leadForm, city: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-bold focus:outline-none focus:border-[#0B4DA2]"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 bg-[#0B4DA2] hover:bg-blue-700 text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95 mt-2"
+              >
+                Submit Bankers ID Application →
+              </button>
+            </form>
+          )}
+        </div>
+
+        {/* Right: Dedicated Channel Management Contacts */}
+        <div className="lg:col-span-6 space-y-3">
+          <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-4">
+            <div className="text-left space-y-1">
+              <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+                Support & Verification
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-1">
+                Dedicated Channel Team
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                Call your regional management directly for priority onboarding & lead sanctions.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              
+              {/* M. Swapna */}
+              <div className="p-3.5 bg-slate-50 border-2 border-emerald-200 rounded-2xl text-center space-y-1 hover:border-emerald-400 transition-all">
+                <div className="text-xs sm:text-sm font-black text-slate-900">M. SWAPNA</div>
+                <a href="tel:7396962063" className="block text-sm font-black text-[#0B4DA2] hover:underline">
+                  📞 7396962063
+                </a>
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase">
+                  Branch Manager
+                </div>
+              </div>
+
+              {/* P. Swapna */}
+              <div className="p-3.5 bg-slate-50 border-2 border-blue-200 rounded-2xl text-center space-y-1 hover:border-blue-400 transition-all">
+                <div className="text-xs sm:text-sm font-black text-slate-900">P. SWAPNA</div>
+                <a href="tel:7036105549" className="block text-sm font-black text-[#0B4DA2] hover:underline">
+                  📞 7036105549
+                </a>
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-black uppercase">
+                  Sales Manager
+                </div>
+              </div>
+
+              {/* K. Mounika */}
+              <div className="p-3.5 bg-slate-50 border-2 border-purple-200 rounded-2xl text-center space-y-1 hover:border-purple-400 transition-all">
+                <div className="text-xs sm:text-sm font-black text-slate-900">K. MOUNIKA</div>
+                <a href="tel:7036090991" className="block text-sm font-black text-[#0B4DA2] hover:underline">
+                  📞 7036090991
+                </a>
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-black uppercase">
+                  Area Sales Manager
+                </div>
+              </div>
+
+              {/* P. Pavankumar */}
+              <div className="p-3.5 bg-slate-50 border-2 border-amber-200 rounded-2xl text-center space-y-1 hover:border-amber-400 transition-all">
+                <div className="text-xs sm:text-sm font-black text-slate-900">P. PAVANKUMAR</div>
+                <a href="tel:9553858064" className="block text-sm font-black text-[#0B4DA2] hover:underline">
+                  📞 9553858064
+                </a>
+                <div className="inline-block px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black uppercase">
+                  Management
+                </div>
+              </div>
+
+            </div>
+
+            <div className="p-3 bg-slate-100 rounded-xl text-center text-xs font-bold text-slate-700">
+              📍 <strong>Branch Office:</strong> Maruthi Nagar near HP Petrol Bunk, Sagar Road, Nalgonda
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   );
 }
@@ -1771,6 +2232,12 @@ function App() {
               DSA Corner
             </button>
             <button 
+              onClick={() => { setCurrentView('bankers'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 rounded-xl transition-all ${currentView === 'bankers' ? 'text-red-600 bg-red-50 font-black' : 'text-red-600 hover:text-red-700 hover:bg-red-50 font-bold'}`}
+            >
+              💼 For Bankers
+            </button>
+            <button 
               onClick={() => scrollTo('charges-sec')}
               className="px-3 py-1.5 rounded-xl hover:text-[#0B4DA2] hover:bg-slate-50 transition-all"
             >
@@ -1812,6 +2279,7 @@ function App() {
             <button onClick={() => { setCurrentView('about'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base font-extrabold">👥 About Andromeda</button>
             <button onClick={() => { setCurrentView('partner'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">🤝 Become a Partner</button>
             <button onClick={() => { setCurrentView('dsa'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#D32F2F] font-black text-base">⭐ DSA Corner</button>
+            <button onClick={() => { setCurrentView('bankers'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-red-600 font-black text-base">💼 For Bankers</button>
             <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('charges-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">💰 Our Charges (For 1 Lakh)</button>
             <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('contact-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">📞 Contact Details</button>
           </div>
@@ -1848,6 +2316,15 @@ function App() {
             onOpenApply={openApply}
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          />
+        )}
+
+        {currentView === 'bankers' && (
+          <BankersPage
+            onOpenApply={openApply}
+            onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToDSA={() => { setCurrentView('dsa'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           />
         )}
 
