@@ -2623,9 +2623,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
             { id: 'overview', icon: '📊', label: 'Dashboard Overview', desc: 'Summary & Stats' },
             { id: 'leads', icon: '👥', label: 'Leads & Applications', desc: 'Customer Inquiries', badge: leads.length },
             { id: 'content', icon: '✏️', label: 'Website Content CMS', desc: 'Phone, Text, Offers' },
-            { id: 'media', icon: '🖼️', label: 'Cloudinary Media', desc: 'Images & Logos' },
-            { id: 'rates', icon: '💳', label: 'Loan Rates & Tenures', desc: 'Interest Slabs' },
-            { id: 'sql', icon: '⚡', label: 'Supabase SQL Setup', desc: 'Database Schema' }
+            { id: 'rates', icon: '💳', label: 'Loan Rates & Tenures', desc: 'Interest Slabs' }
           ].map(tab => {
             const isActive = activeTab === tab.id;
             return (
