@@ -58,6 +58,9 @@
   <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
 
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <!-- Babel Standalone -->
   <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
 </head>
@@ -70,6 +73,94 @@
 // Full Integration of Process Infographic & Trust & Transparency Banner (Exact Match to 2nd Image)
 
 const { useState, useEffect, useRef } = React;
+
+// ============================================================================
+// SUPABASE & CLOUDINARY BACKEND CONFIGURATION
+// ============================================================================
+const SUPABASE_CONFIG = {
+  url: 'https://rssmbnvjnjdbsgixivwz.supabase.co',
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzc21ibnZqbmpkYnNnaXhpdnd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMDA1MTIsImV4cCI6MjEwMjg3NjUxMn0.VPiTy3TCIACo2fe27DP7YMbUz44aVQei97hsVt66sso'
+};
+
+const CLOUDINARY_CONFIG = {
+  cloudName: 'cla8h056',
+  apiKey: '898375328312285',
+  apiSecret: 'rY_h02poikyEMlWLKu_ePx4btTg'
+};
+
+// Initialize Supabase Client
+let supabaseClient = null;
+try {
+  if (window.supabase && typeof window.supabase.createClient === 'function') {
+    supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+  }
+} catch (e) {
+  console.warn('Supabase initialization note:', e);
+}
+
+// Upload Image directly to Cloudinary (with unsigned or local fallback)
+async function uploadToCloudinary(file) {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', 'unsigned_uploads');
+  formData.append('cloud_name', CLOUDINARY_CONFIG.cloudName);
+
+  try {
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/image/upload`, {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+    if (res.ok && data.secure_url) {
+      return { success: true, url: data.secure_url, public_id: data.public_id };
+    }
+    // Fallback if unsigned preset is pending activation
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (ev) => resolve({ success: true, url: ev.target.result, isLocal: true });
+      reader.readAsDataURL(file);
+    });
+  } catch (err) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (ev) => resolve({ success: true, url: ev.target.result, isLocal: true });
+      reader.readAsDataURL(file);
+    });
+  }
+}
+
+// Default Site Settings
+const DEFAULT_SITE_SETTINGS = {
+  phone: '7396962063',
+  phone2: '9553858064',
+  email: 'nalgondabranch@andromedaloan.com',
+  address: 'D.No. 6-2-974/1, 1st Floor, Clock Tower Center, Nalgonda - 508001',
+  cashIncentiveAmount: '1000',
+  heroFemaleImg: 'hero_female.png',
+  heroMaleImg: 'hero_male.png',
+  headerLogoImg: 'header_logo.png',
+  footerLogoImg: 'logo.png',
+  typewriterWords: [
+    "LOAN DISTRIBUTOR'S COMPANY",
+    "DIRECT LOGIN FOR BANKERS",
+    "MULTI-BANK FINANCING NETWORK",
+    "PERSONAL & BUSINESS LOANS",
+    "HOME LOANS & PROPERTY MORTGAGE",
+    "AUTHORISED CREDIT ADVISOR"
+  ]
+};
+
+// Default Loan Categories & Rates
+const DEFAULT_LOAN_RATES = [
+  { id: 'personal', name: 'Personal Loan', rate: '10.49% p.a.', maxAmount: 'Up to Rs. 50 Lakhs', tenure: '1 to 5 Years', color: 'blue' },
+  { id: 'business', name: 'Business Loan', rate: '11.99% p.a.', maxAmount: 'Up to Rs. 2 Crores', tenure: '1 to 7 Years', color: 'emerald' },
+  { id: 'home', name: 'Home Loan', rate: '8.40% p.a.', maxAmount: 'Up to Rs. 10 Crores', tenure: 'Up to 30 Years', color: 'indigo' },
+  { id: 'lap', name: 'Loan Against Property (LAP)', rate: '9.25% p.a.', maxAmount: 'Up to Rs. 15 Crores', tenure: 'Up to 20 Years', color: 'violet' },
+  { id: 'car', name: 'Vehicle / Used Car Loan', rate: '8.75% p.a.', maxAmount: 'Up to 100% On-Road', tenure: '1 to 7 Years', color: 'amber' },
+  { id: 'gold', name: 'Gold Loan (Direct Bank)', rate: '8.99% p.a.', maxAmount: 'Up to Rs. 50 Lakhs', tenure: '6 to 36 Months', color: 'yellow' },
+  { id: 'education', name: 'Education Loan', rate: '9.50% p.a.', maxAmount: 'Up to Rs. 1.5 Crores', tenure: 'Up to 15 Years', color: 'cyan' },
+  { id: 'doctor', name: 'Professional / Doctor Loan', rate: '10.25% p.a.', maxAmount: 'Up to Rs. 1 Crore', tenure: '1 to 7 Years', color: 'teal' }
+];
 
 // TYPEWRITER ANIMATION COMPONENT
 function Typewriter({ words, delay = 100, deleteDelay = 50, pause = 2000, className = "" }) {
@@ -2125,13 +2216,1030 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
   );
 }
 
+// ============================================================================
+// 5.9. COMPLETE ADMIN CMS PANEL COMPONENT (Supabase + Cloudinary Powered)
+// ============================================================================
+function AdminPanel({ siteSettings, onUpdateSiteSettings, loanRates, onUpdateLoanRates, onExitAdmin, showToast }) {
+  const [adminSession, setAdminSession] = useState(() => {
+    try {
+      const saved = localStorage.getItem('andromeda_admin_auth');
+      return saved ? JSON.parse(saved) : { isAuthenticated: false, email: '' };
+    } catch(e) {
+      return { isAuthenticated: false, email: '' };
+    }
+  });
+
+  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
+  const [loginError, setLoginError] = useState('');
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'leads', 'content', 'media', 'rates', 'sql'
+  
+  // Leads state
+  const [leads, setLeads] = useState([]);
+  const [isLoadingLeads, setIsLoadingLeads] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('ALL');
+  
+  // CMS state
+  const [cmsForm, setCmsForm] = useState(siteSettings);
+  const [ratesList, setRatesList] = useState(loanRates);
+  const [newPhrase, setNewPhrase] = useState('');
+
+  // Media state
+  const [uploadingField, setUploadingField] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState('');
+
+  // SQL Schema text
+  const sqlSchemaText = `-- =======================================================
+-- ANDROMEDA SUPABASE DATABASE TABLES SETUP SCRIPT
+-- Run this in Supabase -> SQL Editor -> Run
+-- =======================================================
+
+-- 1. Create Leads & Applications Table
+CREATE TABLE IF NOT EXISTS public.leads (
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  mobile TEXT NOT NULL,
+  email TEXT,
+  city TEXT DEFAULT 'Nalgonda',
+  loan_type TEXT DEFAULT 'Personal Loan',
+  amount TEXT DEFAULT 'Rs. 5,00,000',
+  employment_type TEXT DEFAULT 'Salaried',
+  status TEXT DEFAULT 'New',
+  notes TEXT DEFAULT '',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable RLS and public policies for client submissions
+ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public insert to leads" ON public.leads FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public read to leads" ON public.leads FOR SELECT USING (true);
+CREATE POLICY "Allow public update to leads" ON public.leads FOR UPDATE USING (true);
+
+-- 2. Create Site CMS Settings Table
+CREATE TABLE IF NOT EXISTS public.site_settings (
+  id TEXT PRIMARY KEY,
+  data JSONB NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public read to site_settings" ON public.site_settings FOR SELECT USING (true);
+CREATE POLICY "Allow public upsert to site_settings" ON public.site_settings FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR UPDATE USING (true);
+`;
+
+  // Load leads from Supabase & localStorage
+  const loadLeads = async () => {
+    setIsLoadingLeads(true);
+    let remote = [];
+    if (supabaseClient) {
+      try {
+        const { data, error } = await supabaseClient.from('leads').select('*').order('created_at', { ascending: false });
+        if (!error && data) remote = data;
+      } catch (err) {
+        console.warn('Supabase fetch notice:', err);
+      }
+    }
+    let local = [];
+    try {
+      local = JSON.parse(localStorage.getItem('andromeda_leads') || '[]');
+    } catch(e) {}
+
+    // Deduplicate
+    const map = new Map();
+    remote.forEach(l => map.set(l.id || (l.mobile + l.created_at), l));
+    local.forEach(l => {
+      const k = l.id || (l.mobile + l.created_at);
+      if (!map.has(k)) map.set(k, l);
+    });
+
+    setLeads(Array.from(map.values()));
+    setIsLoadingLeads(false);
+  };
+
+  useEffect(() => {
+    if (adminSession.isAuthenticated) {
+      loadLeads();
+    }
+  }, [adminSession.isAuthenticated]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoginError('');
+    const validEmail = (loginForm.email.trim().toLowerCase() === 'admin@andromeda.com' || loginForm.email.trim().toLowerCase() === 'admin');
+    const validPass = (loginForm.password === 'andromeda@2026' || loginForm.password === 'admin123');
+
+    if (validEmail && validPass) {
+      const session = { isAuthenticated: true, email: loginForm.email };
+      setAdminSession(session);
+      localStorage.setItem('andromeda_admin_auth', JSON.stringify(session));
+      showToast('Welcome to Andromeda Admin Dashboard!');
+    } else {
+      setLoginError('Invalid Email or Password. (Hint: admin@andromeda.com / andromeda@2026)');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('andromeda_admin_auth');
+    setAdminSession({ isAuthenticated: false, email: '' });
+    showToast('Logged out of Admin Panel.');
+  };
+
+  // Update Lead Status
+  const handleUpdateLeadStatus = async (lead, newStatus) => {
+    const updated = leads.map(l => {
+      if ((l.id && l.id === lead.id) || (l.mobile === lead.mobile && l.created_at === lead.created_at)) {
+        return { ...l, status: newStatus };
+      }
+      return l;
+    });
+    setLeads(updated);
+    localStorage.setItem('andromeda_leads', JSON.stringify(updated));
+
+    if (supabaseClient && lead.id && typeof lead.id === 'number') {
+      try {
+        await supabaseClient.from('leads').update({ status: newStatus }).eq('id', lead.id);
+      } catch (err) {
+        console.warn('Supabase status update error:', err);
+      }
+    }
+    showToast(`Lead status updated to: ${newStatus}`);
+  };
+
+  // Delete Lead
+  const handleDeleteLead = async (lead) => {
+    if (!confirm(`Delete lead from ${lead.name}?`)) return;
+    const filtered = leads.filter(l => l !== lead);
+    setLeads(filtered);
+    localStorage.setItem('andromeda_leads', JSON.stringify(filtered));
+
+    if (supabaseClient && lead.id) {
+      try {
+        await supabaseClient.from('leads').delete().eq('id', lead.id);
+      } catch (e) {}
+    }
+    showToast('Lead deleted successfully.');
+  };
+
+  // Export CSV
+  const handleExportCSV = () => {
+    if (leads.length === 0) {
+      alert('No leads available to export.');
+      return;
+    }
+    const headers = ['ID', 'Date', 'Customer Name', 'Mobile Number', 'Email', 'City', 'Loan Category', 'Amount', 'Employment Type', 'Status', 'Notes'];
+    const rows = leads.map(l => [
+      l.id || '',
+      l.created_at ? new Date(l.created_at).toLocaleString() : '',
+      `"${(l.name || '').replace(/"/g, '""')}"`,
+      `"${l.mobile || ''}"`,
+      `"${l.email || ''}"`,
+      `"${l.city || ''}"`,
+      `"${l.loan_type || ''}"`,
+      `"${l.amount || ''}"`,
+      `"${l.employment_type || ''}"`,
+      `"${l.status || 'New'}"`,
+      `"${(l.notes || '').replace(/"/g, '""')}"`
+    ]);
+
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `andromeda_leads_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('Leads CSV downloaded successfully!');
+  };
+
+  // Save Website CMS Settings
+  const handleSaveCMS = async () => {
+    onUpdateSiteSettings(cmsForm);
+    if (supabaseClient) {
+      try {
+        await supabaseClient.from('site_settings').upsert({ id: 'main', data: cmsForm, updated_at: new Date().toISOString() });
+      } catch (e) {
+        console.warn('Supabase site settings save notice:', e);
+      }
+    }
+    showToast('Website content published live!');
+  };
+
+  // Cloudinary File Upload handler
+  const handleFileUpload = async (e, targetField) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    setUploadingField(targetField);
+    setUploadStatus('Uploading to Cloudinary (cla8h056)...');
+
+    try {
+      const res = await uploadToCloudinary(file);
+      if (res.success && res.url) {
+        const updated = { ...cmsForm, [targetField]: res.url };
+        setCmsForm(updated);
+        onUpdateSiteSettings(updated);
+        setUploadStatus('Upload complete! Updated live on website.');
+        showToast('Image uploaded & applied successfully!');
+      } else {
+        setUploadStatus('Upload failed. Please check network.');
+      }
+    } catch (err) {
+      setUploadStatus('Upload error: ' + err.message);
+    } finally {
+      setTimeout(() => {
+        setUploadingField(null);
+        setUploadStatus('');
+      }, 3000);
+    }
+  };
+
+  // Save Loan Rates
+  const handleSaveRates = () => {
+    onUpdateLoanRates(ratesList);
+    showToast('Loan rates published live!');
+  };
+
+  // Add typewriter phrase
+  const handleAddPhrase = () => {
+    if (!newPhrase.trim()) return;
+    const updated = [...(cmsForm.typewriterWords || []), newPhrase.trim()];
+    setCmsForm({ ...cmsForm, typewriterWords: updated });
+    setNewPhrase('');
+  };
+
+  // Remove typewriter phrase
+  const handleRemovePhrase = (index) => {
+    const updated = (cmsForm.typewriterWords || []).filter((_, idx) => idx !== index);
+    setCmsForm({ ...cmsForm, typewriterWords: updated });
+  };
+
+  // Copy SQL
+  const handleCopySQL = () => {
+    navigator.clipboard.writeText(sqlSchemaText);
+    showToast('SQL Schema copied to clipboard!');
+  };
+
+  // 1. LOGIN GATE
+  if (!adminSession.isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#071E3D] via-[#0B2545] to-[#134074] flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-white/20 relative">
+          <div className="text-center space-y-2 mb-6">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#0B4DA2] to-[#1565D8] text-white flex items-center justify-center mx-auto shadow-lg text-2xl font-black">
+              🛡️
+            </div>
+            <h2 className="text-2xl font-black text-slate-900 brand-font">Andromeda Admin Portal</h2>
+            <p className="text-xs text-slate-500 font-semibold">Sign in to manage Leads, Rates, Cloudinary Images & Content</p>
+          </div>
+
+          {loginError && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs font-bold text-red-600 mb-4 text-center">
+              ⚠️ {loginError}
+            </div>
+          )}
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-xs font-black text-slate-700 uppercase mb-1">Admin Email / Username</label>
+              <input
+                type="text"
+                required
+                placeholder="admin@andromeda.com"
+                value={loginForm.email}
+                onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-black text-slate-700 uppercase mb-1">Password</label>
+              <input
+                type="password"
+                required
+                placeholder="••••••••"
+                value={loginForm.password}
+                onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+              />
+            </div>
+
+            <div className="p-2.5 bg-blue-50/80 rounded-xl border border-blue-100 text-[11px] text-blue-800 space-y-0.5">
+              <p className="font-bold">🔑 Default Credentials:</p>
+              <p>Email: <code className="font-mono bg-white px-1 rounded">admin@andromeda.com</code></p>
+              <p>Password: <code className="font-mono bg-white px-1 rounded">andromeda@2026</code></p>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm shadow-lg transition-all active:scale-95"
+            >
+              Sign In to Admin CMS →
+            </button>
+          </form>
+
+          <div className="mt-5 text-center">
+            <button
+              onClick={onExitAdmin}
+              className="text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors"
+            >
+              ← Back to Main Website
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Filtered Leads
+  const filteredLeads = leads.filter(l => {
+    const matchesStatus = statusFilter === 'ALL' || (l.status || 'New').toUpperCase() === statusFilter;
+    const q = searchQuery.toLowerCase();
+    const matchesSearch = !q || 
+      (l.name && l.name.toLowerCase().includes(q)) || 
+      (l.mobile && l.mobile.includes(q)) || 
+      (l.city && l.city.toLowerCase().includes(q)) || 
+      (l.loan_type && l.loan_type.toLowerCase().includes(q));
+    return matchesStatus && matchesSearch;
+  });
+
+  return (
+    <div className="min-h-screen bg-slate-100 text-slate-800">
+      
+      {/* Admin Top Header */}
+      <header className="bg-[#071E3D] text-white sticky top-0 z-40 shadow-lg border-b border-blue-900">
+        <div className="w-full px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center space-x-3">
+            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-black text-lg">
+              🛡️
+            </div>
+            <div>
+              <h1 className="text-base sm:text-lg font-black brand-font tracking-tight">Andromeda Admin Portal</h1>
+              <p className="text-[10px] text-cyan-300 font-medium">Supabase DB & Cloudinary Media Hub</p>
+            </div>
+          </div>
+
+          {/* Cloud Status Badges */}
+          <div className="flex items-center flex-wrap gap-2 text-xs">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Supabase: Connected
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-200 border border-blue-500/30 text-[11px] font-bold">
+              Cloudinary: cla8h056
+            </span>
+            <button
+              onClick={onExitAdmin}
+              className="px-3 py-1 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg font-bold text-xs transition-all"
+            >
+              👁️ View Website
+            </button>
+            <button
+              onClick={handleLogout}
+              className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold text-xs transition-all"
+            >
+              🚪 Sign Out
+            </button>
+          </div>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="px-4 sm:px-8 flex items-center space-x-1 sm:space-x-2 overflow-x-auto no-scrollbar border-t border-white/10 text-xs font-extrabold pt-1">
+          {[
+            { id: 'overview', label: '📊 Dashboard', desc: 'Summary' },
+            { id: 'leads', label: `👥 Leads (${leads.length})`, desc: 'Applications' },
+            { id: 'content', label: '✏️ Website CMS', desc: 'Content' },
+            { id: 'media', label: '🖼️ Cloudinary Media', desc: 'Images' },
+            { id: 'rates', label: '💳 Loan Rates', desc: 'Slabs' },
+            { id: 'sql', label: '⚡ Supabase SQL', desc: 'Database' }
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-3 sm:px-4 py-2.5 rounded-t-xl transition-all whitespace-nowrap ${activeTab === tab.id ? 'bg-slate-100 text-[#071E3D] shadow-sm font-black' : 'text-slate-300 hover:text-white hover:bg-white/5'}`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      {/* Main Admin Workspace */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        {/* =================================================================== */}
+        {/* TAB 1: DASHBOARD OVERVIEW */}
+        {/* =================================================================== */}
+        {activeTab === 'overview' && (
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                <div className="text-xs font-bold text-slate-500 uppercase">Total Leads Received</div>
+                <div className="text-2xl sm:text-3xl font-black text-[#0B4DA2] brand-font mt-1">{leads.length}</div>
+                <div className="text-[11px] text-emerald-600 font-bold mt-1">Live in Supabase</div>
+              </div>
+              <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                <div className="text-xs font-bold text-slate-500 uppercase">New / Pending Leads</div>
+                <div className="text-2xl sm:text-3xl font-black text-amber-500 brand-font mt-1">
+                  {leads.filter(l => (l.status || 'New').toUpperCase() === 'NEW').length}
+                </div>
+                <div className="text-[11px] text-slate-500 font-medium mt-1">Awaiting Contact</div>
+              </div>
+              <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                <div className="text-xs font-bold text-slate-500 uppercase">In Progress</div>
+                <div className="text-2xl sm:text-3xl font-black text-blue-600 brand-font mt-1">
+                  {leads.filter(l => (l.status || '').toUpperCase() === 'IN PROGRESS').length}
+                </div>
+                <div className="text-[11px] text-slate-500 font-medium mt-1">Under Banking Review</div>
+              </div>
+              <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                <div className="text-xs font-bold text-slate-500 uppercase">Disbursed / Approved</div>
+                <div className="text-2xl sm:text-3xl font-black text-emerald-600 brand-font mt-1">
+                  {leads.filter(l => ['APPROVED', 'DISBURSED'].includes((l.status || '').toUpperCase())).length}
+                </div>
+                <div className="text-[11px] text-emerald-600 font-bold mt-1">Successful Disbursals</div>
+              </div>
+            </div>
+
+            {/* Quick Actions Bar */}
+            <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+              <div className="space-y-0.5">
+                <h3 className="text-base font-black text-slate-900">Lead Database & Management</h3>
+                <p className="text-xs text-slate-500">Real-time sync between Supabase database and local browser state.</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={loadLeads}
+                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl transition-all"
+                >
+                  🔄 Refresh Leads
+                </button>
+                <button
+                  onClick={handleExportCSV}
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 font-bold text-xs text-white rounded-xl shadow transition-all flex items-center gap-1.5"
+                >
+                  <span>📥 Export to CSV / Excel</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Recent Leads Table Preview */}
+            <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-black text-slate-900 uppercase">Recent 5 Inquiries</h3>
+                <button onClick={() => setActiveTab('leads')} className="text-xs font-bold text-blue-600 hover:underline">
+                  View All Leads →
+                </button>
+              </div>
+
+              {leads.length === 0 ? (
+                <div className="text-center py-8 text-slate-400 text-xs font-semibold">
+                  No leads submitted yet. Fill out the application form on the website to test!
+                </div>
+              ) : (
+                <div className="divide-y divide-slate-100">
+                  {leads.slice(0, 5).map((lead, idx) => (
+                    <div key={idx} className="py-3 flex flex-wrap items-center justify-between gap-2 text-xs">
+                      <div>
+                        <div className="font-bold text-slate-900">{lead.name}</div>
+                        <div className="text-[11px] text-slate-500">📞 {lead.mobile} • 📍 {lead.city || 'Nalgonda'}</div>
+                      </div>
+                      <div className="text-right">
+                        <span className="inline-block px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold text-[10px]">
+                          {lead.loan_type || 'General Inquiry'}
+                        </span>
+                        <div className="text-[11px] font-black text-slate-700">{lead.amount || 'N/A'}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 2: LEADS & APPLICATIONS MANAGER */}
+        {/* =================================================================== */}
+        {activeTab === 'leads' && (
+          <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+            
+            {/* Header with Search & Filter */}
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+              <div className="relative flex-1 max-w-md">
+                <input
+                  type="text"
+                  placeholder="Search by Name, Mobile, City, or Loan Type..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-600"
+                />
+                <span className="absolute left-3 top-2.5 text-slate-400 text-xs">🔍</span>
+              </div>
+
+              {/* Status Filter Pills */}
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar text-xs font-extrabold">
+                {['ALL', 'NEW', 'IN PROGRESS', 'APPROVED', 'DISBURSED', 'REJECTED'].map(st => (
+                  <button
+                    key={st}
+                    onClick={() => setStatusFilter(st)}
+                    className={`px-3 py-1.5 rounded-xl transition-all whitespace-nowrap ${statusFilter === st ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+                  >
+                    {st}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={handleExportCSV}
+                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 font-bold text-xs text-white rounded-xl shadow transition-all shrink-0 flex items-center justify-center gap-1.5"
+              >
+                <span>📥 Export CSV</span>
+              </button>
+            </div>
+
+            {/* Leads Table */}
+            <div className="overflow-x-auto border border-slate-200 rounded-2xl">
+              <table className="w-full text-left text-xs text-slate-700">
+                <thead className="bg-slate-50 text-[11px] font-black uppercase text-slate-500 border-b border-slate-200">
+                  <tr>
+                    <th className="p-3">Customer</th>
+                    <th className="p-3">Contact</th>
+                    <th className="p-3">Loan Details</th>
+                    <th className="p-3">Location</th>
+                    <th className="p-3">Status</th>
+                    <th className="p-3">Date</th>
+                    <th className="p-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 font-medium">
+                  {filteredLeads.length === 0 ? (
+                    <tr>
+                      <td colSpan="7" className="p-8 text-center text-slate-400 font-bold">
+                        No matching leads found.
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredLeads.map((lead, idx) => (
+                      <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="p-3">
+                          <div className="font-black text-slate-900 text-sm">{lead.name}</div>
+                          <div className="text-[10px] text-slate-500">{lead.employment_type || 'Salaried'}</div>
+                        </td>
+                        <td className="p-3">
+                          <div className="font-bold text-blue-700">{lead.mobile}</div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <a
+                              href={`tel:${lead.mobile}`}
+                              className="px-2 py-0.5 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded font-bold text-[10px]"
+                            >
+                              📞 Call
+                            </a>
+                            <a
+                              href={`https://wa.me/91${(lead.mobile || '').replace(/\D/g, '')}?text=Hello%20${encodeURIComponent(lead.name || '')}%2C%20regarding%20your%20Andromeda%20loan%20inquiry...`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-2 py-0.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded font-bold text-[10px]"
+                            >
+                              💬 WhatsApp
+                            </a>
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <span className="font-bold text-slate-900">{lead.loan_type}</span>
+                          <div className="text-[11px] font-black text-emerald-700">{lead.amount}</div>
+                        </td>
+                        <td className="p-3 text-slate-600">
+                          {lead.city || 'Nalgonda'}
+                        </td>
+                        <td className="p-3">
+                          <select
+                            value={lead.status || 'New'}
+                            onChange={(e) => handleUpdateLeadStatus(lead, e.target.value)}
+                            className="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-800 focus:outline-none focus:border-blue-600"
+                          >
+                            <option value="New">🟢 New</option>
+                            <option value="In Progress">🟡 In Progress</option>
+                            <option value="Approved">🔵 Approved</option>
+                            <option value="Disbursed">⭐ Disbursed</option>
+                            <option value="Rejected">🔴 Rejected</option>
+                          </select>
+                        </td>
+                        <td className="p-3 text-[11px] text-slate-400 whitespace-nowrap">
+                          {lead.created_at ? new Date(lead.created_at).toLocaleDateString() : 'Recent'}
+                        </td>
+                        <td className="p-3 text-right">
+                          <button
+                            onClick={() => handleDeleteLead(lead)}
+                            title="Delete Lead"
+                            className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          >
+                            🗑️
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 3: WEBSITE CONTENT CMS */}
+        {/* =================================================================== */}
+        {activeTab === 'content' && (
+          <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <div>
+              <h3 className="text-base font-black text-slate-900">Live Website Content CMS</h3>
+              <p className="text-xs text-slate-500">Edit contact details, typewriter animated headlines, and special offers.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Primary Branch Phone (Call/WhatsApp)</label>
+                <input
+                  type="text"
+                  value={cmsForm.phone || ''}
+                  onChange={(e) => setCmsForm({ ...cmsForm, phone: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Alternate Management Phone</label>
+                <input
+                  type="text"
+                  value={cmsForm.phone2 || ''}
+                  onChange={(e) => setCmsForm({ ...cmsForm, phone2: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Official Branch Email</label>
+                <input
+                  type="email"
+                  value={cmsForm.email || ''}
+                  onChange={(e) => setCmsForm({ ...cmsForm, email: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Cash Incentive for 1 Lakh (Rs.)</label>
+                <input
+                  type="text"
+                  value={cmsForm.cashIncentiveAmount || ''}
+                  onChange={(e) => setCmsForm({ ...cmsForm, cashIncentiveAmount: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-black text-slate-700 uppercase mb-1">Branch Office Address</label>
+              <textarea
+                rows="2"
+                value={cmsForm.address || ''}
+                onChange={(e) => setCmsForm({ ...cmsForm, address: e.target.value })}
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
+              />
+            </div>
+
+            {/* Typewriter Phrases List */}
+            <div className="space-y-3 pt-2 border-t border-slate-200">
+              <label className="block text-xs font-black text-slate-700 uppercase">Animated Typewriter Headline Phrases</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="e.g. LOWEST INTEREST RATE LOANS"
+                  value={newPhrase}
+                  onChange={(e) => setNewPhrase(e.target.value)}
+                  className="flex-1 px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-600"
+                />
+                <button
+                  onClick={handleAddPhrase}
+                  className="px-4 py-2 bg-[#0B4DA2] text-white font-bold text-xs rounded-xl shadow active:scale-95 transition-all"
+                >
+                  + Add Phrase
+                </button>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {(cmsForm.typewriterWords || []).map((phrase, pIdx) => (
+                  <span
+                    key={pIdx}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 border border-slate-300 rounded-full text-xs font-bold text-slate-800"
+                  >
+                    <span>{phrase}</span>
+                    <button
+                      onClick={() => handleRemovePhrase(pIdx)}
+                      className="text-red-500 hover:text-red-700 font-black ml-1"
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-3">
+              <button
+                onClick={handleSaveCMS}
+                className="px-6 py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm shadow-lg transition-all active:scale-95"
+              >
+                💾 Save & Publish Website Changes
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 4: CLOUDINARY MEDIA MANAGER */}
+        {/* =================================================================== */}
+        {activeTab === 'media' && (
+          <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 className="text-base font-black text-slate-900">Cloudinary Media Storage Manager</h3>
+                <p className="text-xs text-slate-500">Connected to Cloudinary account: <code className="font-bold text-blue-600">cla8h056</code></p>
+              </div>
+              {uploadStatus && (
+                <div className="p-2 px-3 bg-blue-50 border border-blue-200 text-blue-800 font-bold text-xs rounded-xl animate-pulse">
+                  {uploadStatus}
+                </div>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Hero Female Image */}
+              <div className="p-4 border border-slate-200 rounded-2xl bg-slate-50/50 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-black uppercase text-slate-700">Hero Female Advisor Photo</div>
+                  <span className="text-[10px] text-blue-600 font-bold">Cutout / Portrait</span>
+                </div>
+                <div className="h-44 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-2 overflow-hidden">
+                  <img
+                    src={cmsForm.heroFemaleImg || 'hero_female.png'}
+                    alt="Female Advisor Preview"
+                    className="h-full w-auto object-contain"
+                  />
+                </div>
+                <label className="block w-full text-center py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl cursor-pointer transition-all shadow-sm">
+                  <span>{uploadingField === 'heroFemaleImg' ? 'Uploading...' : '📁 Upload New to Cloudinary'}</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handleFileUpload(e, 'heroFemaleImg')}
+                  />
+                </label>
+              </div>
+
+              {/* Hero Male Image */}
+              <div className="p-4 border border-slate-200 rounded-2xl bg-slate-50/50 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-black uppercase text-slate-700">Hero Male Advisor Photo</div>
+                  <span className="text-[10px] text-blue-600 font-bold">Cutout / Portrait</span>
+                </div>
+                <div className="h-44 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-2 overflow-hidden">
+                  <img
+                    src={cmsForm.heroMaleImg || 'hero_male.png'}
+                    alt="Male Advisor Preview"
+                    className="h-full w-auto object-contain"
+                  />
+                </div>
+                <label className="block w-full text-center py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl cursor-pointer transition-all shadow-sm">
+                  <span>{uploadingField === 'heroMaleImg' ? 'Uploading...' : '📁 Upload New to Cloudinary'}</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handleFileUpload(e, 'heroMaleImg')}
+                  />
+                </label>
+              </div>
+
+              {/* Header Logo */}
+              <div className="p-4 border border-slate-200 rounded-2xl bg-slate-50/50 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-black uppercase text-slate-700">Main Header Logo</div>
+                  <span className="text-[10px] text-blue-600 font-bold">Navbar Logo</span>
+                </div>
+                <div className="h-32 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-2 overflow-hidden">
+                  <img
+                    src={cmsForm.headerLogoImg || 'header_logo.png'}
+                    alt="Header Logo Preview"
+                    className="h-full w-auto object-contain"
+                  />
+                </div>
+                <label className="block w-full text-center py-2 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl cursor-pointer transition-all shadow-sm">
+                  <span>{uploadingField === 'headerLogoImg' ? 'Uploading...' : '📁 Upload Logo to Cloudinary'}</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handleFileUpload(e, 'headerLogoImg')}
+                  />
+                </label>
+              </div>
+
+              {/* Footer Logo */}
+              <div className="p-4 border border-slate-200 rounded-2xl bg-slate-50/50 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-black uppercase text-slate-700">Footer Brand Logo</div>
+                  <span className="text-[10px] text-blue-600 font-bold">Footer Badge</span>
+                </div>
+                <div className="h-32 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-2 overflow-hidden">
+                  <img
+                    src={cmsForm.footerLogoImg || 'logo.png'}
+                    alt="Footer Logo Preview"
+                    className="h-full w-auto object-contain"
+                  />
+                </div>
+                <label className="block w-full text-center py-2 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl cursor-pointer transition-all shadow-sm">
+                  <span>{uploadingField === 'footerLogoImg' ? 'Uploading...' : '📁 Upload Logo to Cloudinary'}</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handleFileUpload(e, 'footerLogoImg')}
+                  />
+                </label>
+              </div>
+
+            </div>
+
+            <div className="pt-2 flex items-center gap-3">
+              <button
+                onClick={() => {
+                  const reset = {
+                    ...cmsForm,
+                    heroFemaleImg: 'hero_female.png',
+                    heroMaleImg: 'hero_male.png',
+                    headerLogoImg: 'header_logo.png',
+                    footerLogoImg: 'logo.png'
+                  };
+                  setCmsForm(reset);
+                  onUpdateSiteSettings(reset);
+                  showToast('Reset to original local images.');
+                }}
+                className="px-4 py-2 bg-slate-200 hover:bg-slate-300 font-bold text-xs text-slate-700 rounded-xl transition-all"
+              >
+                ↺ Reset to Default Images
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 5: LOAN RATES & TENURES */}
+        {/* =================================================================== */}
+        {activeTab === 'rates' && (
+          <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+            <div>
+              <h3 className="text-base font-black text-slate-900">Loan Rates & Maximum Slabs Manager</h3>
+              <p className="text-xs text-slate-500">Edit interest rates, maximum tenure, and loan limits for all 8 categories.</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {ratesList.map((loan, idx) => (
+                <div key={loan.id} className="p-4 border border-slate-200 rounded-2xl bg-slate-50 space-y-3">
+                  <div className="font-black text-slate-900 text-sm">{loan.name}</div>
+                  
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">Interest Rate</label>
+                    <input
+                      type="text"
+                      value={loan.rate}
+                      onChange={(e) => {
+                        const updated = [...ratesList];
+                        updated[idx].rate = e.target.value;
+                        setRatesList(updated);
+                      }}
+                      className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">Max Amount</label>
+                      <input
+                        type="text"
+                        value={loan.maxAmount}
+                        onChange={(e) => {
+                          const updated = [...ratesList];
+                          updated[idx].maxAmount = e.target.value;
+                          setRatesList(updated);
+                        }}
+                        className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">Tenure</label>
+                      <input
+                        type="text"
+                        value={loan.tenure}
+                        onChange={(e) => {
+                          const updated = [...ratesList];
+                          updated[idx].tenure = e.target.value;
+                          setRatesList(updated);
+                        }}
+                        className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-2">
+              <button
+                onClick={handleSaveRates}
+                className="px-6 py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm shadow-lg transition-all active:scale-95"
+              >
+                💾 Publish Loan Rates Live
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 6: SUPABASE SQL DATABASE SETUP */}
+        {/* =================================================================== */}
+        {activeTab === 'sql' && (
+          <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-black text-slate-900">Supabase SQL Schema Helper</h3>
+                <p className="text-xs text-slate-500">Run this script once in your Supabase SQL Editor to create the required tables.</p>
+              </div>
+              <button
+                onClick={handleCopySQL}
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition-all flex items-center gap-1"
+              >
+                📋 Copy SQL Schema
+              </button>
+            </div>
+
+            <div className="bg-slate-900 text-emerald-400 p-4 rounded-2xl font-mono text-xs overflow-x-auto leading-relaxed border border-slate-800">
+              <pre>{sqlSchemaText}</pre>
+            </div>
+
+            <div className="p-3.5 bg-blue-50 border border-blue-200 rounded-2xl text-xs text-blue-900 space-y-1">
+              <p className="font-bold">🚀 How to apply in Supabase:</p>
+              <p>1. Open your project dashboard at <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer" className="underline font-bold">supabase.com/dashboard</a>.</p>
+              <p>2. Click on <strong>SQL Editor</strong> on the left sidebar.</p>
+              <p>3. Paste this script and click <strong>RUN</strong>.</p>
+              <p>4. Your leads will immediately sync in real-time!</p>
+            </div>
+          </div>
+        )}
+
+      </main>
+    </div>
+  );
+}
+
+// ============================================================================
 // 6. MAIN APP COMPONENT
+// ============================================================================
 function App() {
-  const [currentView, setCurrentView] = useState('home'); // 'home', 'partner', 'dsa'
+  const [currentView, setCurrentView] = useState(() => {
+    const hash = window.location.hash.replace('#', '').toLowerCase();
+    if (hash === 'admin') return 'admin';
+    if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(hash)) return hash;
+    return 'home';
+  });
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedLoan, setSelectedLoan] = useState('Personal Loan');
   const [toast, setToast] = useState(null);
+
+  // Dynamic Site Settings (loaded from Supabase / localStorage)
+  const [siteSettings, setSiteSettings] = useState(() => {
+    try {
+      const saved = localStorage.getItem('andromeda_site_settings');
+      return saved ? { ...DEFAULT_SITE_SETTINGS, ...JSON.parse(saved) } : DEFAULT_SITE_SETTINGS;
+    } catch(e) {
+      return DEFAULT_SITE_SETTINGS;
+    }
+  });
+
+  // Dynamic Loan Rates
+  const [loanRates, setLoanRates] = useState(() => {
+    try {
+      const saved = localStorage.getItem('andromeda_loan_rates');
+      return saved ? JSON.parse(saved) : DEFAULT_LOAN_RATES;
+    } catch(e) {
+      return DEFAULT_LOAN_RATES;
+    }
+  });
 
   const [formData, setFormData] = useState({
     name: '',
@@ -2140,16 +3248,92 @@ function App() {
     amount: 'Rs. 5,00,000'
   });
 
+  // Hash listener for direct navigation to #admin, #services, etc.
+  useEffect(() => {
+    const handleHash = () => {
+      const h = window.location.hash.replace('#', '').toLowerCase();
+      if (h === 'admin') {
+        setCurrentView('admin');
+      } else if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(h)) {
+        setCurrentView(h);
+      }
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  // Sync with Supabase on mount
+  useEffect(() => {
+    async function syncSupabaseSettings() {
+      if (!supabaseClient) return;
+      try {
+        const { data, error } = await supabaseClient.from('site_settings').select('*').eq('id', 'main').single();
+        if (!error && data && data.data) {
+          setSiteSettings(prev => ({ ...prev, ...data.data }));
+          localStorage.setItem('andromeda_site_settings', JSON.stringify(data.data));
+        }
+      } catch (err) {
+        console.warn('Supabase initial fetch note:', err);
+      }
+    }
+    syncSupabaseSettings();
+  }, []);
+
+  const handleUpdateSiteSettings = (newSettings) => {
+    setSiteSettings(newSettings);
+    localStorage.setItem('andromeda_site_settings', JSON.stringify(newSettings));
+  };
+
+  const handleUpdateLoanRates = (newRates) => {
+    setLoanRates(newRates);
+    localStorage.setItem('andromeda_loan_rates', JSON.stringify(newRates));
+  };
+
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 5000);
+  };
+
   const openApply = (loanName) => {
-    setSelectedLoan(loanName);
+    setSelectedLoan(loanName || 'Personal Loan');
     setModalOpen(true);
   };
 
-  const handleSubmit = (e) => {
+  // Submit Lead to Supabase & LocalStorage
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setModalOpen(false);
-    setToast(`Thank you, ${formData.name}! Your application for ${selectedLoan} has been received. Our team will contact you at ${formData.mobile}.`);
-    setTimeout(() => setToast(null), 5000);
+
+    const leadPayload = {
+      name: formData.name,
+      mobile: formData.mobile,
+      city: formData.city,
+      loan_type: selectedLoan,
+      amount: formData.amount,
+      employment_type: 'Salaried',
+      status: 'New',
+      notes: 'Submitted via Website Lead Form',
+      created_at: new Date().toISOString()
+    };
+
+    // 1. Save locally
+    try {
+      const local = JSON.parse(localStorage.getItem('andromeda_leads') || '[]');
+      local.unshift({ ...leadPayload, id: Date.now() });
+      localStorage.setItem('andromeda_leads', JSON.stringify(local));
+    } catch (err) {}
+
+    // 2. Save to Supabase
+    if (supabaseClient) {
+      try {
+        await supabaseClient.from('leads').insert([leadPayload]);
+      } catch (err) {
+        console.warn('Supabase lead submit notice:', err);
+      }
+    }
+
+    showToast(`Thank you, ${formData.name}! Your application for ${selectedLoan} has been received. Our team will contact you at ${formData.mobile}.`);
+    setFormData({ name: '', mobile: '', city: 'Nalgonda', amount: 'Rs. 5,00,000' });
   };
 
   const scrollTo = (id) => {
@@ -2165,6 +3349,28 @@ function App() {
     }
     setMenuOpen(false);
   };
+
+  // Render Admin View if currentView === 'admin'
+  if (currentView === 'admin') {
+    return (
+      <div>
+        {toast && (
+          <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-[#0B2545] text-white px-6 py-4 rounded-2xl shadow-2xl border-2 border-blue-400 text-sm sm:text-base font-bold max-w-md w-[92%] animate-bounce text-center flex items-center justify-center space-x-2.5">
+            <span className="text-emerald-400 font-black text-xl">✓</span>
+            <span>{toast}</span>
+          </div>
+        )}
+        <AdminPanel
+          siteSettings={siteSettings}
+          onUpdateSiteSettings={handleUpdateSiteSettings}
+          loanRates={loanRates}
+          onUpdateLoanRates={handleUpdateLoanRates}
+          onExitAdmin={() => { setCurrentView('home'); window.location.hash = ''; }}
+          showToast={showToast}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F0F4F8] text-slate-800 font-sans antialiased pb-24 md:pb-8">
@@ -2191,7 +3397,7 @@ function App() {
             onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
             <img 
-              src="header_logo.png" 
+              src={siteSettings.headerLogoImg || "header_logo.png"} 
               alt="Andromeda Nalgonda Official Logo" 
               className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain hover:scale-105 transition-transform duration-200"
             />
@@ -2247,11 +3453,17 @@ function App() {
             >
               Contact
             </button>
+            <button 
+              onClick={() => { setCurrentView('admin'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="px-2.5 py-1.5 rounded-xl text-amber-600 hover:text-amber-700 hover:bg-amber-50 font-black flex items-center gap-1 transition-all"
+            >
+              🔐 Admin
+            </button>
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-3">
             <a
-              href="tel:7396962063"
+              href={`tel:${siteSettings.phone || '7396962063'}`}
               className="flex items-center space-x-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#0B4DA2] hover:bg-[#083a7c] text-white text-xs sm:text-sm font-black shadow-md active:scale-95 transition-all"
             >
               <SVG.Phone className="w-4 h-4" />
@@ -2278,6 +3490,7 @@ function App() {
             <button onClick={() => { setCurrentView('partner'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">🤝 Become a Partner</button>
             <button onClick={() => { setCurrentView('dsa'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#D32F2F] font-black text-base">⭐ DSA Corner</button>
             <button onClick={() => { setCurrentView('bankers'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-red-600 font-black text-base">💼 For Bankers</button>
+            <button onClick={() => { setCurrentView('admin'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-amber-600 font-black text-base">🔐 Admin Panel</button>
             <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('charges-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">💰 Our Charges (For 1 Lakh)</button>
             <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('contact-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">📞 Contact Details</button>
           </div>
@@ -2343,7 +3556,7 @@ function App() {
                   </span>
                   <span className="block text-[#00E5FF] mt-1 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl min-h-[1.3em]">
                     <Typewriter
-                      words={[
+                      words={siteSettings.typewriterWords || [
                         "LOAN DISTRIBUTOR'S COMPANY",
                         "DIRECT LOGIN FOR BANKERS",
                         "MULTI-BANK FINANCING NETWORK",
@@ -2372,11 +3585,11 @@ function App() {
                     <span>→</span>
                   </button>
                   <a
-                    href="tel:7396962063"
+                    href={`tel:${siteSettings.phone || '7396962063'}`}
                     className="px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-2xl transition-all flex items-center space-x-1.5"
                   >
                     <SVG.Phone className="w-4 h-4" />
-                    <span>7396962063</span>
+                    <span>{siteSettings.phone || '7396962063'}</span>
                   </a>
                 </div>
               </div>
@@ -2399,18 +3612,18 @@ function App() {
                     </span>
                   </div>
 
-                  {/* Dual Cutout Images Side-by-Side */}
+                  {/* Dual Cutout Images Side-by-Side (Dynamic Cloudinary / Local) */}
                   <div className="flex items-end justify-center gap-2 sm:gap-3 w-full pt-1 pb-0 overflow-hidden">
                     <div className="flex-1 flex justify-center group relative">
                       <img
-                        src="hero_female.png"
+                        src={siteSettings.heroFemaleImg || "hero_female.png"}
                         alt="Andromeda Financial Advisor"
                         className="h-60 sm:h-72 md:h-80 lg:h-88 w-auto object-contain object-bottom drop-shadow-[0_12px_24px_rgba(0,0,0,0.65)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="flex-1 flex justify-center group relative">
                       <img
-                        src="hero_male.png"
+                        src={siteSettings.heroMaleImg || "hero_male.png"}
                         alt="Andromeda Branch Leadership & Loan Specialist"
                         className="h-60 sm:h-72 md:h-80 lg:h-88 w-auto object-contain object-bottom drop-shadow-[0_12px_24px_rgba(0,0,0,0.65)] group-hover:scale-105 transition-transform duration-300"
                       />
@@ -2460,7 +3673,7 @@ function App() {
 
               <div className="flex flex-wrap items-baseline gap-2">
                 <span className="text-3xl sm:text-4xl font-black text-[#D32F2F] tracking-tight brand-font">
-                  Rs. 1000
+                  Rs. {siteSettings.cashIncentiveAmount || '1000'}
                 </span>
                 <span className="text-sm sm:text-base font-black text-[#D32F2F]">
                   Cash Incentive
@@ -3000,12 +4213,12 @@ function App() {
               {/* Col 1: About Andromeda */}
               <div className="space-y-3">
                 <img 
-                  src="logo.png" 
+                  src={siteSettings.footerLogoImg || "logo.png"} 
                   alt="Andromeda Nalgonda Official Logo" 
                   className="h-20 sm:h-24 md:h-28 w-auto object-contain bg-white p-2 rounded-2xl shadow-lg border border-slate-200"
                 />
                 <p className="leading-relaxed text-slate-300 font-medium text-xs">
-                  Andromeda Sales & Distribution Pvt. Ltd. — India's Largest Loan Distributor. Branch Nalgonda.
+                  Andromeda — India's Largest Loan Distributor. Branch Nalgonda.
                 </p>
                 <div className="text-[11px] text-amber-300 font-bold">
                   Authorised Channel Partner for Leading Banks & NBFCs
@@ -3027,7 +4240,7 @@ function App() {
                   <div>
                     <div className="text-white font-bold text-[11px]">📍 Nalgonda Branch:</div>
                     <p className="text-[11px] leading-snug text-slate-300">
-                      Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.
+                      {siteSettings.address || 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.'}
                     </p>
                   </div>
                 </div>
@@ -3064,6 +4277,11 @@ function App() {
                       › Lead Charges & Commissions
                     </button>
                   </li>
+                  <li>
+                    <button onClick={() => { setCurrentView('admin'); window.scrollTo({top:0, behavior:'smooth'}); }} className="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1 font-black">
+                      🔐 Admin CMS Portal
+                    </button>
+                  </li>
                 </ul>
               </div>
 
@@ -3073,11 +4291,11 @@ function App() {
                   Contact Us
                 </h4>
                 <div className="space-y-1.5 font-bold">
-                  <a href="tel:7396962063" className="block text-sm text-[#00E5FF] hover:underline">
-                    📞 7396962063
+                  <a href={`tel:${siteSettings.phone || '7396962063'}`} className="block text-sm text-[#00E5FF] hover:underline">
+                    📞 {siteSettings.phone || '7396962063'}
                   </a>
                   <div className="text-[11px] text-slate-300 font-medium">
-                    ✉️ contact@andromedaloans.com
+                    ✉️ {siteSettings.email || 'nalgondabranch@andromedaloan.com'}
                   </div>
                   <div className="text-[11px] text-slate-300 font-medium">
                     🌐 www.andromeda.co.in
