@@ -71,9 +71,37 @@ export const HeroSection = ({ onOpenLeadModal, onExploreLoans, onSelectLoan }) =
           <div className="lg:col-span-5 relative" data-aos="fade-left">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
-              {/* Central Illustration Artboard */}
+              {/* Central Illustration Artboard with Dual Advisor Photo Showcase */}
               <div className="relative rounded-3xl bg-gradient-to-b from-blue-50/70 via-white to-slate-50 border border-blue-100/70 p-6 sm:p-8 shadow-xl shadow-blue-900/5">
                 
+                {/* Advisor Photo Showcase */}
+                <div className="relative rounded-2xl bg-gradient-to-tr from-[#071E3D] via-[#0B3A75] to-[#1565D8] p-3 mb-5 overflow-hidden shadow-md">
+                  <div className="flex items-center justify-between px-2 pb-2 text-white">
+                    <span className="text-[11px] font-extrabold text-amber-300 flex items-center gap-1">
+                      <Icons.ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
+                      <span>Certified Loan Specialists</span>
+                    </span>
+                    <span className="text-[10px] font-bold text-cyan-200 bg-cyan-500/20 px-2 py-0.5 rounded-full">
+                      Direct Login
+                    </span>
+                  </div>
+                  <div className="flex items-end justify-center gap-2 pt-1">
+                    <img
+                      src="./hero_female.png"
+                      alt="Andromeda Advisor"
+                      className="h-44 sm:h-52 w-auto object-contain object-bottom drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform"
+                    />
+                    <img
+                      src="./hero_male.png"
+                      alt="Andromeda Advisor"
+                      className="h-44 sm:h-52 w-auto object-contain object-bottom drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <div className="text-center pt-2 border-t border-white/10">
+                    <p className="text-[10px] font-bold text-white tracking-wide uppercase">Multi-Bank Loan Network • Fast Approvals</p>
+                  </div>
+                </div>
+
                 {/* Visual Header */}
                 <div className="flex items-center justify-between pb-5 border-b border-slate-100">
                   <div className="flex items-center space-x-2.5">
