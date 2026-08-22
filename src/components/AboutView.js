@@ -41,12 +41,12 @@ export const AboutView = ({ onOpenLeadModal }) => {
               <div className="relative group rounded-3xl overflow-hidden border-2 border-slate-200 shadow-xl bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent w-full max-w-sm">
                 <img
                   src="./leadership.jpg"
-                  alt="Andromeda Leadership - P. Pavan Kumar"
+                  alt="Andromeda Leadership - Srisailam Katta"
                   className="w-full h-72 sm:h-80 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex flex-col justify-end p-5 text-white">
                   <span className="text-[10px] font-black uppercase tracking-wider text-amber-300">Management & Leadership</span>
-                  <h4 className="text-base font-black">P. Pavan Kumar</h4>
+                  <h4 className="text-base font-black">Srisailam Katta</h4>
                   <p className="text-xs text-slate-300">Andromeda Branch Leadership • 9963909220</p>
                 </div>
               </div>
