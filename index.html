@@ -133,8 +133,9 @@ async function uploadToCloudinary(file) {
 const DEFAULT_SITE_SETTINGS = {
   phone: '7396962063',
   phone2: '9553858064',
-  email: 'nalgondabranch@andromedaloan.com',
-  address: 'D.No. 6-2-974/1, 1st Floor, Clock Tower Center, Nalgonda - 508001',
+  email: 'contact@andromeda.in',
+  address: '158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098',
+  branchAddress: 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.',
   cashIncentiveAmount: '1000',
   heroFemaleImg: 'hero_female.png',
   headerLogoImg: 'header_logo.png',
@@ -1121,19 +1122,25 @@ function AboutUsPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToService
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
-            <div className="text-xs font-black uppercase text-[#0B4DA2]">Head Office</div>
-            <div className="text-sm font-black text-slate-900">Vijayawada Regional Office</div>
+            <div className="text-xs font-black uppercase text-[#0B4DA2]">Corporate Head Office</div>
+            <div className="text-sm font-black text-slate-900">Mumbai Main Office</div>
             <p className="text-xs text-slate-600 font-medium">
-              Door No: 48-13-24/3, 2nd Floor, Swarna's Sri Manikanta Enclave, Mogalarajupuram, Vijayawada - 520010.
+              158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098
             </p>
+            <div className="text-xs font-bold text-blue-700 pt-1">
+              ✉️ Mail Us: <a href="mailto:contact@andromeda.in" className="hover:underline">contact@andromeda.in</a>
+            </div>
           </div>
 
           <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
-            <div className="text-xs font-black uppercase text-[#0B4DA2]">Branch Office</div>
+            <div className="text-xs font-black uppercase text-[#0B4DA2]">Regional Branch Office</div>
             <div className="text-sm font-black text-slate-900">Nalgonda Branch Office</div>
             <p className="text-xs text-slate-600 font-medium">
               Maruti Nagar, Near H.P. Petrol Bunk (Near By Jwalakanthi Indra Reddy Function Hall), Sagar Road, Nalgonda.
             </p>
+            <div className="text-xs font-bold text-slate-700 pt-1">
+              📞 Phone: 7396962063 / 9963909220
+            </div>
           </div>
         </div>
       </div>
@@ -4514,15 +4521,15 @@ function App() {
                 </h4>
                 <div className="space-y-2 font-medium">
                   <div>
-                    <div className="text-white font-bold text-[11px]">📍 Vijayawada Head Office:</div>
+                    <div className="text-white font-bold text-[11px]">📍 Corporate Head Office (Mumbai):</div>
                     <p className="text-[11px] leading-snug text-slate-300">
-                      Door No: 48-13-24/3, 2nd Floor, Swarna's Sri Manikanta Enclave, Mogalarajupuram, Vijayawada - 520010.
+                      158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098
                     </p>
                   </div>
                   <div>
                     <div className="text-white font-bold text-[11px]">📍 Nalgonda Branch:</div>
                     <p className="text-[11px] leading-snug text-slate-300">
-                      {siteSettings.address || 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.'}
+                      {siteSettings.branchAddress || 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.'}
                     </p>
                   </div>
                 </div>
@@ -4577,10 +4584,10 @@ function App() {
                     📞 {siteSettings.phone || '7396962063'}
                   </a>
                   <div className="text-[11px] text-slate-300 font-medium">
-                    ✉️ {siteSettings.email || 'nalgondabranch@andromedaloan.com'}
+                    ✉️ {siteSettings.email || 'contact@andromeda.in'}
                   </div>
                   <div className="text-[11px] text-slate-300 font-medium">
-                    🌐 www.andromeda.co.in
+                    🌐 www.andromeda.in
                   </div>
                   <div className="pt-2 flex items-center space-x-2">
                     <span className="px-2 py-1 bg-blue-600/40 rounded text-[10px] text-white">FB</span>

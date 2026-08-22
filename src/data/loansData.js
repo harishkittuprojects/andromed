@@ -4,10 +4,10 @@ export const BRAND_INFO = {
   name: "Andromeda",
   tagline: "Connecting You with Premier Financial & Loan Solutions",
   phone: "+1 (800) 456-ANDRO",
-  supportEmail: "contact@andromedaloans.com",
-  salesEmail: "leads@andromedaloans.com",
-  address: "Financial District, Suite 400, New York, NY 10005",
-  workingHours: "Mon - Sat: 9:00 AM - 7:00 PM EST"
+  supportEmail: "contact@andromeda.in",
+  salesEmail: "contact@andromeda.in",
+  address: "158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098",
+  workingHours: "Mon - Sat: 9:00 AM - 7:00 PM IST"
 };
 
 export const LOAN_CATEGORIES = [
