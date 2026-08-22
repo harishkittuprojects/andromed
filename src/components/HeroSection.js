@@ -75,8 +75,18 @@ export const HeroSection = ({ onOpenLeadModal, onExploreLoans, onSelectLoan }) =
               <div className="relative rounded-3xl bg-gradient-to-b from-blue-50/70 via-white to-slate-50 border border-blue-100/70 p-6 sm:p-8 shadow-xl shadow-blue-900/5">
                 
                 {/* Advisor Photo Showcase */}
-                <div className="relative rounded-2xl bg-gradient-to-tr from-[#071E3D] via-[#0B3A75] to-[#1565D8] p-3 mb-5 overflow-hidden shadow-md">
-                  <div className="flex items-center justify-between px-2 pb-2 text-white">
+                <div className="relative rounded-2xl p-3 mb-5 overflow-hidden shadow-md border border-white/20">
+                  {/* Background Building */}
+                  <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-2xl">
+                    <img
+                      src="./building_bg.png"
+                      alt="Andromeda Corporate Building"
+                      className="w-full h-full object-cover object-center opacity-50 scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#071E3D]/60 via-[#0B3A75]/50 to-[#071E3D]/90"></div>
+                  </div>
+
+                  <div className="flex items-center justify-between px-2 pb-2 text-white relative z-10">
                     <span className="text-[11px] font-extrabold text-amber-300 flex items-center gap-1">
                       <Icons.ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
                       <span>Certified Loan Specialists</span>
@@ -85,19 +95,14 @@ export const HeroSection = ({ onOpenLeadModal, onExploreLoans, onSelectLoan }) =
                       Direct Login
                     </span>
                   </div>
-                  <div className="flex items-end justify-center gap-2 pt-1">
+                  <div className="flex items-end justify-center pt-1 relative z-10">
                     <img
                       src="./hero_female.png"
                       alt="Andromeda Advisor"
-                      className="h-44 sm:h-52 w-auto object-contain object-bottom drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform"
-                    />
-                    <img
-                      src="./hero_male.png"
-                      alt="Andromeda Advisor"
-                      className="h-44 sm:h-52 w-auto object-contain object-bottom drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform"
+                      className="h-48 sm:h-56 w-auto object-contain object-bottom drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)] hover:scale-105 transition-transform"
                     />
                   </div>
-                  <div className="text-center pt-2 border-t border-white/10">
+                  <div className="text-center pt-2 border-t border-white/10 relative z-10">
                     <p className="text-[10px] font-bold text-white tracking-wide uppercase">Multi-Bank Loan Network • Fast Approvals</p>
                   </div>
                 </div>

@@ -37,20 +37,18 @@ export const AboutView = ({ onOpenLeadModal }) => {
               </p>
             </div>
 
-            <div className="lg:col-span-5 bg-gradient-to-br from-blue-600 to-blue-900 text-white rounded-2xl p-8 shadow-xl space-y-6">
-              <h3 className="text-xl font-bold brand-font">Key Milestones</h3>
-              <div className="space-y-4">
-                {STATS.slice(0, 3).map((st, i) => (
-                  <div key={i} className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-bold text-white text-xs">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <div className="text-lg font-black">{st.value}</div>
-                      <div className="text-xs text-blue-100">{st.label}</div>
-                    </div>
-                  </div>
-                ))}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="relative group rounded-3xl overflow-hidden border-2 border-slate-200 shadow-xl bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent w-full max-w-sm">
+                <img
+                  src="./leadership.jpg"
+                  alt="Andromeda Leadership - P. Pavan Kumar"
+                  className="w-full h-72 sm:h-80 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex flex-col justify-end p-5 text-white">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-amber-300">Management & Leadership</span>
+                  <h4 className="text-base font-black">P. Pavan Kumar</h4>
+                  <p className="text-xs text-slate-300">Andromeda Branch Leadership • 9963909220</p>
+                </div>
               </div>
             </div>
           </div>
