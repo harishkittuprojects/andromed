@@ -3602,9 +3602,11 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
 // ============================================================================
 function App() {
   const [currentView, setCurrentView] = useState(() => {
-    const hash = window.location.hash.replace('#', '').toLowerCase();
-    if (hash === 'admin') return 'admin';
+    const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+    const pathname = (window.location.pathname || '').replace('/', '').toLowerCase();
+    if (hash === 'admin' || pathname === 'admin') return 'admin';
     if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(hash)) return hash;
+    if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(pathname)) return pathname;
     return 'home';
   });
 
@@ -3641,18 +3643,25 @@ function App() {
     amount: 'Rs. 5,00,000'
   });
 
-  // Hash listener for direct navigation to #admin, #services, etc.
+  // Listener for direct navigation to /admin, #admin, /services, etc.
   useEffect(() => {
-    const handleHash = () => {
-      const h = window.location.hash.replace('#', '').toLowerCase();
-      if (h === 'admin') {
+    const handleRoute = () => {
+      const h = (window.location.hash || '').replace('#', '').toLowerCase();
+      const p = (window.location.pathname || '').replace('/', '').toLowerCase();
+      if (h === 'admin' || p === 'admin') {
         setCurrentView('admin');
       } else if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(h)) {
         setCurrentView(h);
+      } else if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(p)) {
+        setCurrentView(p);
       }
     };
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('popstate', handleRoute);
+    return () => {
+      window.removeEventListener('hashchange', handleRoute);
+      window.removeEventListener('popstate', handleRoute);
+    };
   }, []);
 
   // Sync with Supabase on mount
