@@ -3,7 +3,8 @@
 export const BRAND_INFO = {
   name: "Andromeda",
   tagline: "Connecting You with Premier Financial & Loan Solutions",
-  phone: "+1 (800) 456-ANDRO",
+  phone: "7396962063",
+  phoneDisplay: "+91 7396962063",
   supportEmail: "contact@andromeda.in",
   salesEmail: "contact@andromeda.in",
   address: "158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098",

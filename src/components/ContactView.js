@@ -66,7 +66,11 @@ export const ContactView = ({ onFormSubmitted }) => {
                   </div>
                   <div>
                     <span className="text-xs font-bold text-slate-400 uppercase">Toll-Free Helpline</span>
-                    <div className="text-base font-bold text-slate-900">{BRAND_INFO.phone}</div>
+                    <div>
+                      <a href={`tel:${BRAND_INFO.phone}`} className="text-base font-bold text-slate-900 hover:text-blue-600 hover:underline">
+                        {BRAND_INFO.phoneDisplay || BRAND_INFO.phone}
+                      </a>
+                    </div>
                     <span className="text-xs text-slate-500">{BRAND_INFO.workingHours}</span>
                   </div>
                 </div>

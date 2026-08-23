@@ -128,10 +128,50 @@ export function App() {
   };
 
   const handleLeadSubmit = (data) => {
+    const applicantName = data.fullName || data.name || 'Anonymous Applicant';
+    const contactNumber = data.mobileNumber || data.phone || data.mobile || '';
+    const category = data.loanCategory || data.category || 'Personal Loans';
+    const amountVal = data.loanAmount ? (`Rs. ${data.loanAmount}`) : (data.amount || 'Rs. 25,000');
+    const cityVal = data.city || 'Nalgonda';
+
+    const newLead = {
+      id: Date.now(),
+      name: applicantName,
+      fullName: applicantName,
+      mobile: contactNumber,
+      mobileNumber: contactNumber,
+      phone: contactNumber,
+      email: data.email || '',
+      city: cityVal,
+      loan_type: category,
+      loanCategory: category,
+      amount: amountVal,
+      employment_type: data.employmentType || 'Salaried',
+      status: 'New',
+      notes: data.message || 'Submitted via Website Lead Form',
+      created_at: new Date().toISOString()
+    };
+
+    try {
+      const local = JSON.parse(localStorage.getItem('andromeda_leads') || '[]');
+      local.unshift(newLead);
+      localStorage.setItem('andromeda_leads', JSON.stringify(local));
+    } catch (e) {
+      console.warn('LocalStorage save error:', e);
+    }
+
+    // Real-Time Cross-Tab & Same-Window Event Broadcast
+    try {
+      window.dispatchEvent(new CustomEvent('andromeda_lead_added', { detail: newLead }));
+      const bc = new BroadcastChannel('andromeda_realtime_leads');
+      bc.postMessage(newLead);
+      bc.close();
+    } catch(e) {}
+
     setToast({
       type: 'success',
       title: 'Application Received',
-      message: `Thank you ${data.fullName}! Our financial advisor will contact you shortly.`
+      message: `Thank you ${applicantName}! Your loan application has been recorded in the Admin Panel.`
     });
   };
 

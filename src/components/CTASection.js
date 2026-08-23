@@ -31,13 +31,13 @@ export const CTASection = ({ onOpenLeadModal, onSpeakAdvisor }) => {
             <Icons.ArrowRight className="w-5 h-5 text-blue-700 group-hover:translate-x-1 transition-transform" />
           </button>
 
-          <button
-            onClick={onSpeakAdvisor}
-            className="w-full sm:w-auto px-7 py-4 text-base font-bold text-white bg-white/10 hover:bg-white/20 border border-white/25 rounded-xl backdrop-blur-xs transition-all flex items-center justify-center gap-2"
+          <a
+            href="tel:7396962063"
+            className="w-full sm:w-auto px-7 py-4 text-base font-bold text-white bg-white/10 hover:bg-white/20 border border-white/25 rounded-xl backdrop-blur-xs transition-all flex items-center justify-center gap-2 active:scale-95"
           >
             <Icons.PhoneCall className="w-5 h-5 text-blue-200" />
-            <span>Request Advisor Call</span>
-          </button>
+            <span>Call Advisor Directly (7396962063)</span>
+          </a>
         </div>
 
         {/* 3 micro badges below CTA */}

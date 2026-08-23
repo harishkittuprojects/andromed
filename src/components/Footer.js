@@ -108,7 +108,9 @@ export const Footer = ({ onNavigate, onSelectLoanCategory }) => {
             <div className="space-y-2.5 text-xs sm:text-sm text-slate-400">
               <div className="flex items-start space-x-2.5">
                 <Icons.Phone className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                <span>{BRAND_INFO.phone}</span>
+                <a href={`tel:${BRAND_INFO.phone}`} className="hover:text-white hover:underline transition-colors font-medium">
+                  {BRAND_INFO.phoneDisplay || BRAND_INFO.phone}
+                </a>
               </div>
               <div className="flex items-start space-x-2.5">
                 <Icons.Mail className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />

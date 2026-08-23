@@ -38,13 +38,15 @@ export const LeadModal = ({ isOpen, onClose, initialCategory, isPartnerInquiry =
     setErrorMsg('');
     setIsSubmitting(true);
 
+    // Trigger submission immediately (0ms)
+    if (onSubmitLead) {
+      onSubmitLead(formData);
+    }
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
-      if (onSubmitLead) {
-        onSubmitLead(formData);
-      }
-    }, 1000);
+    }, 150);
   };
 
   const handleResetAndClose = () => {

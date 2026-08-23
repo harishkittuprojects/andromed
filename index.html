@@ -54,18 +54,22 @@
     }
   </style>
 
-  <!-- React 18 & ReactDOM 18 Global UMD -->
-  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
-
-  <!-- Supabase JS Client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- Babel Standalone -->
-  <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
+  <!-- Fast Local Vendor Libraries (Instant 0ms Load) -->
+  <script src="./vendor/react.min.js"></script>
+  <script src="./vendor/react-dom.min.js"></script>
+  <script src="./vendor/supabase.min.js"></script>
+  <script src="./vendor/babel.min.js"></script>
 </head>
 <body class="text-slate-800 antialiased font-sans">
-  <div id="root"></div>
+  <div id="root">
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:#0B4DA2;background:#F0F4F8;">
+      <div style="text-align:center;">
+        <div style="width:48px;height:48px;border:4px solid #0B4DA2;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px auto;"></div>
+        <p style="font-weight:bold;font-size:18px;">Loading Andromeda Platform...</p>
+      </div>
+      <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+    </div>
+  </div>
 
   <!-- Inline Unified Application Script with Process Infographic & Trust Banner -->
   <script type="text/babel">
@@ -1166,6 +1170,62 @@ function BecomePartnerPage({ onOpenApply, onNavigateHome, onGoToDSA }) {
   const handlePartnerSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+
+    const partnerName = (partnerFormData.fullName || partnerFormData.name || 'Partner Applicant').trim();
+    const contactNo = (partnerFormData.mobile || partnerFormData.phone || '').trim();
+    const roleType = partnerType === 'connector' ? 'Partner Connector Code' : 'DSA Channel Code';
+    const volumeVal = partnerFormData.expectedVolume || '10 - 25 Lakhs';
+    const cityVal = (partnerFormData.city || 'Nalgonda').trim();
+
+    const partnerLead = {
+      id: Date.now(),
+      name: partnerName,
+      fullName: partnerName,
+      mobile: contactNo,
+      mobileNumber: contactNo,
+      phone: contactNo,
+      email: partnerFormData.email || '',
+      city: cityVal,
+      loan_type: roleType,
+      loanCategory: roleType,
+      loanType: roleType,
+      amount: `Volume: ${volumeVal}`,
+      employment_type: partnerFormData.profession || 'Financial Consultant',
+      status: 'New',
+      notes: `Partner Registration (${roleType}) | Experience: ${partnerFormData.experience || '1-3 Years'}`,
+      created_at: new Date().toISOString()
+    };
+
+    // 1. Save locally
+    try {
+      const local = JSON.parse(localStorage.getItem('andromeda_leads') || '[]');
+      local.unshift(partnerLead);
+      localStorage.setItem('andromeda_leads', JSON.stringify(local));
+    } catch(err) {}
+
+    // 2. Realtime Broadcast
+    try {
+      window.dispatchEvent(new CustomEvent('andromeda_lead_added', { detail: partnerLead }));
+      const bc = new BroadcastChannel('andromeda_realtime_leads');
+      bc.postMessage(partnerLead);
+      bc.close();
+    } catch(e) {}
+
+    // 3. Supabase background
+    if (supabaseClient) {
+      supabaseClient.from('leads').insert([{
+        name: partnerName,
+        mobile: contactNo,
+        email: partnerFormData.email || '',
+        city: cityVal,
+        loan_type: roleType,
+        amount: `Volume: ${volumeVal}`,
+        employment_type: partnerFormData.profession || 'Financial Consultant',
+        status: 'New',
+        notes: `Partner Registration (${roleType}) | Experience: ${partnerFormData.experience || '1-3 Years'}`,
+        created_at: new Date().toISOString()
+      }]).then(() => {}).catch(() => {});
+    }
   };
 
   return (
@@ -1862,6 +1922,60 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
     e.preventDefault();
     setFormSubmitted(true);
     setTimeout(() => setFormSubmitted(false), 6000);
+
+    const bankerName = (leadForm.name || 'Banker Applicant').trim();
+    const contactNo = (leadForm.mobile || '').trim();
+    const bankName = (leadForm.bankName || 'Partner Bank').trim();
+    const volumeVal = leadForm.volume || '₹ 25 Lakhs';
+    const cityVal = (leadForm.city || 'Nalgonda').trim();
+
+    const bankerLead = {
+      id: Date.now(),
+      name: bankerName,
+      fullName: bankerName,
+      mobile: contactNo,
+      mobileNumber: contactNo,
+      phone: contactNo,
+      city: cityVal,
+      loan_type: `Banker ID (${bankName})`,
+      loanCategory: `Banker Login ID`,
+      loanType: `Banker ID (${bankName})`,
+      amount: `Monthly: ${volumeVal}`,
+      employment_type: `Banker (${bankName})`,
+      status: 'New',
+      notes: `Bankers Direct Login ID Application for ${bankName} (${volumeVal})`,
+      created_at: new Date().toISOString()
+    };
+
+    // 1. Save locally
+    try {
+      const local = JSON.parse(localStorage.getItem('andromeda_leads') || '[]');
+      local.unshift(bankerLead);
+      localStorage.setItem('andromeda_leads', JSON.stringify(local));
+    } catch(err) {}
+
+    // 2. Realtime Broadcast
+    try {
+      window.dispatchEvent(new CustomEvent('andromeda_lead_added', { detail: bankerLead }));
+      const bc = new BroadcastChannel('andromeda_realtime_leads');
+      bc.postMessage(bankerLead);
+      bc.close();
+    } catch(e) {}
+
+    // 3. Supabase background
+    if (supabaseClient) {
+      supabaseClient.from('leads').insert([{
+        name: bankerName,
+        mobile: contactNo,
+        city: cityVal,
+        loan_type: `Banker ID (${bankName})`,
+        amount: `Monthly: ${volumeVal}`,
+        employment_type: `Banker (${bankName})`,
+        status: 'New',
+        notes: `Bankers Direct Login ID Application for ${bankName} (${volumeVal})`,
+        created_at: new Date().toISOString()
+      }]).then(() => {}).catch(() => {});
+    }
   };
 
   return (
@@ -2382,39 +2496,144 @@ CREATE POLICY "Allow public upsert to site_settings" ON public.site_settings FOR
 CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR UPDATE USING (true);
 `;
 
-  // Load leads from Supabase & localStorage
-  const loadLeads = async () => {
-    setIsLoadingLeads(true);
-    let remote = [];
-    if (supabaseClient) {
-      try {
-        const { data, error } = await supabaseClient.from('leads').select('*').order('created_at', { ascending: false });
-        if (!error && data) remote = data;
-      } catch (err) {
-        console.warn('Supabase fetch notice:', err);
-      }
-    }
+  // Normalize lead structure helper
+  const normalizeLead = (l) => {
+    const applicantName = (l.name || l.fullName || l.customerName || l.applicant_name || 'Applicant').trim();
+    const rawMobile = String(l.mobile || l.mobileNumber || l.phone || l.phoneNumber || '').trim();
+    const contactNo = rawMobile;
+    const loanCat = l.loan_type || l.loanCategory || l.loanType || l.category || 'Personal Loan';
+    const loanAmt = l.amount || (l.loanAmount ? ('Rs. ' + l.loanAmount) : 'Rs. 5,00,000');
+    const locCity = (l.city || 'Nalgonda').trim();
+    const leadStatus = l.status || 'New';
+    const createdDate = l.created_at || new Date().toISOString();
+    
+    // Stable deduplication key by name + last 10 digits of phone
+    const cleanDigits = rawMobile.replace(/\D/g, '').slice(-10);
+    const dedupeKey = cleanDigits 
+      ? `${applicantName.toLowerCase()}_${cleanDigits}` 
+      : `${applicantName.toLowerCase()}_${createdDate.slice(0, 10)}`;
+
+    return {
+      ...l,
+      id: l.id || dedupeKey,
+      dedupeKey: dedupeKey,
+      name: applicantName,
+      fullName: applicantName,
+      mobile: contactNo,
+      mobileNumber: contactNo,
+      phone: contactNo,
+      loan_type: loanCat,
+      loanCategory: loanCat,
+      amount: loanAmt,
+      city: locCity,
+      status: leadStatus,
+      created_at: createdDate
+    };
+  };
+
+  // Load leads: Stable Deduplicated Sync (0ms Local + Seamless Cloud Merge)
+  const loadLeads = () => {
     let local = [];
     try {
       local = JSON.parse(localStorage.getItem('andromeda_leads') || '[]');
     } catch(e) {}
 
-    // Deduplicate
     const map = new Map();
-    remote.forEach(l => map.set(l.id || (l.mobile + l.created_at), l));
     local.forEach(l => {
-      const k = l.id || (l.mobile + l.created_at);
-      if (!map.has(k)) map.set(k, l);
+      const norm = normalizeLead(l);
+      if (!map.has(norm.dedupeKey)) {
+        map.set(norm.dedupeKey, norm);
+      }
     });
 
-    setLeads(Array.from(map.values()));
-    setIsLoadingLeads(false);
+    const getSortedList = () => {
+      return Array.from(map.values()).sort((a, b) => {
+        return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
+      });
+    };
+
+    setLeads(getSortedList());
+
+    // 2. Background Asynchronous Remote Supabase Sync (Non-blocking & Stable)
+    if (supabaseClient) {
+      supabaseClient.from('leads').select('*').order('created_at', { ascending: false })
+        .then(({ data, error }) => {
+          if (!error && data && data.length > 0) {
+            data.forEach(l => {
+              const norm = normalizeLead(l);
+              map.set(norm.dedupeKey, norm);
+            });
+            setLeads(getSortedList());
+          }
+        })
+        .catch(err => console.warn('Supabase background fetch notice:', err));
+    }
   };
 
   useEffect(() => {
-    if (adminSession.isAuthenticated) {
+    if (!adminSession.isAuthenticated) return;
+
+    // 1. Initial Load
+    loadLeads();
+
+    // 2. Multi-Tab Real-Time Sync via BroadcastChannel
+    let broadcastChannel = null;
+    try {
+      broadcastChannel = new BroadcastChannel('andromeda_realtime_leads');
+      broadcastChannel.onmessage = (event) => {
+        if (event.data) {
+          loadLeads();
+          showToast(`🔔 Instant Alert: New lead received from ${event.data.name || 'Applicant'}!`);
+        }
+      };
+    } catch(e) {}
+
+    // 3. Same-Window Custom Event Listener
+    const handleCustomLeadEvent = (e) => {
       loadLeads();
+      if (e.detail && e.detail.name) {
+        showToast(`🔔 Instant Alert: New lead received from ${e.detail.name}!`);
+      }
+    };
+    window.addEventListener('andromeda_lead_added', handleCustomLeadEvent);
+
+    // 4. LocalStorage Cross-Tab Storage Event Listener
+    const handleStorageChange = (e) => {
+      if (e.key === 'andromeda_leads') {
+        loadLeads();
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+
+    // 5. Supabase Realtime Postgres Changes Subscription
+    let supabaseChannel = null;
+    if (supabaseClient) {
+      try {
+        supabaseChannel = supabaseClient.channel('realtime-leads-channel')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'leads' }, (payload) => {
+            loadLeads();
+            if (payload.new && payload.new.name) {
+              showToast(`🔔 Live Lead Synced: ${payload.new.name} (${payload.new.loan_type || 'Loan'})`);
+            }
+          })
+          .subscribe();
+      } catch (err) {
+        console.warn('Supabase realtime subscription notice:', err);
+      }
     }
+
+    // 6. Fast 2.5-second background auto-polling fallback
+    const pollInterval = setInterval(() => {
+      loadLeads();
+    }, 2500);
+
+    return () => {
+      if (broadcastChannel) broadcastChannel.close();
+      window.removeEventListener('andromeda_lead_added', handleCustomLeadEvent);
+      window.removeEventListener('storage', handleStorageChange);
+      if (supabaseClient && supabaseChannel) supabaseClient.removeChannel(supabaseChannel);
+      clearInterval(pollInterval);
+    };
   }, [adminSession.isAuthenticated]);
 
   const handleLogin = (e) => {
@@ -2972,7 +3191,12 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                         </td>
                         <td className="p-3">
                           <div className="font-bold text-blue-700">{lead.mobile}</div>
-                          <div className="flex items-center gap-2 mt-1">
+                          {lead.email && (
+                            <div className="text-[11px] text-slate-500 font-semibold truncate max-w-[170px]" title={lead.email}>
+                              ✉️ {lead.email}
+                            </div>
+                          )}
+                          <div className="flex items-center gap-1.5 mt-1 flex-wrap">
                             <a
                               href={`tel:${lead.mobile}`}
                               className="px-2 py-0.5 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded font-bold text-[10px]"
@@ -2987,6 +3211,14 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                             >
                               💬 WhatsApp
                             </a>
+                            {lead.email && (
+                              <a
+                                href={`mailto:${lead.email}?subject=Andromeda%20Loan%20Application%20Update%20-%20${encodeURIComponent(lead.loan_type || 'Loan')}&body=Dear%20${encodeURIComponent(lead.name || 'Applicant')}%2C%0A%0AWe%20have%20received%20your%20loan%20request%20for%20${encodeURIComponent(lead.loan_type || 'Loan')}%20(${encodeURIComponent(lead.amount || '')}).%0A%0AOur%20loan%20advisor%20will%20contact%20you%20at%20${encodeURIComponent(lead.mobile || '')}%20shortly.%0A%0AWith%20Best%20Regards%2C%0AAndromeda%20Branch%20Office`}
+                                className="px-2 py-0.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded font-bold text-[10px]"
+                              >
+                                ✉️ Email
+                              </a>
+                            )}
                           </div>
                         </td>
                         <td className="p-3">
@@ -3404,6 +3636,7 @@ function App() {
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
+    email: '',
     city: 'Nalgonda',
     amount: 'Rs. 5,00,000'
   });
@@ -3459,41 +3692,97 @@ function App() {
     setModalOpen(true);
   };
 
-  // Submit Lead to Supabase & LocalStorage
+  // Submit Lead to Supabase, LocalStorage & Email Request Dispatch
   const handleSubmit = async (e) => {
     e.preventDefault();
     setModalOpen(false);
 
+    const applicantName = (formData.name || formData.fullName || 'Valued Customer').trim();
+    const contactNo = (formData.mobile || formData.mobileNumber || formData.phone || '').trim();
+    const applicantEmail = (formData.email || '').trim();
+    const category = selectedLoan || formData.loan_type || 'Personal Loan';
+    const amountVal = formData.amount || 'Rs. 5,00,000';
+    const cityVal = (formData.city || 'Nalgonda').trim();
+
     const leadPayload = {
-      name: formData.name,
-      mobile: formData.mobile,
-      city: formData.city,
-      loan_type: selectedLoan,
-      amount: formData.amount,
+      id: Date.now(),
+      name: applicantName,
+      fullName: applicantName,
+      mobile: contactNo,
+      mobileNumber: contactNo,
+      phone: contactNo,
+      email: applicantEmail,
+      city: cityVal,
+      loan_type: category,
+      loanCategory: category,
+      loanType: category,
+      amount: amountVal,
       employment_type: 'Salaried',
       status: 'New',
-      notes: 'Submitted via Website Lead Form',
+      notes: applicantEmail ? `Email: ${applicantEmail} | Submitted via Website Form` : 'Submitted via Website Lead Form',
       created_at: new Date().toISOString()
     };
 
     // 1. Save locally
     try {
       const local = JSON.parse(localStorage.getItem('andromeda_leads') || '[]');
-      local.unshift({ ...leadPayload, id: Date.now() });
+      local.unshift(leadPayload);
       localStorage.setItem('andromeda_leads', JSON.stringify(local));
     } catch (err) {}
 
-    // 2. Save to Supabase
+    // 2. Save to Supabase (Background)
     if (supabaseClient) {
       try {
-        await supabaseClient.from('leads').insert([leadPayload]);
+        supabaseClient.from('leads').insert([{
+          name: applicantName,
+          mobile: contactNo,
+          email: applicantEmail,
+          city: cityVal,
+          loan_type: category,
+          amount: amountVal,
+          employment_type: 'Salaried',
+          status: 'New',
+          notes: applicantEmail ? `Email: ${applicantEmail} | Submitted via Website Form` : 'Submitted via Website Lead Form',
+          created_at: new Date().toISOString()
+        }]).then(() => {}).catch(() => {});
       } catch (err) {
         console.warn('Supabase lead submit notice:', err);
       }
     }
 
-    showToast(`Thank you, ${formData.name}! Your application for ${selectedLoan} has been received. Our team will contact you at ${formData.mobile}.`);
-    setFormData({ name: '', mobile: '', city: 'Nalgonda', amount: 'Rs. 5,00,000' });
+    // 3. Automated Email Notification Dispatch to Applicant & Admin
+    if (applicantEmail) {
+      try {
+        fetch(`https://formsubmit.co/ajax/${encodeURIComponent(siteSettings.email || 'contact@andromeda.in')}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: `New Loan Application Received: ${category} - ${applicantName}`,
+            _replyto: applicantEmail,
+            _cc: applicantEmail,
+            "Applicant Name": applicantName,
+            "Applicant Email": applicantEmail,
+            "Contact Number": contactNo,
+            "Loan Category": category,
+            "Requested Amount": amountVal,
+            "City": cityVal,
+            "Date": new Date().toLocaleString(),
+            "Status": "Application Acknowledged - Advisor will call shortly"
+          })
+        }).catch(err => console.warn('Email dispatch background note:', err));
+      } catch (err) {}
+    }
+
+    // 4. Instant Real-Time Cross-Tab & Same-Window Event Broadcast
+    try {
+      window.dispatchEvent(new CustomEvent('andromeda_lead_added', { detail: leadPayload }));
+      const bc = new BroadcastChannel('andromeda_realtime_leads');
+      bc.postMessage(leadPayload);
+      bc.close();
+    } catch(e) {}
+
+    showToast(`Thank you, ${applicantName}! Your application for ${category} has been received and confirmed to ${applicantEmail || contactNo}.`);
+    setFormData({ name: '', mobile: '', email: '', city: 'Nalgonda', amount: 'Rs. 5,00,000' });
   };
 
   const scrollTo = (id) => {
@@ -3613,12 +3902,6 @@ function App() {
             >
               Contact
             </button>
-            <button 
-              onClick={() => { setCurrentView('admin'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="px-2.5 py-1.5 rounded-xl text-amber-600 hover:text-amber-700 hover:bg-amber-50 font-black flex items-center gap-1 transition-all"
-            >
-              🔐 Admin
-            </button>
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-3">
@@ -3650,7 +3933,6 @@ function App() {
             <button onClick={() => { setCurrentView('partner'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">🤝 Become a Partner</button>
             <button onClick={() => { setCurrentView('dsa'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#D32F2F] font-black text-base">⭐ DSA Corner</button>
             <button onClick={() => { setCurrentView('bankers'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-red-600 font-black text-base">💼 For Bankers</button>
-            <button onClick={() => { setCurrentView('admin'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-amber-600 font-black text-base">🔐 Admin Panel</button>
             <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('charges-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">💰 Our Charges (For 1 Lakh)</button>
             <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('contact-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">📞 Contact Details</button>
           </div>
@@ -4714,7 +4996,7 @@ function App() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Mobile Number</label>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Mobile Number *</label>
                   <input
                     type="tel"
                     required
@@ -4725,7 +5007,7 @@ function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">City</label>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">City *</label>
                   <input
                     type="text"
                     required
@@ -4737,7 +5019,19 @@ function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Loan Amount</label>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Email Address (Get Request in Mail) *</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="yourname@gmail.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Loan Amount *</label>
                 <input
                   type="text"
                   required

@@ -80,9 +80,16 @@ export const Navbar = ({ currentRoute, setCurrentRoute, onOpenLeadModal, onOpenL
 
           {/* Right Action CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
+            <a
+              href="tel:7396962063"
+              className="px-4 py-2 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-sm transition-all flex items-center gap-1.5 active:scale-95"
+            >
+              <Icons.Phone className="w-4 h-4" />
+              <span>Call: 7396962063</span>
+            </a>
             <button
               onClick={onOpenLoginModal}
-              className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors flex items-center gap-1.5"
+              className="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors flex items-center gap-1.5"
             >
               <Icons.Lock className="w-4 h-4 text-slate-400" />
               <span>User Login</span>
@@ -139,6 +146,13 @@ export const Navbar = ({ currentRoute, setCurrentRoute, onOpenLeadModal, onOpenL
           </div>
 
           <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5">
+            <a
+              href="tel:7396962063"
+              className="w-full py-3 px-4 text-center font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-sm flex items-center justify-center gap-2 active:scale-95"
+            >
+              <Icons.Phone className="w-4 h-4" />
+              <span>Call Advisor: 7396962063</span>
+            </a>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
