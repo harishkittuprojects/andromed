@@ -6,8 +6,11 @@
   <title>Andromeda | India's Largest Loan Distributor</title>
   <meta name="description" content="Andromeda Sales & Distribution Pvt. Ltd. - India's Largest Loan Distributor. Authorised Channel Partner for Leading Banks & NBFCs." />
   
+  <!-- Base URL for consistent routing across /admin, #/admin, etc. -->
+  <base href="/" />
+
   <!-- Favicon using official Logo -->
-  <link rel="icon" type="image/png" href="./logo.png" />
+  <link rel="icon" type="image/png" href="/logo.png" />
 
   <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,7 +33,7 @@
             }
           },
           fontFamily: {
-            sans: ['\"Plus Jakarta Sans\"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             brand: ['Outfit', 'sans-serif']
           }
         }
@@ -54,11 +57,15 @@
     }
   </style>
 
-  <!-- Fast Local Vendor Libraries (Instant 0ms Load) -->
-  <script src="./vendor/react.min.js"></script>
-  <script src="./vendor/react-dom.min.js"></script>
-  <script src="./vendor/supabase.min.js"></script>
-  <script src="./vendor/babel.min.js"></script>
+  <!-- Fast Local Vendor Libraries with Reliable CDN Fallbacks -->
+  <script src="/vendor/react.min.js"></script>
+  <script>window.React || document.write('<script src="https://unpkg.com/react@18/umd/react.production.min.js"><\/script>')</script>
+  <script src="/vendor/react-dom.min.js"></script>
+  <script>window.ReactDOM || document.write('<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"><\/script>')</script>
+  <script src="/vendor/supabase.min.js"></script>
+  <script>window.supabase || document.write('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script>')</script>
+  <script src="/vendor/babel.min.js"></script>
+  <script>window.Babel || document.write('<script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"><\/script>')</script>
 </head>
 <body class="text-slate-800 antialiased font-sans">
   <div id="root">
@@ -2838,17 +2845,29 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
               />
             </div>
 
-            <div className="p-2.5 bg-blue-50/80 rounded-xl border border-blue-100 text-[11px] text-blue-800 space-y-0.5">
-              <p className="font-bold">🔑 Default Credentials:</p>
-              <p>Email: <code className="font-mono bg-white px-1 rounded">admin@andromeda.com</code></p>
-              <p>Password: <code className="font-mono bg-white px-1 rounded">andromeda@2026</code></p>
+            <div className="p-3 bg-blue-50/90 rounded-2xl border border-blue-200 text-xs text-blue-900 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-extrabold flex items-center gap-1">🔑 <span>Admin Credentials:</span></span>
+                <button
+                  type="button"
+                  onClick={() => setLoginForm({ email: 'admin@andromeda.com', password: 'andromeda@2026' })}
+                  className="px-2.5 py-1 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-bold text-[11px] rounded-lg shadow-xs transition-transform active:scale-95"
+                >
+                  ⚡ Auto Fill
+                </button>
+              </div>
+              <div className="text-[11px] text-slate-700 space-y-0.5 font-medium">
+                <p>Email: <code className="font-mono bg-white px-1.5 py-0.5 rounded border border-blue-100 font-bold text-blue-700">admin@andromeda.com</code></p>
+                <p>Password: <code className="font-mono bg-white px-1.5 py-0.5 rounded border border-blue-100 font-bold text-blue-700">andromeda@2026</code></p>
+              </div>
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm shadow-lg transition-all active:scale-95"
+              className="w-full py-3.5 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm sm:text-base shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2"
             >
-              Sign In to Admin CMS →
+              <span>Sign In to Admin CMS</span>
+              <span>→</span>
             </button>
           </form>
 
@@ -3600,15 +3619,25 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
 // ============================================================================
 // 6. MAIN APP COMPONENT
 // ============================================================================
-function App() {
-  const [currentView, setCurrentView] = useState(() => {
-    const hash = (window.location.hash || '').replace('#', '').toLowerCase();
-    const pathname = (window.location.pathname || '').replace('/', '').toLowerCase();
-    if (hash === 'admin' || pathname === 'admin') return 'admin';
-    if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(hash)) return hash;
-    if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(pathname)) return pathname;
+function getRouteFromLocation() {
+  try {
+    const rawHash = (window.location.hash || '').replace(/^[#/]+/, '').replace(/\/+$/, '').toLowerCase();
+    const rawPath = (window.location.pathname || '').replace(/^\/+/, '').replace(/\/+$/, '').toLowerCase();
+    
+    if (rawHash === 'admin' || rawPath === 'admin' || rawHash.startsWith('admin') || rawPath.startsWith('admin')) {
+      return 'admin';
+    }
+    const known = ['home', 'services', 'about', 'partner', 'dsa', 'bankers'];
+    if (known.includes(rawHash)) return rawHash;
+    if (known.includes(rawPath)) return rawPath;
     return 'home';
-  });
+  } catch(e) {
+    return 'home';
+  }
+}
+
+function App() {
+  const [currentView, setCurrentView] = useState(() => getRouteFromLocation());
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -3643,18 +3672,11 @@ function App() {
     amount: 'Rs. 5,00,000'
   });
 
-  // Listener for direct navigation to /admin, #admin, /services, etc.
+  // Listener for direct navigation to /admin, #/admin, #admin, /services, etc.
   useEffect(() => {
     const handleRoute = () => {
-      const h = (window.location.hash || '').replace('#', '').toLowerCase();
-      const p = (window.location.pathname || '').replace('/', '').toLowerCase();
-      if (h === 'admin' || p === 'admin') {
-        setCurrentView('admin');
-      } else if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(h)) {
-        setCurrentView(h);
-      } else if (['home', 'services', 'about', 'partner', 'dsa', 'bankers'].includes(p)) {
-        setCurrentView(p);
-      }
+      const route = getRouteFromLocation();
+      setCurrentView(route);
     };
     window.addEventListener('hashchange', handleRoute);
     window.addEventListener('popstate', handleRoute);
@@ -3911,6 +3933,13 @@ function App() {
             >
               Contact
             </button>
+            <button 
+              onClick={() => { setCurrentView('admin'); window.location.hash = 'admin'; window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="px-3 py-1.5 rounded-xl bg-amber-50 text-amber-800 hover:bg-amber-100 font-bold transition-all flex items-center gap-1 border border-amber-200"
+            >
+              <span>🔐</span>
+              <span>Admin</span>
+            </button>
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-3">
@@ -3944,6 +3973,7 @@ function App() {
             <button onClick={() => { setCurrentView('bankers'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-red-600 font-black text-base">💼 For Bankers</button>
             <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('charges-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">💰 Our Charges (For 1 Lakh)</button>
             <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('contact-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">📞 Contact Details</button>
+            <button onClick={() => { setCurrentView('admin'); window.location.hash = 'admin'; setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2.5 text-amber-700 bg-amber-50 px-3 rounded-xl font-black text-base border border-amber-200">🔐 Admin CMS Portal</button>
           </div>
         )}
 
