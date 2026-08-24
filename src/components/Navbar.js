@@ -88,13 +88,6 @@ export const Navbar = ({ currentRoute, setCurrentRoute, onOpenLeadModal, onOpenL
               <span>Call: 7396962063</span>
             </a>
             <button
-              onClick={onOpenLoginModal}
-              className="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors flex items-center gap-1.5"
-            >
-              <Icons.Lock className="w-4 h-4 text-slate-400" />
-              <span>User Login</span>
-            </button>
-            <button
               onClick={() => onOpenLeadModal()}
               className="px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-sm hover:shadow-md hover:shadow-blue-600/20 transition-all flex items-center gap-2"
             >
@@ -153,16 +146,6 @@ export const Navbar = ({ currentRoute, setCurrentRoute, onOpenLeadModal, onOpenL
               <Icons.Phone className="w-4 h-4" />
               <span>Call Advisor: 7396962063</span>
             </a>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenLoginModal();
-              }}
-              className="w-full py-2.5 px-4 text-center font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg flex items-center justify-center gap-2"
-            >
-              <Icons.Lock className="w-4 h-4 text-slate-500" />
-              <span>User Login</span>
-            </button>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

@@ -140,25 +140,64 @@ async function uploadToCloudinary(file) {
   }
 }
 
-// Default Site Settings
+// Default Site Settings (Total Header to Footer Content)
 const DEFAULT_SITE_SETTINGS = {
+  // 1. Header & Contact Details
+  brandName: 'ANDROMEDA',
+  branchName: 'NALGONDA',
+  headerTagline: "India's Largest Loan Distributor",
+  topNoticeText: "✨ Official Loan Channel Partner for 500+ Top Banks & NBFCs • Doorstep Service Available in Nalgonda & Surrounding Districts",
   phone: '7396962063',
   phone2: '9553858064',
   email: 'contact@andromeda.in',
-  address: '158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098',
-  branchAddress: 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.',
-  cashIncentiveAmount: '1000',
-  heroFemaleImg: 'hero_female.png',
-  headerLogoImg: 'header_logo.png',
-  footerLogoImg: 'logo.png',
+  workingHours: 'Mon - Sat: 9:30 AM - 7:00 PM',
+
+  // 2. Hero Banner & Slogans
+  heroBadgeText: 'Official Loan Channel Partner',
+  heroMainHeading: "India's Largest",
+  heroSubHeading: 'Personal, Business & Home Loan Specialist in Nalgonda',
+  heroDescription: 'Join hands with India’s #1 Loan Distributor. Get lowest interest rates, maximum loan eligibility, fast doorstep verification, and instant sanction across 500+ leading banks & NBFCs.',
   typewriterWords: [
     "LOAN DISTRIBUTOR'S COMPANY",
+    "ZERO BALANCE & SAVINGS ACCOUNTS",
+    "CURRENT ACCOUNTS & CREDIT CARDS",
     "DIRECT LOGIN FOR BANKERS",
     "MULTI-BANK FINANCING NETWORK",
     "PERSONAL & BUSINESS LOANS",
     "HOME LOANS & PROPERTY MORTGAGE",
     "AUTHORISED CREDIT ADVISOR"
-  ]
+  ],
+
+  // 3. Doorstep Service
+  doorstepBadge: '🛵 100% Free Doorstep Service',
+  doorstepHeading: 'We Provide Services at Your Doorstep',
+  doorstepDescription: 'Safe & Reliable • Fast & On Time • 100% Satisfaction with Zero Service Charges.',
+
+  // 4. Partner Program & Incentives
+  partnerBadge: '⭐ High Incentive Program',
+  partnerHeadline: 'Partner With Us & Earn More!',
+  partnerSubheadline: 'Highest Commission Slab in the Market',
+  partnerDescription: 'Become an Authorised Andromeda Partner in Nalgonda. Refer loan leads, earn high monthly payouts, and get complete processing support.',
+  cashIncentiveAmount: '1000',
+
+  // 5. Banking & Credit Cards Section
+  bankingBadge: '🏦 Banking & Card Solutions',
+  bankingHeading: 'Account Opening & Credit Card Services',
+  bankingSubheading: 'Zero Balance Savings Accounts, High-Yield Salary Accounts, Business Current Accounts & Lifetime Free Credit Cards with 100% Free Doorstep Assistance.',
+
+  // 6. Footer & Addresses
+  footerAboutText: "Andromeda — India's Largest Loan Distributor. Branch Nalgonda. Authorised direct loan distribution channel partner for top leading Banks & NBFCs.",
+  footerPartnerTag: 'Authorised Channel Partner for Leading Banks & NBFCs',
+  headOfficeAddress: '158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098',
+  branchAddress: 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.',
+  copyrightText: '© 2026 Andromeda Loans Nalgonda Branch. All Rights Reserved.',
+  disclaimerText: 'Disclaimer: Andromeda Loans Nalgonda Branch is an authorised loan distribution partner for multiple RBI regulated Banks & NBFCs.',
+
+  // 7. Media & Logos
+  heroFemaleImg: 'hero_female.png',
+  headerLogoImg: 'header_logo.png',
+  footerLogoImg: 'logo.png',
+  doorstepBannerImg: 'doorstep_service.png'
 };
 
 // Default Loan Categories & Rates
@@ -467,14 +506,86 @@ const INSURANCE_LIST = [
   }
 ];
 
+// 3.2. BANKING & CREDIT CARD SERVICES ARRAY
+const BANKING_SERVICES = [
+  {
+    id: "zero-balance",
+    title: "Zero Balance Account",
+    type: "Digital Account",
+    tag: "Instant KYC",
+    icon: "🪙",
+    iconBg: "bg-amber-100 text-amber-900 border border-amber-300",
+    gradient: "from-amber-500/10 via-yellow-500/5 to-transparent",
+    border: "border-amber-200 hover:border-amber-400",
+    desc: "Open digital zero-maintenance bank account with instant Virtual Debit Card, zero balance penalties & UPI activation.",
+    features: [
+      "₹0 Minimum Monthly Balance (No Hidden Fees)",
+      "Instant Virtual & Physical Debit Card",
+      "Free UPI, IMPS, NEFT & NetBanking",
+      "Doorstep biometric verification available"
+    ]
+  },
+  {
+    id: "savings",
+    title: "Savings Account",
+    type: "High Interest",
+    tag: "Up to 7% Interest p.a.",
+    icon: "🏦",
+    iconBg: "bg-blue-100 text-[#0B4DA2] border border-blue-300",
+    gradient: "from-blue-500/10 via-sky-500/5 to-transparent",
+    border: "border-blue-200 hover:border-blue-500",
+    desc: "High-yield interest savings accounts with top private & PSU partner banks, cashback rewards & free cheque book.",
+    features: [
+      "Attractive Interest Rates (up to 7% p.a.)",
+      "Cashback on shopping & utility bill payments",
+      "Unlimited free ATM withdrawals across India",
+      "Free Doorstep Banking & Account Opening"
+    ]
+  },
+  {
+    id: "current",
+    title: "Current Account",
+    type: "Business Banking",
+    tag: "High Cash Limits",
+    icon: "🏢",
+    iconBg: "bg-emerald-100 text-emerald-800 border border-emerald-300",
+    gradient: "from-emerald-500/10 via-teal-500/5 to-transparent",
+    border: "border-emerald-200 hover:border-emerald-500",
+    desc: "Customized business current accounts with high cash deposit limits, POS machines & seamless soundbox integration.",
+    features: [
+      "High free cash deposit & withdrawal limits",
+      "Free QR code & Soundbox setup assistance",
+      "Business Overdraft & Working Capital Line",
+      "Dedicated corporate banking relationship manager"
+    ]
+  },
+  {
+    id: "credit-card",
+    title: "Credit Card Services",
+    type: "Card Services",
+    tag: "Lifetime Free Options",
+    icon: "💳",
+    iconBg: "bg-purple-100 text-purple-800 border border-purple-300",
+    gradient: "from-purple-500/10 via-indigo-500/5 to-transparent",
+    border: "border-purple-200 hover:border-purple-500",
+    desc: "Instant pre-approved & premium credit cards from 15+ top banks with airport lounge access, reward points & cashback.",
+    features: [
+      "Lifetime Free Cards with ₹0 Annual Fee",
+      "Instant in-principle digital card approval",
+      "Complimentary Airport Lounge Access & Fuel Waiver",
+      "Up to 5% flat cashback & rewards on every spend"
+    ]
+  }
+];
+
 // 4. WHY CHOOSE US POINTS
 const WHY_CHOOSE_POINTS = [
   "500+ Bank & NBFC Partners",
-  "Multiple Loan Options",
-  "Fast Processing",
-  "Expert Guidance",
-  "100% Transparent",
-  "Free Consultation"
+  "Multiple Loan & Account Options",
+  "Zero Balance & Savings Accounts",
+  "Lifetime Free Credit Cards",
+  "Fast Processing & Doorstep KYC",
+  "100% Transparent Support"
 ];
 
 // 5. 6-STEP PROCESS DATA (Exact match to 2nd image)
@@ -583,6 +694,46 @@ function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
       minScore: "670+",
       desc: "Specialized credit facilities and government-backed scheme financing for Micro, Small, and Medium Enterprises.",
       highlights: ["Government subsidy & CGTMSE scheme benefits", "Quick assessment based on GST & bank inflows", "Machinery and inventory financing", "Flexible repayment aligned with business cash cycles"]
+    },
+    'zero-balance': {
+      title: "Zero Balance Account",
+      rate: "3.5% - 4.0% p.a.",
+      maxAmount: "No Balance Limit",
+      tenure: "Lifetime Account",
+      processingFee: "₹0 Free",
+      minScore: "No CIBIL Required",
+      desc: "Instant digital savings account with ₹0 minimum balance requirement, free virtual debit card, instant UPI setup, and doorstep KYC.",
+      highlights: ["Zero monthly balance maintenance charges", "Instant account number & virtual debit card in minutes", "Free UPI, IMPS, NEFT & mobile banking", "Doorstep biometric verification by certified agent"]
+    },
+    'savings': {
+      title: "Savings Account",
+      rate: "Up to 7.0% p.a.",
+      maxAmount: "High Limit",
+      tenure: "Lifetime Account",
+      processingFee: "₹0 Free",
+      minScore: "All Eligible",
+      desc: "High-yield interest savings accounts with top private & PSU partner banks offering complimentary insurance, shopping cashback, and free cheque books.",
+      highlights: ["High interest rate up to 7% per annum", "Cashback on shopping, bill payments & dining", "Unlimited free ATM transactions at partner networks", "Complimentary accidental insurance cover on debit card"]
+    },
+    'current': {
+      title: "Current Account",
+      rate: "Overdraft Available",
+      maxAmount: "Custom Limits",
+      tenure: "Business Account",
+      processingFee: "₹0 Free Setup",
+      minScore: "Business KYC",
+      desc: "Comprehensive business current accounts for traders, firms, startups, and merchants with high cash deposit limits, POS swipe machines, and soundboxes.",
+      highlights: ["High free cash deposit & withdrawal limits", "Free QR code & Soundbox setup assistance", "Pre-approved business overdraft and working capital limits", "Dedicated corporate relationship manager support"]
+    },
+    'credit-card': {
+      title: "Credit Card Services",
+      rate: "Up to 50 Days Free",
+      maxAmount: "Up to Rs. 10 Lakhs",
+      tenure: "Revolving Credit",
+      processingFee: "₹0 Lifetime Free Options",
+      minScore: "650+",
+      desc: "Instant approval for co-branded & premium credit cards from 15+ top banks with airport lounge access, fuel surcharge waivers, and 5% cashback rewards.",
+      highlights: ["Lifetime free credit cards with zero annual fees", "Complimentary domestic & international airport lounge visits", "1% Fuel surcharge waiver at all petrol pumps", "Welcome reward points & vouchers worth up to ₹5,000"]
     }
   };
 
@@ -632,24 +783,48 @@ function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
 
       {/* Interactive Service Detail Showcase */}
       <div className="bg-white rounded-3xl border-2 border-slate-200 shadow-md overflow-hidden">
-        <div className="p-4 sm:p-6 border-b border-slate-100 bg-slate-50/70">
-          <div className="text-xs font-black text-slate-500 uppercase tracking-wider mb-2">
-            Select a Loan Service to View Full Specs:
+        <div className="p-4 sm:p-6 border-b border-slate-100 bg-slate-50/70 space-y-3">
+          <div>
+            <div className="text-xs font-black text-slate-500 uppercase tracking-wider mb-2">
+              Loan Services:
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+              {SERVICES.map((srv) => (
+                <button
+                  key={srv.id}
+                  onClick={() => setSelectedServiceId(srv.id)}
+                  className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center justify-center ${
+                    selectedServiceId === srv.id
+                      ? 'bg-[#0B4DA2] text-white border-[#0B4DA2] shadow-md font-black'
+                      : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300'
+                  }`}
+                >
+                  <span className="text-xs font-black leading-tight">{srv.title}</span>
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
-            {SERVICES.map((srv) => (
-              <button
-                key={srv.id}
-                onClick={() => setSelectedServiceId(srv.id)}
-                className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center justify-center ${
-                  selectedServiceId === srv.id
-                    ? 'bg-[#0B4DA2] text-white border-[#0B4DA2] shadow-md font-black'
-                    : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300'
-                }`}
-              >
-                <span className="text-xs font-black leading-tight">{srv.title}</span>
-              </button>
-            ))}
+
+          <div>
+            <div className="text-xs font-black text-slate-500 uppercase tracking-wider mb-2">
+              Account Opening & Credit Card Services:
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {BANKING_SERVICES.map((srv) => (
+                <button
+                  key={srv.id}
+                  onClick={() => setSelectedServiceId(srv.id)}
+                  className={`p-2.5 rounded-xl border text-center transition-all flex items-center justify-center gap-2 ${
+                    selectedServiceId === srv.id
+                      ? 'bg-[#0B4DA2] text-white border-[#0B4DA2] shadow-md font-black'
+                      : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300'
+                  }`}
+                >
+                  <span className="text-sm">{srv.icon}</span>
+                  <span className="text-xs font-black leading-tight">{srv.title}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -750,17 +925,11 @@ function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
             <div key={ins.id} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-black text-slate-900">{ins.name}</span>
-                  <span className="text-[10.5px] font-black text-[#D32F2F] bg-red-100/60 px-2 py-0.5 rounded-full">{ins.incentive}</span>
+                  <span className="text-xs font-black text-slate-900">{ins.name || ins.title}</span>
+                  <span className="text-[10.5px] font-black text-[#D32F2F] bg-red-100/60 px-2 py-0.5 rounded-full">{ins.incentive || ins.pct}</span>
                 </div>
                 <p className="text-xs text-slate-500 font-medium mt-1">{ins.desc}</p>
               </div>
-              <button
-                onClick={() => onOpenApply(ins.name)}
-                className="w-full py-2 bg-white hover:bg-red-50 text-[#D32F2F] font-black text-xs rounded-xl border border-red-200 transition-all mt-2"
-              >
-                Apply for {ins.name} →
-              </button>
             </div>
           ))}
         </div>
@@ -1265,13 +1434,6 @@ function BecomePartnerPage({ onOpenApply, onNavigateHome, onGoToDSA }) {
           </p>
 
           <div className="pt-3 flex flex-wrap items-center gap-3">
-            <a
-              href="#partner-form"
-              className="px-6 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95 flex items-center space-x-1.5"
-            >
-              <span>Register as Partner Now</span>
-              <span>↓</span>
-            </a>
             <button
               onClick={onGoToDSA}
               className="px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-xl transition-all"
@@ -1506,143 +1668,37 @@ function BecomePartnerPage({ onOpenApply, onNavigateHome, onGoToDSA }) {
         </div>
       </div>
 
-      {/* Partner Registration Form */}
-      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-lg space-y-6" id="partner-form">
-        <div className="text-center space-y-1">
-          <span className="px-3.5 py-1 rounded-full bg-blue-50 text-[#0B4DA2] text-xs font-black uppercase tracking-wider">
-            Online Registration
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 brand-font mt-2">
-            Register as Andromeda Partner
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium max-w-lg mx-auto">
-            Fill out the form below to receive your official Connector Code or DSA Code. Our Channel Manager will contact you within 24 hours.
+      {/* Official Code Issuance Notice / Contact Card */}
+      <div className="bg-gradient-to-r from-[#071E3D] via-[#0B2545] to-[#071E3D] rounded-3xl p-6 sm:p-8 text-white shadow-xl border border-blue-800 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="space-y-2 text-center md:text-left">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-400/20 border border-amber-300/30 rounded-full text-amber-300 text-xs font-black uppercase">
+            <span>⭐ Official Partner Code Allocation</span>
+          </div>
+          <h3 className="text-xl sm:text-2xl font-black text-white brand-font">
+            Ready to Start as an Official Andromeda Partner?
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-300 font-medium max-w-xl">
+            Official DSA Codes (<code className="text-amber-300 font-mono font-bold">ANDR-XXX</code>) and Connector Codes (<code className="text-cyan-300 font-mono font-bold">CONN-XXX</code>) are issued directly by the Andromeda Branch Manager upon onboarding.
           </p>
         </div>
-
-        {submitted ? (
-          <div className="p-6 bg-emerald-50 border-2 border-emerald-300 rounded-2xl text-center space-y-3">
-            <div className="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto text-2xl font-black">
-              ✓
-            </div>
-            <h3 className="text-lg font-black text-emerald-900">Partner Application Submitted Successfully!</h3>
-            <p className="text-xs sm:text-sm text-emerald-700 font-medium max-w-md mx-auto">
-              Thank you, <strong>{partnerFormData.fullName}</strong>! Your request for <strong>{partnerType === 'connector' ? 'Connector Code' : 'DSA Channel Code'}</strong> has been registered. Our Area Sales Manager will call you at <strong>{partnerFormData.mobile}</strong>.
-            </p>
-            <button
-              onClick={() => setSubmitted(false)}
-              className="mt-2 px-5 py-2 bg-[#0B4DA2] text-white font-bold text-xs rounded-xl hover:bg-blue-800"
-            >
-              Submit Another Partner Request
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handlePartnerSubmit} className="space-y-4 max-w-xl mx-auto">
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Full Name *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Suresh Reddy"
-                  value={partnerFormData.fullName}
-                  onChange={(e) => setPartnerFormData({ ...partnerFormData, fullName: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Mobile Number *</label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="9876543210"
-                  value={partnerFormData.mobile}
-                  onChange={(e) => setPartnerFormData({ ...partnerFormData, mobile: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Email Address</label>
-                <input
-                  type="email"
-                  placeholder="partner@gmail.com"
-                  value={partnerFormData.email}
-                  onChange={(e) => setPartnerFormData({ ...partnerFormData, email: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">City / District *</label>
-                <input
-                  type="text"
-                  required
-                  value={partnerFormData.city}
-                  onChange={(e) => setPartnerFormData({ ...partnerFormData, city: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Current Profession</label>
-                <select
-                  value={partnerFormData.profession}
-                  onChange={(e) => setPartnerFormData({ ...partnerFormData, profession: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
-                >
-                  <option>Financial Consultant</option>
-                  <option>Insurance Advisor / Agent</option>
-                  <option>Real Estate Consultant</option>
-                  <option>Chartered Accountant / Tax Auditor</option>
-                  <option>Existing Loan DSA</option>
-                  <option>Business Owner / Freelancer</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Partnership Program</label>
-                <select
-                  value={partnerType}
-                  onChange={(e) => setPartnerType(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-blue-50 border-2 border-blue-300 text-[#0B4DA2] rounded-xl text-sm font-black focus:outline-none focus:border-[#0B4DA2]"
-                >
-                  <option value="connector">Connector Code (Individual / Referral)</option>
-                  <option value="dsa">DSA Channel Code (Business / Volume)</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-black text-slate-700 uppercase mb-1">Expected Monthly Lead Volume</label>
-              <select
-                value={partnerFormData.expectedVolume}
-                onChange={(e) => setPartnerFormData({ ...partnerFormData, expectedVolume: e.target.value })}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
-              >
-                <option>5 - 10 Lakhs</option>
-                <option>10 - 25 Lakhs</option>
-                <option>25 - 50 Lakhs</option>
-                <option>50 Lakhs - 1 Crore</option>
-                <option>Above 1 Crore</option>
-              </select>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full py-3.5 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm sm:text-base shadow-lg transition-all active:scale-95 flex items-center justify-center space-x-2"
-            >
-              <span>Submit Partner Application</span>
-              <span>→</span>
-            </button>
-          </form>
-        )}
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <a
+            href="tel:7396962063"
+            className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center gap-1.5 active:scale-95"
+          >
+            <SVG.Phone className="w-4 h-4" />
+            <span>Call: 7396962063</span>
+          </a>
+          <a
+            href="https://wa.me/917396962063?text=Hello%20Andromeda%2C%20I%20want%20to%20get%20a%20DSA%20%2F%20Connector%20Code."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-3 bg-[#25D366] hover:bg-[#1da851] text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center gap-1.5 active:scale-95"
+          >
+            <SVG.WhatsApp className="w-4 h-4" />
+            <span>Chat on WhatsApp</span>
+          </a>
+        </div>
       </div>
 
     </div>
@@ -1693,13 +1749,31 @@ function DSACornerPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
             Welcome to the dedicated Andromeda DSA Hub. Calculate your monthly commission payouts, access multi-bank rate matrices, review eligibility guidelines, and connect directly with your dedicated Area Channel Managers.
           </p>
 
+          {/* Official Code Issuance Notice Banner */}
+          <div className="bg-gradient-to-r from-blue-900/80 to-blue-950/90 border border-cyan-400/40 rounded-2xl p-3.5 sm:p-4 text-xs space-y-1.5 shadow-md">
+            <div className="flex items-center space-x-2 text-cyan-300 font-black uppercase text-[11px] tracking-wider">
+              <span>🔑 OFFICIAL PARTNER CODE ISSUANCE</span>
+            </div>
+            <p className="text-slate-200 text-xs font-semibold leading-relaxed">
+              Official <strong className="text-amber-300">DSA Codes</strong> and <strong className="text-emerald-300">Connector Codes</strong> are issued directly here by the Andromeda Branch Admin upon joining. Contact our channel team or apply to receive your authorized code.
+            </p>
+          </div>
+
           <div className="pt-2 flex flex-wrap items-center gap-3">
             <button
               onClick={onGoToPartner}
-              className="px-6 py-3 bg-[#0B4DA2] hover:bg-blue-600 text-white font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95"
+              className="px-6 py-3 bg-[#0B4DA2] hover:bg-blue-600 text-white font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95 flex items-center gap-1.5"
             >
-              Apply for DSA Code →
+              <span>🔑</span>
+              <span>Apply for Partner Code →</span>
             </button>
+            <a
+              href="tel:7396962063"
+              className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all flex items-center gap-1.5 active:scale-95"
+            >
+              <span>📞</span>
+              <span>Call for Code: 7396962063</span>
+            </a>
             <button
               onClick={onNavigateHome}
               className="px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm rounded-xl transition-all"
@@ -1796,6 +1870,73 @@ function DSACornerPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
             >
               Get DSA Code to Claim →
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Official DSA Code & Connector Code Allocation Card */}
+      <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50/50 rounded-3xl p-5 sm:p-7 border-2 border-blue-200 shadow-sm space-y-4">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-100 px-3 py-1 rounded-full uppercase tracking-wider">
+            Official Channel Onboarding
+          </span>
+          <h3 className="text-lg sm:text-2xl font-black text-slate-900 brand-font mt-2">
+            DSA Code & Connector Code Allocation
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto">
+            Authorized partner codes are issued directly by the Andromeda Admin / Branch Channel Manager upon onboarding.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          {/* Card 1: DSA Code */}
+          <div className="bg-white p-5 rounded-2xl border-2 border-blue-200 shadow-xs space-y-3 flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 rounded-full text-xs font-black bg-blue-100 text-[#0B4DA2] border border-blue-200">
+                  🛡️ DSA Channel Code
+                </span>
+                <span className="text-[11px] font-bold text-slate-400">Prefix: ANDR-XXX</span>
+              </div>
+              <h4 className="text-base font-black text-slate-900">For Full-time DSA Agents & Agencies</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Direct Selling Agent codes provide access to 70+ bank loan logins, dedicated Area Sales Manager support, and the highest payout slab structures (1.2% - 1.6%+).
+              </p>
+            </div>
+            <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span className="font-bold text-slate-700">Code Issued by: <strong>Admin</strong></span>
+              <button
+                onClick={onGoToPartner}
+                className="text-[#0B4DA2] font-black hover:underline"
+              >
+                Request DSA Code →
+              </button>
+            </div>
+          </div>
+
+          {/* Card 2: Connector Code */}
+          <div className="bg-white p-5 rounded-2xl border-2 border-emerald-200 shadow-xs space-y-3 flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
+                  🤝 Connector Code
+                </span>
+                <span className="text-[11px] font-bold text-slate-400">Prefix: CONN-XXX</span>
+              </div>
+              <h4 className="text-base font-black text-slate-900">For CAs, Tax Advocates & Advisors</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Connector codes offer a simple zero-target referral model. Simply refer loan leads and Andromeda manages 100% of documentation, login, and disbursement with prompt payouts.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span className="font-bold text-slate-700">Code Issued by: <strong>Admin</strong></span>
+              <button
+                onClick={onGoToPartner}
+                className="text-emerald-700 font-black hover:underline"
+              >
+                Request Connector Code →
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -2422,7 +2563,871 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
             <div className="p-3 bg-slate-100 rounded-xl text-center text-xs font-bold text-slate-700">
               📍 <strong>Branch Office:</strong> Maruthi Nagar near HP Petrol Bunk, Sagar Road, Nalgonda
             </div>
+
+            <div className="p-3 bg-slate-100 rounded-xl text-center text-xs font-bold text-slate-700">
+              📍 <strong>Branch Office:</strong> Maruthi Nagar near HP Petrol Bunk, Sagar Road, Nalgonda
+            </div>
           </div>
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
+
+// ============================================================================
+// 5.45. CHARGES DEDICATED PAGE COMPONENT
+// ============================================================================
+function ChargesPage({ siteSettings, onNavigateHome, onGoToPartner, onGoToBankers, onOpenApply }) {
+  const [calcType, setCalcType] = useState('Personal Loan');
+  const [calcVolume, setCalcVolume] = useState(1000000); // 10 Lakhs default
+
+  const ratesMap = {
+    'Personal Loan': 0.013,
+    'Business Loan': 0.012,
+    'LAP': 0.010,
+    'Vehicle Loan': 0.010,
+    'Home Loan': 0.006,
+    'Education Loan': 0.005,
+    'Gold Loan': 0.008,
+    'MSME Loan': 0.012
+  };
+
+  const calculatedPayout = Math.round(calcVolume * (ratesMap[calcType] || 0.013));
+
+  return (
+    <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 py-6 space-y-6 sm:space-y-8 animate-fade-in">
+      
+      {/* 1. HERO HEADER BANNER */}
+      <div className="rounded-3xl bg-gradient-to-r from-[#071E3D] via-[#0B3A75] to-[#1565D8] text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="space-y-2">
+            <button
+              onClick={onNavigateHome}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white/15 hover:bg-white/25 text-white rounded-full text-xs font-black transition-all shadow-xs"
+            >
+              <span>← Back to Home</span>
+            </button>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black brand-font uppercase text-white tracking-tight">
+              Our Charges & Payout Structure
+            </h1>
+            <p className="text-xs sm:text-sm text-blue-100 font-medium max-w-2xl">
+              Payout & Incentive Structure for Every ₹1 Lakh Disbursed across all Loan Categories and Partner Channels.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 shrink-0">
+            <a
+              href={`tel:${siteSettings?.phone || '7396962063'}`}
+              className="px-5 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95 flex items-center gap-1.5"
+            >
+              <SVG.Phone className="w-4 h-4" />
+              <span>Call: {siteSettings?.phone || '7396962063'}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. SPECIAL OFFER CASH INCENTIVE */}
+      <div className="rounded-3xl border-2 border-amber-300 bg-[#FFF9E6] p-4 sm:p-5 shadow-sm flex items-center space-x-4">
+        <div className="shrink-0">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-[#D4AF37] via-[#FFD700] to-[#F3E5AB] p-1.5 shadow-md flex items-center justify-center text-center">
+            <div className="w-full h-full rounded-full border-2 border-dashed border-[#8B6508] bg-gradient-to-b from-[#FFFDF0] to-[#FFE8A3] flex flex-col items-center justify-center p-1 text-[#5C4033]">
+              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider leading-tight">TRUST</span>
+              <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-tight leading-tight">TRANSPARENCY</span>
+              <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-tight leading-tight">SPEED</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex-1 space-y-1 text-left">
+          <div className="text-xs sm:text-sm font-extrabold text-slate-700">
+            For 1 Lakh Disbursement
+          </div>
+          <div className="flex flex-wrap items-baseline gap-2">
+            <span className="text-3xl sm:text-4xl font-black text-[#D32F2F] tracking-tight brand-font">
+              Rs. {siteSettings?.cashIncentiveAmount || '1000'}
+            </span>
+            <span className="text-sm sm:text-base font-black text-[#D32F2F]">
+              Cash Incentive
+            </span>
+          </div>
+          <p className="text-xs text-slate-600 font-bold leading-snug">
+            On Personal Loans, Home Loans, Business Loans & Non-Finance Leads
+          </p>
+        </div>
+      </div>
+
+      {/* 3. ALL LOAN CHARGES CARDS (FOR 1 LAKH) */}
+      <div className="space-y-4">
+        <div className="text-center">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 border border-blue-200 px-3.5 py-1 rounded-full uppercase tracking-wider">
+            Standard DSA / Connector Payouts
+          </span>
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+            Charges & Payout for Every ₹1 Lakh Disbursed
+          </h2>
+          <p className="text-xs text-slate-500 font-medium mt-0.5">
+            Transparent commission credited directly to your bank account with MIS report.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          {CHARGES.map((ch, idx) => (
+            <div
+              key={idx}
+              className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                  {ch.icon}
+                </div>
+                <div>
+                  <div className="text-sm font-black text-slate-900 leading-tight">
+                    {ch.title}
+                  </div>
+                  <div className="text-xs text-slate-500 font-bold mt-0.5">
+                    {ch.perLakh}
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-right shrink-0">
+                <div className="text-base sm:text-lg font-black text-[#D32F2F] tracking-tight leading-none brand-font">
+                  {ch.amount}
+                </div>
+                <div className="text-xs font-black text-[#D32F2F] mt-0.5">
+                  {ch.pct}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 4. INTERACTIVE PAYOUT CALCULATOR */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+            Real-Time Earnings Simulator
+          </span>
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+            Calculate Your Total Earnings
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-md mx-auto">
+            Select loan category and monthly disbursal amount to see your estimated commission.
+          </p>
+        </div>
+
+        <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 sm:p-7 space-y-6 max-w-3xl mx-auto">
+          <div>
+            <label className="block text-xs font-black text-slate-700 uppercase mb-2">1. Select Loan Category</label>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {['Personal Loan', 'Business Loan', 'Home Loan', 'LAP', 'Vehicle Loan', 'Education Loan', 'Gold Loan', 'MSME Loan'].map((type) => (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() => setCalcType(type)}
+                  className={`py-2.5 px-3 rounded-xl text-xs font-black transition-all text-center border ${
+                    calcType === type
+                      ? 'bg-[#0B4DA2] text-white border-[#0B4DA2] shadow-md'
+                      : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300'
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-xs font-black text-slate-700 uppercase">2. Disbursed Loan Volume</label>
+              <span className="text-sm sm:text-base font-black text-[#0B4DA2] bg-blue-100 px-3 py-1 rounded-lg">
+                ₹ {(calcVolume / 100000).toLocaleString('en-IN', { maximumFractionDigits: 2 })} Lakhs
+              </span>
+            </div>
+            <input
+              type="range"
+              min="100000"
+              max="10000000"
+              step="100000"
+              value={calcVolume}
+              onChange={(e) => setCalcVolume(Number(e.target.value))}
+              className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#0B4DA2]"
+            />
+            <div className="flex justify-between text-[11px] text-slate-400 font-bold mt-1">
+              <span>₹ 1 Lakh</span>
+              <span>₹ 25 Lakhs</span>
+              <span>₹ 50 Lakhs</span>
+              <span>₹ 1 Crore</span>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-[#071E3D] to-[#0B4DA2] text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+            <div>
+              <span className="text-xs text-blue-200 uppercase font-black tracking-wider block">Estimated Payout Earnings</span>
+              <div className="text-2xl sm:text-4xl font-black text-[#FFD700] brand-font mt-0.5">
+                ₹ {calculatedPayout.toLocaleString('en-IN')}
+              </div>
+              <span className="text-[11px] text-slate-300 font-medium">
+                Commission Rate: {((ratesMap[calcType] || 0.013) * 100).toFixed(1)}% for {calcType}
+              </span>
+            </div>
+            <a
+              href={`tel:${siteSettings?.phone || '7396962063'}`}
+              className="w-full sm:w-auto px-6 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95 text-center shrink-0 flex items-center justify-center gap-1.5"
+            >
+              <SVG.Phone className="w-3.5 h-3.5" />
+              <span>Call: {siteSettings?.phone || '7396962063'}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 5. 100% FREE SERVICE BANNER */}
+      <div className="rounded-2xl bg-[#0B3A75] text-white p-4 sm:p-5 shadow-md flex items-center space-x-3.5 sm:space-x-4">
+        <div className="shrink-0">
+          <SVG.Shield />
+        </div>
+        <div>
+          <div className="text-base sm:text-lg font-black text-[#FFD700] brand-font uppercase">
+            100% FREE SERVICE
+          </div>
+          <div className="text-xs sm:text-sm text-blue-100 font-semibold leading-tight mt-0.5">
+            Free Lead, Processing, Pre-Disbursal, Disbursal & Post Disbursal Support with Zero Hidden Charges.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// ============================================================================
+// 5.48. CONTACT DEDICATED PAGE COMPONENT
+// ============================================================================
+function ContactPage({ siteSettings, onNavigateHome, onGoToPartner, onOpenApply }) {
+  return (
+    <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 py-6 space-y-6 sm:space-y-8 animate-fade-in">
+      
+      {/* 1. HERO HEADER BANNER */}
+      <div className="rounded-3xl bg-gradient-to-r from-[#071E3D] via-[#0B3A75] to-[#1565D8] text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="space-y-2">
+            <button
+              onClick={onNavigateHome}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white/15 hover:bg-white/25 text-white rounded-full text-xs font-black transition-all shadow-xs"
+            >
+              <span>← Back to Home</span>
+            </button>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black brand-font uppercase text-white tracking-tight">
+              Contact Andromeda Loans
+            </h1>
+            <p className="text-xs sm:text-sm text-blue-100 font-medium max-w-2xl">
+              Nalgonda Branch Helpline, Dedicated Loan Managers, Doorstep Assistance & Corporate Office Details.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 shrink-0">
+            <a
+              href={`tel:${siteSettings?.phone || '7396962063'}`}
+              className="px-5 py-3 bg-[#FFD700] hover:bg-yellow-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg transition-all active:scale-95 flex items-center gap-1.5"
+            >
+              <SVG.Phone className="w-4 h-4" />
+              <span>Call: {siteSettings?.phone || '7396962063'}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. PRIMARY CONTACT CHANNELS (4 CARDS) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        {/* Card 1: Primary Branch Phone */}
+        <div className="bg-white rounded-3xl p-5 border-2 border-emerald-200 shadow-sm space-y-3 hover:shadow-md transition-all">
+          <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <SVG.Phone className="w-5 h-5" />
+          </div>
+          <div>
+            <span className="text-[10.5px] font-black uppercase text-slate-400 tracking-wider">Primary Call & WhatsApp</span>
+            <div className="text-base sm:text-lg font-black text-slate-900 mt-0.5">
+              {siteSettings?.phone || '7396962063'}
+            </div>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Direct Branch Call Line</p>
+          </div>
+          <a
+            href={`tel:${siteSettings?.phone || '7396962063'}`}
+            className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-black text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 text-center"
+          >
+            <SVG.Phone className="w-3.5 h-3.5" />
+            <span>Call Now</span>
+          </a>
+        </div>
+
+        {/* Card 2: Alternate Phone */}
+        <div className="bg-white rounded-3xl p-5 border-2 border-blue-200 shadow-sm space-y-3 hover:shadow-md transition-all">
+          <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+            <SVG.Phone className="w-5 h-5" />
+          </div>
+          <div>
+            <span className="text-[10.5px] font-black uppercase text-slate-400 tracking-wider">Management Line</span>
+            <div className="text-base sm:text-lg font-black text-slate-900 mt-0.5">
+              {siteSettings?.phone2 || '9553858064'}
+            </div>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Senior Advisory Support</p>
+          </div>
+          <a
+            href={`tel:${siteSettings?.phone2 || '9553858064'}`}
+            className="w-full py-2 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 text-center"
+          >
+            <SVG.Phone className="w-3.5 h-3.5" />
+            <span>Call Line 2</span>
+          </a>
+        </div>
+
+        {/* Card 3: Email */}
+        <div className="bg-white rounded-3xl p-5 border-2 border-slate-200 shadow-sm space-y-3 hover:shadow-md transition-all">
+          <div className="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg">
+            ✉️
+          </div>
+          <div>
+            <span className="text-[10.5px] font-black uppercase text-slate-400 tracking-wider">Official Email</span>
+            <div className="text-xs sm:text-sm font-black text-slate-900 mt-0.5 break-all">
+              {siteSettings?.email || 'contact@andromeda.in'}
+            </div>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Responses within 24 hours</p>
+          </div>
+          <a
+            href={`mailto:${siteSettings?.email || 'contact@andromeda.in'}`}
+            className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-black text-xs rounded-xl transition-all flex items-center justify-center gap-1 text-center"
+          >
+            <span>Send Email</span>
+          </a>
+        </div>
+
+        {/* Card 4: Working Hours */}
+        <div className="bg-white rounded-3xl p-5 border-2 border-slate-200 shadow-sm space-y-3 hover:shadow-md transition-all">
+          <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg">
+            ⏰
+          </div>
+          <div>
+            <span className="text-[10.5px] font-black uppercase text-slate-400 tracking-wider">Working Hours</span>
+            <div className="text-xs sm:text-sm font-black text-slate-900 mt-0.5">
+              {siteSettings?.workingHours || 'Mon - Sat: 9:30 AM - 7:00 PM'}
+            </div>
+            <p className="text-xs text-emerald-600 font-bold mt-0.5">● Open Now for Doorstep Visits</p>
+          </div>
+          <div className="w-full py-2 bg-emerald-50 text-emerald-800 font-black text-[11px] rounded-xl text-center">
+            Sunday: On Call Support
+          </div>
+        </div>
+
+      </div>
+
+      {/* 3. BRANCH TEAM & RELATIONSHIP MANAGERS */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-sm space-y-4">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 border border-blue-200 px-3 py-1 rounded-full uppercase tracking-wider">
+            Leadership & Management Team
+          </span>
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-1">
+            Andromeda Nalgonda Branch Managers
+          </h2>
+          <p className="text-xs text-slate-500 font-medium">
+            Contact our dedicated managers directly for loan sanctions, doorstep visits, and partner code allocations.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2">
+          <div className="p-4 bg-slate-50 border-2 border-emerald-200 rounded-2xl text-center space-y-1.5 hover:border-emerald-400 transition-all">
+            <div className="text-sm font-black text-slate-900">M. SWAPNA</div>
+            <div className="inline-block px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10.5px] font-black uppercase">
+              Branch Manager
+            </div>
+            <a href="tel:7396962063" className="block text-sm font-black text-[#0B4DA2] hover:underline pt-1">
+              📞 7396962063
+            </a>
+          </div>
+
+          <div className="p-4 bg-slate-50 border-2 border-blue-200 rounded-2xl text-center space-y-1.5 hover:border-blue-400 transition-all">
+            <div className="text-sm font-black text-slate-900">P. SWAPNA</div>
+            <div className="inline-block px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10.5px] font-black uppercase">
+              Sales Manager
+            </div>
+            <a href="tel:7036105549" className="block text-sm font-black text-[#0B4DA2] hover:underline pt-1">
+              📞 7036105549
+            </a>
+          </div>
+
+          <div className="p-4 bg-slate-50 border-2 border-purple-200 rounded-2xl text-center space-y-1.5 hover:border-purple-400 transition-all">
+            <div className="text-sm font-black text-slate-900">K. MOUNIKA</div>
+            <div className="inline-block px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10.5px] font-black uppercase">
+              Area Sales Manager
+            </div>
+            <a href="tel:7036090991" className="block text-sm font-black text-[#0B4DA2] hover:underline pt-1">
+              📞 7036090991
+            </a>
+          </div>
+
+          <div className="p-4 bg-slate-50 border-2 border-amber-200 rounded-2xl text-center space-y-1.5 hover:border-amber-400 transition-all">
+            <div className="text-sm font-black text-slate-900">SRISAILAM KATTA</div>
+            <div className="inline-block px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10.5px] font-black uppercase">
+              Management Head
+            </div>
+            <a href="tel:9963909220" className="block text-sm font-black text-[#0B4DA2] hover:underline pt-1">
+              📞 9963909220
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 4. REGISTERED OFFICE LOCATIONS */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        {/* Nalgonda Branch */}
+        <div className="bg-white rounded-3xl p-6 border-2 border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">📍</span>
+            <h3 className="text-base font-black text-slate-900 brand-font uppercase">
+              Nalgonda Branch Office
+            </h3>
+          </div>
+          <p className="text-xs sm:text-sm text-slate-700 font-semibold leading-relaxed">
+            {siteSettings?.branchAddress || 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.'}
+          </p>
+          <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-500">
+            <span>District: Nalgonda, Telangana</span>
+            <span className="text-[#0B4DA2]">Doorstep Available ✓</span>
+          </div>
+        </div>
+
+        {/* Mumbai Head Office */}
+        <div className="bg-white rounded-3xl p-6 border-2 border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">🏢</span>
+            <h3 className="text-base font-black text-slate-900 brand-font uppercase">
+              Corporate Head Office (Mumbai)
+            </h3>
+          </div>
+          <p className="text-xs sm:text-sm text-slate-700 font-semibold leading-relaxed">
+            {siteSettings?.headOfficeAddress || '158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098'}
+          </p>
+          <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-500">
+            <span>Andromeda Sales & Distribution Pvt. Ltd.</span>
+            <span className="text-emerald-600">500+ Partner Banks</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* 5. 100% FREE SERVICE GUARANTEE */}
+      <div className="rounded-2xl bg-[#0B3A75] text-white p-4 sm:p-5 shadow-md flex items-center space-x-3.5 sm:space-x-4">
+        <div className="shrink-0">
+          <SVG.Shield />
+        </div>
+        <div>
+          <div className="text-base sm:text-lg font-black text-[#FFD700] brand-font uppercase">
+            100% FREE DOORSTEP ASSISTANCE
+          </div>
+          <div className="text-xs sm:text-sm text-blue-100 font-semibold leading-tight mt-0.5">
+            Zero Service Charges • Free Document Collection at Home or Office • Fast Sanction from Top RBI Regulated Banks.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// ============================================================================
+// 5.5. DSA & CONNECTOR LOGIN PAGE COMPONENT (Exact Match to User Design)
+// ============================================================================
+function DSALoginPage({ defaultType = 'dsa', onNavigateHome, onGoToRegister, showToast }) {
+  const [partnerType, setPartnerType] = useState(defaultType);
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loginAlert, setLoginAlert] = useState(null);
+  const [loggedInPartner, setLoggedInPartner] = useState(null);
+
+  const handleSwitchTab = (type) => {
+    setPartnerType(type);
+    setCode('');
+    setLoginAlert(null);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!code.trim() || !password.trim()) {
+      setLoginAlert({ type: 'error', text: `Please enter your valid ${partnerType === 'dsa' ? 'DSA Code' : 'Connector Code'} and password.` });
+      return;
+    }
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      const cleanCode = code.trim().toUpperCase();
+      
+      let matchedPartner = null;
+      try {
+        const stored = localStorage.getItem('andromeda_dsa_partners');
+        if (stored) {
+          const list = JSON.parse(stored);
+          matchedPartner = list.find(p => (p.code || '').toUpperCase() === cleanCode);
+        }
+      } catch(e) {}
+
+      if (matchedPartner) {
+        if (matchedPartner.status === 'Inactive' || matchedPartner.status === 'Suspended') {
+          setLoginAlert({ type: 'error', text: `Access Denied: Partner account [${cleanCode}] is currently inactive or suspended. Please contact Admin.` });
+          return;
+        }
+        if (matchedPartner.password && matchedPartner.password !== password) {
+          setLoginAlert({ type: 'error', text: `Invalid password for ${matchedPartner.type === 'dsa' ? 'DSA' : 'Connector'} Code ${cleanCode}. Please check your credentials.` });
+          return;
+        }
+      }
+
+      const userObj = {
+        code: cleanCode,
+        type: (matchedPartner && matchedPartner.type) || partnerType,
+        name: (matchedPartner && matchedPartner.name) || (partnerType === 'dsa' ? 'Authorized DSA Partner' : 'Registered Connector Partner'),
+        city: (matchedPartner && matchedPartner.city) || 'Nalgonda',
+        commission: (matchedPartner && matchedPartner.commission) || '1.6%',
+        loginTime: new Date().toLocaleTimeString()
+      };
+      setLoggedInPartner(userObj);
+      setLoginAlert({ type: 'success', text: `Authentication verified! Welcome ${userObj.name} to Andromeda ${userObj.type === 'dsa' ? 'DSA' : 'Connector'} Portal.` });
+      if (showToast) {
+        showToast(`Welcome ${userObj.name}! Logged in with ${userObj.code}`);
+      }
+    }, 600);
+  };
+
+  const handleGoogleAuth = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      const userObj = {
+        code: partnerType === 'dsa' ? 'ANDR-GOOGLE' : 'CONN-GOOGLE',
+        type: partnerType,
+        name: 'Google Verified Partner',
+        loginTime: new Date().toLocaleTimeString()
+      };
+      setLoggedInPartner(userObj);
+      setLoginAlert({ type: 'success', text: `Google single sign-on successful! Welcome to Andromeda ${partnerType === 'dsa' ? 'DSA' : 'Connector'} Portal.` });
+      if (showToast) {
+        showToast(`Signed in with Google!`);
+      }
+    }, 600);
+  };
+
+  return (
+    <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-6 sm:space-y-8 py-6 animate-fade-in">
+      
+      {/* Top Header Navigation Bar & Breadcrumb */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-200">
+        <div className="flex items-center space-x-2 text-xs sm:text-sm font-bold text-slate-500">
+          <button onClick={onNavigateHome} className="hover:text-[#0B4DA2] transition-colors flex items-center gap-1">
+            <span>🏠 Home</span>
+          </button>
+          <span>/</span>
+          <span className="text-[#0B4DA2] font-black">
+            {partnerType === 'dsa' ? 'DSA Code Portal' : 'Connector Code Portal'}
+          </span>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <button
+            type="button"
+            onClick={() => handleSwitchTab('dsa')}
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all ${
+              partnerType === 'dsa'
+                ? 'bg-[#0B4DA2] text-white shadow-sm'
+                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+            }`}
+          >
+            DSA Mode
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSwitchTab('connector')}
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all ${
+              partnerType === 'connector'
+                ? 'bg-[#0B4DA2] text-white shadow-sm'
+                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+            }`}
+          >
+            Connector Mode
+          </button>
+        </div>
+      </div>
+
+
+
+      {/* ========================================================================= */}
+      {/* 2. BOTTOM SECTION: SPLIT LOGIN CARD */}
+      {/* ========================================================================= */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border-2 border-slate-200 shadow-2xl bg-white">
+        
+        {/* Left Side: Dark Blue Portal Presentation */}
+        <div className="lg:col-span-5 bg-gradient-to-b from-[#071E3D] via-[#0B3A75] to-[#0A192F] text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden">
+          
+          <div className="absolute top-0 right-0 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-72 h-72 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="relative z-10 space-y-6">
+            <div className="flex items-center space-x-3">
+              <div className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center p-1.5 border border-white/20 shadow-md">
+                <SVG.LogoDelta />
+              </div>
+              <div>
+                <span className="text-xl font-black tracking-tight text-white brand-font block">
+                  ANDROMEDA
+                </span>
+                <span className="text-[10px] font-extrabold text-blue-200 tracking-wider uppercase">
+                  Loan Distribution Platform
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-black text-white brand-font">
+                {partnerType === 'dsa' ? 'DSA Portal' : 'Connector Portal'}
+              </h2>
+              <p className="text-xs sm:text-sm text-blue-200 font-bold mt-1">
+                One Platform. Many Possibilities.
+              </p>
+            </div>
+
+            {/* 3 Feature Highlights */}
+            <div className="space-y-3 pt-2">
+              <div className="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-white/10 backdrop-blur-xs border border-white/10 hover:bg-white/15 transition-colors">
+                <div className="w-8 h-8 rounded-xl bg-blue-500/40 text-cyan-300 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-white">Manage Leads</h4>
+                  <p className="text-[11px] text-blue-200 font-medium">Track and manage your leads in one place</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-white/10 backdrop-blur-xs border border-white/10 hover:bg-white/15 transition-colors">
+                <div className="w-8 h-8 rounded-xl bg-blue-500/40 text-cyan-300 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-white">Track Applications</h4>
+                  <p className="text-[11px] text-blue-200 font-medium">Real-time status of all your loan applications</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-white/10 backdrop-blur-xs border border-white/10 hover:bg-white/15 transition-colors">
+                <div className="w-8 h-8 rounded-xl bg-blue-500/40 text-cyan-300 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-white">View Earnings</h4>
+                  <p className="text-[11px] text-blue-200 font-medium">Check your commissions and performance</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-8 relative z-10">
+            <div className="flex items-center justify-between text-[11px] text-blue-300/80 border-t border-white/10 pt-4 font-bold">
+              <span>⚡ Direct Banker API Integration</span>
+              <span>🔒 256-bit Encrypted</span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Right Side: Clean White Login Form */}
+        <div className="lg:col-span-7 p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+          
+          <div className="max-w-md w-full mx-auto space-y-5">
+            
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <h3 className="text-2xl font-black text-slate-900 brand-font">
+                  {partnerType === 'dsa' ? 'DSA Login' : 'Connector Login'}
+                </h3>
+                <span className="text-[11px] font-black px-2.5 py-1 rounded-full bg-blue-50 text-[#0B4DA2] border border-blue-200">
+                  {partnerType === 'dsa' ? 'DSA Channel' : 'Connector Channel'}
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                Login to your account to continue
+              </p>
+            </div>
+
+            {loginAlert && (
+              <div className={`p-3.5 rounded-xl text-xs font-bold ${
+                loginAlert.type === 'error' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-300'
+              }`}>
+                {loginAlert.text}
+              </div>
+            )}
+
+            {loggedInPartner && (
+              <div className="p-4 bg-emerald-50 border-2 border-emerald-300 rounded-2xl space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black text-emerald-900 uppercase">✓ Active Session</span>
+                  <span className="text-[11px] text-emerald-700 font-mono">{loggedInPartner.loginTime}</span>
+                </div>
+                <div className="text-sm font-black text-slate-900">
+                  Partner Code: <span className="text-[#0B4DA2] font-mono">{loggedInPartner.code}</span>
+                </div>
+                <p className="text-xs text-slate-600 font-medium">
+                  You are connected to the Andromeda Multi-Bank Loan Network.
+                </p>
+                <div className="pt-1 flex gap-2">
+                  <button
+                    onClick={() => { setLoggedInPartner(null); setLoginAlert(null); }}
+                    className="px-3 py-1 bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold rounded-lg"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {!loggedInPartner && (
+              <form onSubmit={handleLogin} className="space-y-4">
+                
+                {/* DSA / Connector Code Input */}
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1.5">
+                    {partnerType === 'dsa' ? 'DSA Code' : 'Connector Code'}
+                  </label>
+                  <div className="relative">
+                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    </div>
+                    <input
+                      type="text"
+                      required
+                      value={code}
+                      onChange={(e) => setCode(e.target.value)}
+                      placeholder={partnerType === 'dsa' ? 'Enter DSA Code (provided by Admin)' : 'Enter Connector Code (provided by Admin)'}
+                      className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2] focus:bg-white transition-colors uppercase placeholder:normal-case"
+                    />
+                  </div>
+                  <p className="text-[11px] text-slate-500 font-semibold mt-1.5 flex items-center gap-1">
+                    <span>🔒</span>
+                    <span>Your unique code is issued and authorized by the admin after joining.</span>
+                  </p>
+                </div>
+
+                {/* Password Input */}
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1.5">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                    </div>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter your password"
+                      className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2] focus:bg-white transition-colors"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                      title={showPassword ? "Hide password" : "Show password"}
+                    >
+                      {showPassword ? (
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/></svg>
+                      ) : (
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Remember Me & Forgot Password Row */}
+                <div className="flex items-center justify-between text-xs pt-1 font-bold">
+                  <label className="flex items-center space-x-2 cursor-pointer select-none text-slate-600">
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      className="w-4 h-4 rounded border-slate-300 text-[#0B4DA2] focus:ring-blue-500"
+                    />
+                    <span>Remember me</span>
+                  </label>
+                  <a
+                    href="#forgot"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      alert(`Password reset instructions have been dispatched for code ${code || 'your account'}. Please check your registered mobile and email.`);
+                    }}
+                    className="font-bold text-[#0B4DA2] hover:underline"
+                  >
+                    Forgot Password?
+                  </a>
+                </div>
+
+                {/* Primary Blue Login CTA Button */}
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full py-3.5 bg-[#0B4DA2] hover:bg-[#083a7c] active:bg-blue-900 text-white font-black rounded-xl shadow-lg transition-all text-sm sm:text-base flex items-center justify-center gap-2 active:scale-95"
+                >
+                  {isLoading ? (
+                    <span>Authenticating...</span>
+                  ) : (
+                    <span>Login</span>
+                  )}
+                </button>
+
+              </form>
+            )}
+
+            {/* Divider */}
+            <div className="relative flex items-center justify-center my-3">
+              <div className="border-t border-slate-200 w-full"></div>
+              <span className="bg-white px-3 text-xs text-slate-400 font-bold absolute lowercase">or</span>
+            </div>
+
+            {/* Google Login Button */}
+            <button
+              type="button"
+              onClick={handleGoogleAuth}
+              className="w-full py-2.5 px-4 border-2 border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-2.5 shadow-2xs active:scale-95"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+              </svg>
+              <span>Login with Google</span>
+            </button>
+
+
+            {/* Footer Registration Link */}
+            <div className="text-center text-xs text-slate-600 font-semibold pt-2 border-t border-slate-100">
+              New {partnerType === 'dsa' ? 'DSA' : 'Connector'}?{' '}
+              <button
+                type="button"
+                onClick={onGoToRegister}
+                className="font-black text-[#0B4DA2] hover:underline"
+              >
+                Register Now
+              </button>
+            </div>
+
+          </div>
+
         </div>
 
       </div>
@@ -2454,6 +3459,44 @@ function AdminPanel({ siteSettings, onUpdateSiteSettings, loanRates, onUpdateLoa
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   
+  // DSA & Connector Partner Accounts State
+  const [dsaPartners, setDsaPartners] = useState(() => {
+    try {
+      const saved = localStorage.getItem('andromeda_dsa_partners');
+      if (saved) return JSON.parse(saved);
+    } catch(e) {}
+    const defaults = [
+      { id: 'p_101', code: 'ANDR101', type: 'dsa', name: 'Ramesh Kumar', phone: '9848022338', email: 'ramesh.dsa@andromeda.in', city: 'Nalgonda', commission: '1.6%', status: 'Active', password: 'pass@ramesh101', createdAt: '2026-08-01' },
+      { id: 'p_102', code: 'ANDR102', type: 'dsa', name: 'Srinivas Rao', phone: '9440188221', email: 'srinivas.dsa@andromeda.in', city: 'Suryapet', commission: '1.8%', status: 'Active', password: 'pass@srini102', createdAt: '2026-08-05' },
+      { id: 'p_501', code: 'CONN501', type: 'connector', name: 'Kavitha Reddy (CA)', phone: '7032155440', email: 'kavitha.ca@gmail.com', city: 'Nalgonda', commission: '0.8%', status: 'Active', password: 'pass@kavitha501', createdAt: '2026-08-10' },
+      { id: 'p_502', code: 'CONN502', type: 'connector', name: 'Anil Varma (Property Advisor)', phone: '9989011223', email: 'anil.advisor@gmail.com', city: 'Miryalaguda', commission: '1.0%', status: 'Active', password: 'pass@anil502', createdAt: '2026-08-15' }
+    ];
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(defaults));
+    } catch(e) {}
+    return defaults;
+  });
+
+  const [partnerFilterType, setPartnerFilterType] = useState('ALL'); // 'ALL', 'dsa', 'connector'
+  const [partnerFilterStatus, setPartnerFilterStatus] = useState('ALL'); // 'ALL', 'Active', 'Suspended'
+  const [partnerSearchQuery, setPartnerSearchQuery] = useState('');
+  const [partnerModalOpen, setPartnerModalOpen] = useState(false);
+  const [editingPartnerId, setEditingPartnerId] = useState(null);
+  const [showPasswordMap, setShowPasswordMap] = useState({});
+  const [selectedPartnerIds, setSelectedPartnerIds] = useState([]);
+  const [quickDeleteCode, setQuickDeleteCode] = useState('');
+  const [partnerForm, setPartnerForm] = useState({
+    code: '',
+    type: 'dsa',
+    name: '',
+    phone: '',
+    email: '',
+    city: 'Nalgonda',
+    commission: '1.6%',
+    password: '',
+    status: 'Active'
+  });
+
   // CMS state
   const [cmsForm, setCmsForm] = useState(siteSettings);
   const [ratesList, setRatesList] = useState(loanRates);
@@ -2686,19 +3729,46 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
     showToast(`Lead status updated to: ${newStatus}`);
   };
 
-  // Delete Lead
+  // Delete Single Lead
   const handleDeleteLead = async (lead) => {
-    if (!confirm(`Delete lead from ${lead.name}?`)) return;
-    const filtered = leads.filter(l => l !== lead);
+    const applicantName = lead.name || 'this lead';
+    if (!confirm(`Are you sure you want to permanently delete the lead from "${applicantName}"?`)) return;
+    const filtered = leads.filter(l => l !== lead && l.id !== lead.id && l.dedupeKey !== lead.dedupeKey);
     setLeads(filtered);
-    localStorage.setItem('andromeda_leads', JSON.stringify(filtered));
+    try {
+      localStorage.setItem('andromeda_leads', JSON.stringify(filtered));
+    } catch(e) {}
 
-    if (supabaseClient && lead.id) {
+    if (supabaseClient && lead.id && typeof lead.id === 'number') {
       try {
         await supabaseClient.from('leads').delete().eq('id', lead.id);
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Supabase lead delete notice:', e);
+      }
     }
-    showToast('Lead deleted successfully.');
+    showToast(`Lead from "${applicantName}" deleted successfully!`);
+  };
+
+  // Clear All Leads
+  const handleClearAllLeads = async () => {
+    if (leads.length === 0) {
+      alert('No leads available to delete.');
+      return;
+    }
+    if (!confirm(`⚠️ WARNING: Are you sure you want to delete ALL ${leads.length} leads? This action cannot be undone.`)) return;
+    setLeads([]);
+    try {
+      localStorage.setItem('andromeda_leads', JSON.stringify([]));
+    } catch(e) {}
+
+    if (supabaseClient) {
+      try {
+        await supabaseClient.from('leads').delete().neq('id', 0);
+      } catch (e) {
+        console.warn('Supabase bulk lead delete notice:', e);
+      }
+    }
+    showToast(`All ${leads.length} leads have been cleared and deleted.`);
   };
 
   // Export CSV
@@ -2801,6 +3871,193 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
     showToast('SQL Schema copied to clipboard!');
   };
 
+  // DSA Partner Management Handlers
+  const handleOpenNewPartnerModal = (type = 'dsa') => {
+    const randomNum = Math.floor(100 + Math.random() * 900);
+    const prefix = type === 'dsa' ? 'ANDR' : 'CONN';
+    setEditingPartnerId(null);
+    setPartnerForm({
+      code: `${prefix}${randomNum}`,
+      type: type,
+      name: '',
+      phone: '',
+      email: '',
+      city: 'Nalgonda',
+      commission: type === 'dsa' ? '1.6%' : '0.8%',
+      password: `andro@${randomNum}`,
+      status: 'Active'
+    });
+    setPartnerModalOpen(true);
+  };
+
+  const handleEditPartner = (p) => {
+    setEditingPartnerId(p.id);
+    setPartnerForm({
+      code: p.code || '',
+      type: p.type || 'dsa',
+      name: p.name || '',
+      phone: p.phone || '',
+      email: p.email || '',
+      city: p.city || 'Nalgonda',
+      commission: p.commission || '1.6%',
+      password: p.password || '',
+      status: p.status || 'Active'
+    });
+    setPartnerModalOpen(true);
+  };
+
+  const handleSavePartner = (e) => {
+    e.preventDefault();
+    if (!partnerForm.code.trim() || !partnerForm.name.trim()) {
+      alert('Please fill in Partner Code and Name.');
+      return;
+    }
+    const cleanCode = partnerForm.code.trim().toUpperCase();
+    let updated;
+    if (editingPartnerId) {
+      updated = dsaPartners.map(p => p.id === editingPartnerId ? { ...p, ...partnerForm, code: cleanCode } : p);
+      showToast(`Partner [${cleanCode}] updated successfully!`);
+    } else {
+      const newEntry = {
+        id: 'p_' + Date.now(),
+        ...partnerForm,
+        code: cleanCode,
+        createdAt: new Date().toISOString().slice(0, 10)
+      };
+      updated = [newEntry, ...dsaPartners];
+      showToast(`New ${partnerForm.type === 'dsa' ? 'DSA' : 'Connector'} Code [${cleanCode}] issued!`);
+    }
+    setDsaPartners(updated);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(updated));
+    } catch(err) {}
+    setPartnerModalOpen(false);
+  };
+
+  const handleDeletePartner = (id, codeVal) => {
+    if (!confirm(`Are you sure you want to revoke and delete partner code [${codeVal}]?`)) return;
+    const updated = dsaPartners.filter(p => p.id !== id);
+    setDsaPartners(updated);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(updated));
+    } catch(err) {}
+    showToast(`Partner code [${codeVal}] revoked and deleted.`);
+  };
+
+  const handleDeleteSelectedPartners = () => {
+    if (selectedPartnerIds.length === 0) return;
+    if (!confirm(`Are you sure you want to delete the ${selectedPartnerIds.length} selected partner accounts?`)) return;
+    const updated = dsaPartners.filter(p => !selectedPartnerIds.includes(p.id));
+    setDsaPartners(updated);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(updated));
+    } catch(err) {}
+    setSelectedPartnerIds([]);
+    showToast(`Deleted ${selectedPartnerIds.length} selected partner accounts.`);
+  };
+
+  const handleDeleteAllDsa = () => {
+    const dsaCount = dsaPartners.filter(p => p.type === 'dsa').length;
+    if (dsaCount === 0) {
+      alert('No DSA accounts found to delete.');
+      return;
+    }
+    if (!confirm(`⚠️ WARNING: Are you sure you want to delete ALL ${dsaCount} DSA partner accounts? This cannot be undone.`)) return;
+    const updated = dsaPartners.filter(p => p.type !== 'dsa');
+    setDsaPartners(updated);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(updated));
+    } catch(err) {}
+    setSelectedPartnerIds([]);
+    showToast(`Deleted all ${dsaCount} DSA partner accounts.`);
+  };
+
+  const handleDeleteAllConnectors = () => {
+    const connCount = dsaPartners.filter(p => p.type === 'connector').length;
+    if (connCount === 0) {
+      alert('No Connector accounts found to delete.');
+      return;
+    }
+    if (!confirm(`⚠️ WARNING: Are you sure you want to delete ALL ${connCount} Connector partner accounts? This cannot be undone.`)) return;
+    const updated = dsaPartners.filter(p => p.type !== 'connector');
+    setDsaPartners(updated);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(updated));
+    } catch(err) {}
+    setSelectedPartnerIds([]);
+    showToast(`Deleted all ${connCount} Connector partner accounts.`);
+  };
+
+  const handlePurgeInactivePartners = () => {
+    const inactiveCount = dsaPartners.filter(p => p.status !== 'Active').length;
+    if (inactiveCount === 0) {
+      alert('No suspended or inactive partner accounts found.');
+      return;
+    }
+    if (!confirm(`Are you sure you want to permanently delete all ${inactiveCount} suspended/inactive partner accounts?`)) return;
+    const updated = dsaPartners.filter(p => p.status === 'Active');
+    setDsaPartners(updated);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(updated));
+    } catch(err) {}
+    setSelectedPartnerIds([]);
+    showToast(`Purged ${inactiveCount} inactive partner accounts.`);
+  };
+
+  const handleResetAllPartners = () => {
+    if (dsaPartners.length === 0) {
+      alert('No partner accounts to delete.');
+      return;
+    }
+    if (!confirm(`⚠️ DANGER: Are you sure you want to delete ALL ${dsaPartners.length} partner accounts from the system?`)) return;
+    setDsaPartners([]);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify([]));
+    } catch(err) {}
+    setSelectedPartnerIds([]);
+    showToast(`All ${dsaPartners.length} partner accounts have been completely wiped.`);
+  };
+
+  const handleQuickDeleteByCode = (e) => {
+    e.preventDefault();
+    const clean = quickDeleteCode.trim().toUpperCase();
+    if (!clean) return;
+    const match = dsaPartners.find(p => (p.code || '').toUpperCase() === clean);
+    if (!match) {
+      alert(`No partner found with code [${clean}]. Please check the code.`);
+      return;
+    }
+    if (!confirm(`Are you sure you want to revoke and delete partner code [${clean}] (${match.name})?`)) return;
+    const updated = dsaPartners.filter(p => (p.code || '').toUpperCase() !== clean);
+    setDsaPartners(updated);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(updated));
+    } catch(err) {}
+    setQuickDeleteCode('');
+    showToast(`Partner code [${clean}] (${match.name}) revoked and deleted.`);
+  };
+
+  const handleTogglePartnerStatus = (id) => {
+    const updated = dsaPartners.map(p => {
+      if (p.id === id) {
+        const nextStatus = p.status === 'Active' ? 'Suspended' : 'Active';
+        showToast(`Partner [${p.code}] status set to ${nextStatus}`);
+        return { ...p, status: nextStatus };
+      }
+      return p;
+    });
+    setDsaPartners(updated);
+    try {
+      localStorage.setItem('andromeda_dsa_partners', JSON.stringify(updated));
+    } catch(err) {}
+  };
+
+  const handleCopyPartnerCredentials = (p) => {
+    const text = `*Andromeda Financial Services Partner Authorization*\n\nHello ${p.name},\nYour official Andromeda ${p.type === 'dsa' ? 'DSA' : 'Connector'} account is active:\n\n🔑 *${p.type === 'dsa' ? 'DSA' : 'Connector'} Code:* ${p.code}\n🔒 *Password:* ${p.password}\n💰 *Commission Slab:* ${p.commission}\n📍 *Territory:* ${p.city}\n\n🌐 *Login Portal:* ${window.location.origin}/#login\n\n_Note: Please keep your credentials confidential._`;
+    navigator.clipboard.writeText(text);
+    showToast(`Credentials for ${p.code} copied! Ready to share.`);
+  };
+
   // 1. LOGIN GATE
   if (!adminSession.isAuthenticated) {
     return (
@@ -2884,16 +4141,43 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
     );
   }
 
+  // State for Loan Type Filtering
+  const [loanTypeFilter, setLoanTypeFilter] = useState('ALL');
+
+  // Helper for prominent loan & service type badges
+  const getLoanBadgeStyle = (type = '') => {
+    const t = String(type || '').toLowerCase();
+    if (t.includes('personal')) return { bg: 'bg-blue-50 text-blue-800 border-blue-200', icon: '👤', name: 'Personal Loan' };
+    if (t.includes('business')) return { bg: 'bg-emerald-50 text-emerald-800 border-emerald-200', icon: '💼', name: 'Business Loan' };
+    if (t.includes('home')) return { bg: 'bg-indigo-50 text-indigo-800 border-indigo-200', icon: '🏠', name: 'Home Loan' };
+    if (t.includes('property') || t.includes('lap')) return { bg: 'bg-violet-50 text-violet-800 border-violet-200', icon: '🏢', name: 'Loan Against Property (LAP)' };
+    if (t.includes('vehicle') || t.includes('car')) return { bg: 'bg-amber-50 text-amber-800 border-amber-200', icon: '🚗', name: 'Vehicle Loan' };
+    if (t.includes('gold')) return { bg: 'bg-yellow-50 text-yellow-900 border-yellow-300', icon: '🪙', name: 'Gold Loan' };
+    if (t.includes('education')) return { bg: 'bg-sky-50 text-sky-800 border-sky-200', icon: '🎓', name: 'Education Loan' };
+    if (t.includes('msme')) return { bg: 'bg-teal-50 text-teal-800 border-teal-200', icon: '⚙️', name: 'MSME Loan' };
+    if (t.includes('zero balance')) return { bg: 'bg-amber-100 text-amber-900 border-amber-300', icon: '🪙', name: 'Zero Balance Account' };
+    if (t.includes('savings')) return { bg: 'bg-blue-100 text-blue-900 border-blue-300', icon: '🏦', name: 'Savings Account' };
+    if (t.includes('current account') || t.includes('current')) return { bg: 'bg-emerald-100 text-emerald-900 border-emerald-300', icon: '🏢', name: 'Current Account' };
+    if (t.includes('credit card') || t.includes('card')) return { bg: 'bg-purple-100 text-purple-900 border-purple-300', icon: '💳', name: 'Credit Card' };
+    if (t.includes('insurance')) return { bg: 'bg-rose-50 text-rose-800 border-rose-200', icon: '🛡️', name: 'Insurance Policy' };
+    if (t.includes('banker')) return { bg: 'bg-orange-50 text-orange-800 border-orange-200', icon: '💼', name: 'Banker ID' };
+    if (t.includes('doorstep')) return { bg: 'bg-emerald-50 text-emerald-800 border-emerald-200', icon: '🛵', name: 'Doorstep Service' };
+    if (t.includes('partner')) return { bg: 'bg-indigo-50 text-indigo-800 border-indigo-200', icon: '🤝', name: 'Partner Application' };
+    return { bg: 'bg-slate-100 text-slate-800 border-slate-200', icon: '📄', name: type || 'General Inquiry' };
+  };
+
   // Filtered Leads
   const filteredLeads = leads.filter(l => {
     const matchesStatus = statusFilter === 'ALL' || (l.status || 'New').toUpperCase() === statusFilter;
+    const loanCat = String(l.loan_type || l.loanCategory || l.loanType || '').toLowerCase();
+    const matchesLoanType = loanTypeFilter === 'ALL' || loanCat.includes(loanTypeFilter.toLowerCase());
     const q = searchQuery.toLowerCase();
     const matchesSearch = !q || 
       (l.name && l.name.toLowerCase().includes(q)) || 
       (l.mobile && l.mobile.includes(q)) || 
       (l.city && l.city.toLowerCase().includes(q)) || 
       (l.loan_type && l.loan_type.toLowerCase().includes(q));
-    return matchesStatus && matchesSearch;
+    return matchesStatus && matchesLoanType && matchesSearch;
   });
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -2952,8 +4236,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
           </div>
 
           {[
-            { id: 'overview', icon: '📊', label: 'Dashboard Overview', desc: 'Summary & Stats' },
-            { id: 'leads', icon: '👥', label: 'Leads & Applications', desc: 'Customer Inquiries', badge: leads.length },
+            { id: 'overview', icon: '📊', label: 'Dashboard Overview', desc: 'CMS & Site Status' },
             { id: 'content', icon: '✏️', label: 'Website Content CMS', desc: 'Phone, Text, Offers' },
             { id: 'rates', icon: '💳', label: 'Loan Rates & Tenures', desc: 'Interest Slabs' }
           ].map(tab => {
@@ -3039,31 +4322,24 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 Andromeda Admin / {activeTab.toUpperCase()}
               </div>
               <h2 className="text-lg sm:text-xl font-black text-slate-900 brand-font">
-                {activeTab === 'overview' && 'Dashboard Analytics & Summary'}
-                {activeTab === 'leads' && 'Leads & Applications Management'}
+                {activeTab === 'overview' && 'Dashboard Overview & Site Management'}
                 {activeTab === 'content' && 'Live Website Content CMS'}
-                {activeTab === 'media' && 'Cloudinary Media Storage'}
                 {activeTab === 'rates' && 'Loan Rates & Limits Manager'}
-                {activeTab === 'sql' && 'Supabase SQL Setup Script'}
               </h2>
             </div>
           </div>
 
           <div className="flex items-center space-x-2">
             <button
-              onClick={loadLeads}
+              onClick={() => {
+                setCmsForm(siteSettings);
+                setRatesList(loanRates);
+                showToast('🔄 CMS content refreshed!');
+              }}
               className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5"
             >
               <span>🔄 Refresh</span>
             </button>
-            {activeTab === 'leads' && (
-              <button
-                onClick={handleExportCSV}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl shadow transition-all flex items-center gap-1.5"
-              >
-                <span>📥 Export CSV</span>
-              </button>
-            )}
           </div>
         </header>
 
@@ -3075,319 +4351,469 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
         {/* =================================================================== */}
         {activeTab === 'overview' && (
           <div className="space-y-6">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {/* Overview Quick Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-xs font-bold text-slate-500 uppercase">Total Leads Received</div>
-                <div className="text-2xl sm:text-3xl font-black text-[#0B4DA2] brand-font mt-1">{leads.length}</div>
-                <div className="text-[11px] text-emerald-600 font-bold mt-1">Live in Supabase</div>
+                <div className="text-xs font-bold text-slate-500 uppercase">Branch Contact</div>
+                <div className="text-xl sm:text-2xl font-black text-[#0B4DA2] brand-font mt-1">{siteSettings.phone || '7396962063'}</div>
+                <div className="text-[11px] text-emerald-600 font-bold mt-1">Active Direct Call Line</div>
               </div>
+
               <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-xs font-bold text-slate-500 uppercase">New / Pending Leads</div>
-                <div className="text-2xl sm:text-3xl font-black text-amber-500 brand-font mt-1">
-                  {leads.filter(l => (l.status || 'New').toUpperCase() === 'NEW').length}
-                </div>
-                <div className="text-[11px] text-slate-500 font-medium mt-1">Awaiting Contact</div>
+                <div className="text-xs font-bold text-slate-500 uppercase">Live Loan Products</div>
+                <div className="text-xl sm:text-2xl font-black text-emerald-600 brand-font mt-1">8 Loan Categories</div>
+                <div className="text-[11px] text-slate-500 font-medium mt-1">+ 4 Banking & Card Services</div>
               </div>
+
               <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-xs font-bold text-slate-500 uppercase">In Progress</div>
-                <div className="text-2xl sm:text-3xl font-black text-blue-600 brand-font mt-1">
-                  {leads.filter(l => (l.status || '').toUpperCase() === 'IN PROGRESS').length}
-                </div>
-                <div className="text-[11px] text-slate-500 font-medium mt-1">Under Banking Review</div>
-              </div>
-              <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-xs font-bold text-slate-500 uppercase">Disbursed / Approved</div>
-                <div className="text-2xl sm:text-3xl font-black text-emerald-600 brand-font mt-1">
-                  {leads.filter(l => ['APPROVED', 'DISBURSED'].includes((l.status || '').toUpperCase())).length}
-                </div>
-                <div className="text-[11px] text-emerald-600 font-bold mt-1">Successful Disbursals</div>
+                <div className="text-xs font-bold text-slate-500 uppercase">Branch Office</div>
+                <div className="text-sm font-black text-slate-800 mt-1 truncate">Nalgonda Branch</div>
+                <div className="text-[11px] text-blue-600 font-bold mt-1">Maruti Nagar, Sagar Road</div>
               </div>
             </div>
 
-            {/* Quick Actions Bar */}
-            <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
-              <div className="space-y-0.5">
-                <h3 className="text-base font-black text-slate-900">Lead Database & Management</h3>
-                <p className="text-xs text-slate-500">Real-time sync between Supabase database and local browser state.</p>
+            {/* Quick Management Shortcuts */}
+            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <div>
+                <h3 className="text-base font-black text-slate-900 brand-font">Website Management Controls</h3>
+                <p className="text-xs text-slate-500">Quickly navigate to modify live website content, phone numbers, or interest rates.</p>
               </div>
-            </div>
 
-            {/* Quick Recent Leads Table Preview */}
-            <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-black text-slate-900 uppercase">Recent Inquiries</h3>
-                <button onClick={() => setActiveTab('leads')} className="text-xs font-bold text-blue-600 hover:underline">
-                  View All Leads ({leads.length}) →
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button
+                  onClick={() => setActiveTab('content')}
+                  className="p-5 rounded-2xl border-2 border-blue-100 hover:border-blue-500 bg-blue-50/40 hover:bg-blue-50 transition-all text-left group"
+                >
+                  <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">✏️</div>
+                  <h4 className="text-sm font-black text-slate-900 group-hover:text-blue-700">Website Content CMS →</h4>
+                  <p className="text-xs text-slate-600 mt-1 font-medium">Update contact numbers, branch address, typewriter headlines, and banner images.</p>
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('rates')}
+                  className="p-5 rounded-2xl border-2 border-emerald-100 hover:border-emerald-500 bg-emerald-50/40 hover:bg-emerald-50 transition-all text-left group"
+                >
+                  <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">💳</div>
+                  <h4 className="text-sm font-black text-slate-900 group-hover:text-emerald-700">Loan Rates & Tenures →</h4>
+                  <p className="text-xs text-slate-600 mt-1 font-medium">Manage starting interest rates, maximum loan limits, and repayment tenures.</p>
                 </button>
               </div>
-
-              {leads.length === 0 ? (
-                <div className="text-center py-8 text-slate-400 text-xs font-semibold">
-                  No leads submitted yet. Fill out the application form on the website to test!
-                </div>
-              ) : (
-                <div className="divide-y divide-slate-100">
-                  {leads.slice(0, 5).map((lead, idx) => (
-                    <div key={idx} className="py-3 flex flex-wrap items-center justify-between gap-2 text-xs">
-                      <div>
-                        <div className="font-bold text-slate-900">{lead.name}</div>
-                        <div className="text-[11px] text-slate-500">📞 {lead.mobile} • 📍 {lead.city || 'Nalgonda'}</div>
-                      </div>
-                      <div className="text-right">
-                        <span className="inline-block px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold text-[10px]">
-                          {lead.loan_type || 'General Inquiry'}
-                        </span>
-                        <div className="text-[11px] font-black text-slate-700">{lead.amount || 'N/A'}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         )}
 
         {/* =================================================================== */}
-        {/* TAB 2: LEADS & APPLICATIONS MANAGER */}
-        {/* =================================================================== */}
-        {activeTab === 'leads' && (
-          <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
-            
-            {/* Header with Search & Filter */}
-            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-              <div className="relative flex-1 max-w-md">
-                <input
-                  type="text"
-                  placeholder="Search by Name, Mobile, City, or Loan Type..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-600"
-                />
-                <span className="absolute left-3 top-3 text-slate-400 text-xs">🔍</span>
-              </div>
-
-              {/* Status Filter Pills */}
-              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar text-xs font-extrabold">
-                {['ALL', 'NEW', 'IN PROGRESS', 'APPROVED', 'DISBURSED', 'REJECTED'].map(st => (
-                  <button
-                    key={st}
-                    onClick={() => setStatusFilter(st)}
-                    className={`px-3 py-1.5 rounded-xl transition-all whitespace-nowrap ${statusFilter === st ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
-                  >
-                    {st}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Leads Table */}
-            <div className="overflow-x-auto border border-slate-200 rounded-2xl">
-              <table className="w-full text-left text-xs text-slate-700">
-                <thead className="bg-slate-50 text-[11px] font-black uppercase text-slate-500 border-b border-slate-200">
-                  <tr>
-                    <th className="p-3">Customer</th>
-                    <th className="p-3">Contact</th>
-                    <th className="p-3">Loan Details</th>
-                    <th className="p-3">Location</th>
-                    <th className="p-3">Status</th>
-                    <th className="p-3">Date</th>
-                    <th className="p-3 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 font-medium">
-                  {filteredLeads.length === 0 ? (
-                    <tr>
-                      <td colSpan="7" className="p-8 text-center text-slate-400 font-bold">
-                        No matching leads found.
-                      </td>
-                    </tr>
-                  ) : (
-                    filteredLeads.map((lead, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
-                        <td className="p-3">
-                          <div className="font-black text-slate-900 text-sm">{lead.name}</div>
-                          <div className="text-[10px] text-slate-500">{lead.employment_type || 'Salaried'}</div>
-                        </td>
-                        <td className="p-3">
-                          <div className="font-bold text-blue-700">{lead.mobile}</div>
-                          {lead.email && (
-                            <div className="text-[11px] text-slate-500 font-semibold truncate max-w-[170px]" title={lead.email}>
-                              ✉️ {lead.email}
-                            </div>
-                          )}
-                          <div className="flex items-center gap-1.5 mt-1 flex-wrap">
-                            <a
-                              href={`tel:${lead.mobile}`}
-                              className="px-2 py-0.5 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded font-bold text-[10px]"
-                            >
-                              📞 Call
-                            </a>
-                            <a
-                              href={`https://wa.me/91${(lead.mobile || '').replace(/\D/g, '')}?text=Hello%20${encodeURIComponent(lead.name || '')}%2C%20regarding%20your%20Andromeda%20loan%20inquiry...`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-2 py-0.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded font-bold text-[10px]"
-                            >
-                              💬 WhatsApp
-                            </a>
-                            {lead.email && (
-                              <a
-                                href={`mailto:${lead.email}?subject=Andromeda%20Loan%20Application%20Update%20-%20${encodeURIComponent(lead.loan_type || 'Loan')}&body=Dear%20${encodeURIComponent(lead.name || 'Applicant')}%2C%0A%0AWe%20have%20received%20your%20loan%20request%20for%20${encodeURIComponent(lead.loan_type || 'Loan')}%20(${encodeURIComponent(lead.amount || '')}).%0A%0AOur%20loan%20advisor%20will%20contact%20you%20at%20${encodeURIComponent(lead.mobile || '')}%20shortly.%0A%0AWith%20Best%20Regards%2C%0AAndromeda%20Branch%20Office`}
-                                className="px-2 py-0.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded font-bold text-[10px]"
-                              >
-                                ✉️ Email
-                              </a>
-                            )}
-                          </div>
-                        </td>
-                        <td className="p-3">
-                          <span className="font-bold text-slate-900">{lead.loan_type}</span>
-                          <div className="text-[11px] font-black text-emerald-700">{lead.amount}</div>
-                        </td>
-                        <td className="p-3 text-slate-600">
-                          {lead.city || 'Nalgonda'}
-                        </td>
-                        <td className="p-3">
-                          <select
-                            value={lead.status || 'New'}
-                            onChange={(e) => handleUpdateLeadStatus(lead, e.target.value)}
-                            className="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-800 focus:outline-none focus:border-blue-600"
-                          >
-                            <option value="New">🟢 New</option>
-                            <option value="In Progress">🟡 In Progress</option>
-                            <option value="Approved">🔵 Approved</option>
-                            <option value="Disbursed">⭐ Disbursed</option>
-                            <option value="Rejected">🔴 Rejected</option>
-                          </select>
-                        </td>
-                        <td className="p-3 text-[11px] text-slate-400 whitespace-nowrap">
-                          {lead.created_at ? new Date(lead.created_at).toLocaleDateString() : 'Recent'}
-                        </td>
-                        <td className="p-3 text-right">
-                          <button
-                            onClick={() => handleDeleteLead(lead)}
-                            title="Delete Lead"
-                            className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                          >
-                            🗑️
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* =================================================================== */}
-        {/* TAB 3: WEBSITE CONTENT CMS */}
+        {/* TAB 3: COMPREHENSIVE WEBSITE CONTENT CMS (HEADER TO FOOTER) */}
         {/* =================================================================== */}
         {activeTab === 'content' && (
-          <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-            <div>
-              <h3 className="text-base font-black text-slate-900">Live Website Content CMS</h3>
-              <p className="text-xs text-slate-500">Edit contact details, typewriter animated headlines, and special offers.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-6">
+            
+            {/* Header Title & Quick Save */}
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Primary Branch Phone (Call/WhatsApp)</label>
-                <input
-                  type="text"
-                  value={cmsForm.phone || ''}
-                  onChange={(e) => setCmsForm({ ...cmsForm, phone: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
-                />
+                <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 border border-blue-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                  Full Website Editor
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+                  Header to Footer Content & Matter CMS
+                </h3>
+                <p className="text-xs text-slate-500 font-medium mt-0.5">
+                  Change all headings, slogans, descriptions, phone numbers, addresses, and footer matter live on the website.
+                </p>
               </div>
-
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Alternate Management Phone</label>
-                <input
-                  type="text"
-                  value={cmsForm.phone2 || ''}
-                  onChange={(e) => setCmsForm({ ...cmsForm, phone2: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Official Branch Email</label>
-                <input
-                  type="email"
-                  value={cmsForm.email || ''}
-                  onChange={(e) => setCmsForm({ ...cmsForm, email: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Cash Incentive for 1 Lakh (Rs.)</label>
-                <input
-                  type="text"
-                  value={cmsForm.cashIncentiveAmount || ''}
-                  onChange={(e) => setCmsForm({ ...cmsForm, cashIncentiveAmount: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-black text-slate-700 uppercase mb-1">Branch Office Address</label>
-              <textarea
-                rows="2"
-                value={cmsForm.address || ''}
-                onChange={(e) => setCmsForm({ ...cmsForm, address: e.target.value })}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-blue-600"
-              />
-            </div>
-
-            {/* Typewriter Phrases List */}
-            <div className="space-y-3 pt-2 border-t border-slate-200">
-              <label className="block text-xs font-black text-slate-700 uppercase">Animated Typewriter Headline Phrases</label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="e.g. LOWEST INTEREST RATE LOANS"
-                  value={newPhrase}
-                  onChange={(e) => setNewPhrase(e.target.value)}
-                  className="flex-1 px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-600"
-                />
-                <button
-                  onClick={handleAddPhrase}
-                  className="px-4 py-2 bg-[#0B4DA2] text-white font-bold text-xs rounded-xl shadow active:scale-95 transition-all"
-                >
-                  + Add Phrase
-                </button>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {(cmsForm.typewriterWords || []).map((phrase, pIdx) => (
-                  <span
-                    key={pIdx}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 border border-slate-300 rounded-full text-xs font-bold text-slate-800"
-                  >
-                    <span>{phrase}</span>
-                    <button
-                      onClick={() => handleRemovePhrase(pIdx)}
-                      className="text-red-500 hover:text-red-700 font-black ml-1"
-                    >
-                      ×
-                    </button>
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-3">
               <button
                 onClick={handleSaveCMS}
-                className="px-6 py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm shadow-lg transition-all active:scale-95"
+                className="w-full sm:w-auto px-6 py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-xs sm:text-sm shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 shrink-0"
               >
-                💾 Save & Publish Website Changes
+                <span>💾 Save & Publish All Changes</span>
               </button>
             </div>
+
+            {/* SECTION 1: HEADER & TOP CONTACT BAR */}
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
+                <h4 className="text-sm font-black text-slate-900 uppercase flex items-center gap-2">
+                  <span>📌</span>
+                  <span>1. Header, Top Bar & Contact Info</span>
+                </h4>
+                <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-2.5 py-0.5 rounded-full">Navigation & Contact</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Company / Brand Name</label>
+                  <input
+                    type="text"
+                    value={cmsForm.brandName || 'ANDROMEDA'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, brandName: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Header Tagline</label>
+                  <input
+                    type="text"
+                    value={cmsForm.headerTagline || "India's Largest Loan Distributor"}
+                    onChange={(e) => setCmsForm({ ...cmsForm, headerTagline: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Branch Name</label>
+                  <input
+                    type="text"
+                    value={cmsForm.branchName || 'NALGONDA'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, branchName: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Primary Call & WhatsApp Phone</label>
+                  <input
+                    type="text"
+                    value={cmsForm.phone || ''}
+                    onChange={(e) => setCmsForm({ ...cmsForm, phone: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Alternate Management Phone</label>
+                  <input
+                    type="text"
+                    value={cmsForm.phone2 || ''}
+                    onChange={(e) => setCmsForm({ ...cmsForm, phone2: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Official Branch Email</label>
+                  <input
+                    type="email"
+                    value={cmsForm.email || ''}
+                    onChange={(e) => setCmsForm({ ...cmsForm, email: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION 2: HERO BANNER & ANIMATED SLOGANS */}
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
+                <h4 className="text-sm font-black text-slate-900 uppercase flex items-center gap-2">
+                  <span>🚀</span>
+                  <span>2. Hero Banner & Animated Headlines</span>
+                </h4>
+                <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full">Top Hero Section</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Hero Badge Text</label>
+                  <input
+                    type="text"
+                    value={cmsForm.heroBadgeText || 'Official Loan Channel Partner'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, heroBadgeText: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Hero Main Title (Line 1)</label>
+                  <input
+                    type="text"
+                    value={cmsForm.heroMainHeading || "India's Largest"}
+                    onChange={(e) => setCmsForm({ ...cmsForm, heroMainHeading: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Hero Sub-Title (Line 2)</label>
+                  <input
+                    type="text"
+                    value={cmsForm.heroSubHeading || 'Personal, Business & Home Loan Specialist in Nalgonda'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, heroSubHeading: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+
+              {/* Animated Typewriter Phrases List */}
+              <div className="space-y-3 pt-2 border-t border-slate-100">
+                <label className="block text-xs font-black text-slate-700 uppercase">
+                  Animated Typewriter Dynamic Slogans (Rotating Text in Hero)
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="e.g. ZERO BALANCE & SAVINGS ACCOUNTS"
+                    value={newPhrase}
+                    onChange={(e) => setNewPhrase(e.target.value)}
+                    className="flex-1 px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                  <button
+                    onClick={handleAddPhrase}
+                    className="px-5 py-2.5 bg-[#0B4DA2] text-white font-black text-xs rounded-xl shadow-md active:scale-95 transition-all"
+                  >
+                    + Add Slogan
+                  </button>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {(cmsForm.typewriterWords || []).map((phrase, pIdx) => (
+                    <span
+                      key={pIdx}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-xl text-xs font-black text-blue-900"
+                    >
+                      <span>{phrase}</span>
+                      <button
+                        onClick={() => handleRemovePhrase(pIdx)}
+                        className="text-red-500 hover:text-red-700 font-black ml-1 text-sm"
+                        title="Remove slogan"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION 3: DOORSTEP SERVICE MATTER */}
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
+                <h4 className="text-sm font-black text-slate-900 uppercase flex items-center gap-2">
+                  <span>🛵</span>
+                  <span>3. Doorstep Service Matter & Slogans</span>
+                </h4>
+                <span className="text-[10px] text-amber-600 font-bold bg-amber-50 px-2.5 py-0.5 rounded-full">Doorstep Section</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Doorstep Section Badge</label>
+                  <input
+                    type="text"
+                    value={cmsForm.doorstepBadge || '🛵 100% Free Doorstep Service'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, doorstepBadge: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Doorstep Main Heading</label>
+                  <input
+                    type="text"
+                    value={cmsForm.doorstepHeading || 'We Provide Services at Your Doorstep'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, doorstepHeading: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Doorstep Description / Slogan</label>
+                <input
+                  type="text"
+                  value={cmsForm.doorstepDescription || 'Safe & Reliable • Fast & On Time • 100% Satisfaction with Zero Service Charges.'}
+                  onChange={(e) => setCmsForm({ ...cmsForm, doorstepDescription: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                />
+              </div>
+            </div>
+
+            {/* SECTION 4: PARTNER & HIGH INCENTIVE PROGRAM MATTER */}
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
+                <h4 className="text-sm font-black text-slate-900 uppercase flex items-center gap-2">
+                  <span>⭐</span>
+                  <span>4. Partner Program & Cash Incentive Matter</span>
+                </h4>
+                <span className="text-[10px] text-purple-600 font-bold bg-purple-50 px-2.5 py-0.5 rounded-full">Partner Section</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Partner Badge</label>
+                  <input
+                    type="text"
+                    value={cmsForm.partnerBadge || '⭐ High Incentive Program'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, partnerBadge: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Partner Headline</label>
+                  <input
+                    type="text"
+                    value={cmsForm.partnerHeadline || 'Partner With Us & Earn More!'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, partnerHeadline: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Cash Incentive for 1 Lakh (₹ Amount)</label>
+                  <input
+                    type="text"
+                    value={cmsForm.cashIncentiveAmount || '1000'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, cashIncentiveAmount: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Partner Subheadline / Offer Text</label>
+                <input
+                  type="text"
+                  value={cmsForm.partnerSubheadline || "Unlimited Earning Opportunities with India's Largest Loan Distributor"}
+                  onChange={(e) => setCmsForm({ ...cmsForm, partnerSubheadline: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                />
+              </div>
+            </div>
+
+            {/* SECTION 5: BANKING & CREDIT CARD SERVICES MATTER */}
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
+                <h4 className="text-sm font-black text-slate-900 uppercase flex items-center gap-2">
+                  <span>🏦</span>
+                  <span>5. Account Opening & Credit Card Services Matter</span>
+                </h4>
+                <span className="text-[10px] text-teal-600 font-bold bg-teal-50 px-2.5 py-0.5 rounded-full">Banking Section</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Section Badge Tag</label>
+                  <input
+                    type="text"
+                    value={cmsForm.bankingBadge || '🏦 Banking & Card Solutions'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, bankingBadge: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Section Headline</label>
+                  <input
+                    type="text"
+                    value={cmsForm.bankingHeading || 'Account Opening & Credit Card Services'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, bankingHeading: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Section Description / Sub-heading</label>
+                <textarea
+                  rows="2"
+                  value={cmsForm.bankingSubheading || 'Zero Balance Savings Accounts, High-Yield Salary Accounts, Business Current Accounts & Lifetime Free Credit Cards with 100% Free Doorstep Assistance.'}
+                  onChange={(e) => setCmsForm({ ...cmsForm, bankingSubheading: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                />
+              </div>
+            </div>
+
+            {/* SECTION 6: FOOTER, OFFICE LOCATIONS & DISCLAIMERS */}
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
+                <h4 className="text-sm font-black text-slate-900 uppercase flex items-center gap-2">
+                  <span>📍</span>
+                  <span>6. Footer Content, Addresses & Legal Matter</span>
+                </h4>
+                <span className="text-[10px] text-slate-600 font-bold bg-slate-100 px-2.5 py-0.5 rounded-full">Footer Section</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">About Andromeda (Footer Column 1)</label>
+                  <textarea
+                    rows="2"
+                    value={cmsForm.footerAboutText || "Andromeda — India's Largest Loan Distributor. Branch Nalgonda."}
+                    onChange={(e) => setCmsForm({ ...cmsForm, footerAboutText: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Authorised Channel Partner Tagline</label>
+                  <textarea
+                    rows="2"
+                    value={cmsForm.footerPartnerTag || "Authorised Channel Partner for Leading Banks & NBFCs"}
+                    onChange={(e) => setCmsForm({ ...cmsForm, footerPartnerTag: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Corporate Head Office (Mumbai)</label>
+                  <textarea
+                    rows="2"
+                    value={cmsForm.headOfficeAddress || '158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, headOfficeAddress: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Branch Office Address (Nalgonda)</label>
+                  <textarea
+                    rows="2"
+                    value={cmsForm.branchAddress || 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, branchAddress: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Copyright Line</label>
+                  <input
+                    type="text"
+                    value={cmsForm.copyrightText || '© 2026 Andromeda Loans Nalgonda Branch. All Rights Reserved.'}
+                    onChange={(e) => setCmsForm({ ...cmsForm, copyrightText: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase mb-1">Legal Disclaimer / Notice</label>
+                  <input
+                    type="text"
+                    value={cmsForm.disclaimerText || "India's Largest Multi-Bank Loan Distribution Network"}
+                    onChange={(e) => setCmsForm({ ...cmsForm, disclaimerText: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Save Button at Bottom */}
+            <div className="pt-2 flex justify-end">
+              <button
+                onClick={handleSaveCMS}
+                className="w-full sm:w-auto px-8 py-4 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-2xl text-sm sm:text-base shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2"
+              >
+                <span>💾 Save & Publish All Website Content</span>
+                <span>→</span>
+              </button>
+            </div>
+
           </div>
         )}
 
@@ -3627,7 +5053,7 @@ function getRouteFromLocation() {
     if (rawHash === 'admin' || rawPath === 'admin' || rawHash.startsWith('admin') || rawPath.startsWith('admin')) {
       return 'admin';
     }
-    const known = ['home', 'services', 'about', 'partner', 'dsa', 'bankers'];
+    const known = ['home', 'services', 'about', 'partner', 'dsa', 'bankers', 'charges', 'contact'];
     if (known.includes(rawHash)) return rawHash;
     if (known.includes(rawPath)) return rawPath;
     return 'home';
@@ -3922,23 +5348,16 @@ function App() {
               💼 For Bankers
             </button>
             <button 
-              onClick={() => scrollTo('charges-sec')}
-              className="px-3 py-1.5 rounded-xl hover:text-[#0B4DA2] hover:bg-slate-50 transition-all"
+              onClick={() => { setCurrentView('charges'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 rounded-xl transition-all ${currentView === 'charges' ? 'text-[#0B4DA2] bg-blue-50 font-black' : 'hover:text-[#0B4DA2] hover:bg-slate-50'}`}
             >
               Charges
             </button>
             <button 
-              onClick={() => scrollTo('contact-sec')}
-              className="px-3 py-1.5 rounded-xl hover:text-[#0B4DA2] hover:bg-slate-50 transition-all"
+              onClick={() => { setCurrentView('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`px-3 py-1.5 rounded-xl transition-all ${currentView === 'contact' ? 'text-[#0B4DA2] bg-blue-50 font-black' : 'hover:text-[#0B4DA2] hover:bg-slate-50'}`}
             >
               Contact
-            </button>
-            <button 
-              onClick={() => { setCurrentView('admin'); window.location.hash = 'admin'; window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="px-3 py-1.5 rounded-xl bg-amber-50 text-amber-800 hover:bg-amber-100 font-bold transition-all flex items-center gap-1 border border-amber-200"
-            >
-              <span>🔐</span>
-              <span>Admin</span>
             </button>
           </div>
 
@@ -3969,15 +5388,13 @@ function App() {
             <button onClick={() => { setCurrentView('services'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">💼 Our Services</button>
             <button onClick={() => { setCurrentView('about'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base font-extrabold">👥 About Andromeda</button>
             <button onClick={() => { setCurrentView('partner'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">🤝 Become a Partner</button>
-            <button onClick={() => { setCurrentView('dsa'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#D32F2F] font-black text-base">⭐ DSA Corner</button>
+            <button onClick={() => { setCurrentView('dsa'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">⭐ DSA Corner</button>
             <button onClick={() => { setCurrentView('bankers'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-red-600 font-black text-base">💼 For Bankers</button>
-            <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('charges-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">💰 Our Charges (For 1 Lakh)</button>
-            <button onClick={() => { setCurrentView('home'); setMenuOpen(false); scrollTo('contact-sec'); }} className="block w-full text-left py-2 hover:text-[#0B4DA2] text-base">📞 Contact Details</button>
-            <button onClick={() => { setCurrentView('admin'); window.location.hash = 'admin'; setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2.5 text-amber-700 bg-amber-50 px-3 rounded-xl font-black text-base border border-amber-200">🔐 Admin CMS Portal</button>
+            <button onClick={() => { setCurrentView('charges'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">💰 Our Charges (For 1 Lakh)</button>
+            <button onClick={() => { setCurrentView('contact'); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block w-full text-left py-2 text-[#0B4DA2] font-black text-base">📞 Contact Details</button>
           </div>
         )}
 
-        {/* Main Content Pages */}
         {currentView === 'services' && (
           <ServicesPage
             onOpenApply={openApply}
@@ -4017,6 +5434,25 @@ function App() {
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToDSA={() => { setCurrentView('dsa'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          />
+        )}
+
+        {currentView === 'charges' && (
+          <ChargesPage
+            siteSettings={siteSettings}
+            onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToBankers={() => { setCurrentView('bankers'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onOpenApply={openApply}
+          />
+        )}
+
+        {currentView === 'contact' && (
+          <ContactPage
+            siteSettings={siteSettings}
+            onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onOpenApply={openApply}
           />
         )}
 
@@ -4190,19 +5626,19 @@ function App() {
               {/* Left Column: Content & Benefits */}
               <div className="md:col-span-7 space-y-3 sm:space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-400/20 border border-amber-300/30 rounded-full text-amber-300 text-xs font-black uppercase tracking-wider">
-                  <span>⭐ High Incentive Program</span>
+                  <span>{siteSettings.partnerBadge || "⭐ High Incentive Program"}</span>
                 </div>
 
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white brand-font leading-tight">
-                  Partner With Us & Earn More!
+                  {siteSettings.partnerHeadline || "Partner With Us & Earn More!"}
                 </h3>
 
                 <div className="text-sm sm:text-base font-extrabold text-[#FFD700]">
-                  Unlimited Earning Opportunities with India's Largest Loan Distributor
+                  {siteSettings.partnerSubheadline || "Unlimited Earning Opportunities with India's Largest Loan Distributor"}
                 </div>
 
                 <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
-                  Refer loan leads & earn top industry commissions. Direct bank codes, doorstep support, and attractive gift & tour incentives for active DSAs and Connectors.
+                  {siteSettings.partnerDescription || "Refer loan leads & earn top industry commissions. Direct bank codes, doorstep support, and attractive gift & tour incentives for active DSAs and Connectors."}
                 </p>
 
                 <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -4259,8 +5695,7 @@ function App() {
               {SERVICES.map((srv) => (
                 <div
                   key={srv.id}
-                  onClick={() => openApply(srv.title)}
-                  className="bg-white rounded-2xl border-2 border-slate-200/90 hover:border-[#0B4DA2] p-2.5 sm:p-3 flex flex-col justify-between items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer group active:scale-95 shadow-xs"
+                  className="bg-white rounded-2xl border-2 border-slate-200/90 hover:border-[#0B4DA2] p-2.5 sm:p-3 flex flex-col justify-between items-center text-center hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group shadow-xs"
                 >
                   <div className="flex flex-col items-center w-full">
                     <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-2 group-hover:scale-110 transition-transform ${srv.iconBg}`}>
@@ -4274,9 +5709,87 @@ function App() {
                     </p>
                   </div>
 
-                  <div className="mt-2.5 pt-1.5 border-t border-slate-100 w-full flex items-center justify-center text-[11px] font-black text-[#0B4DA2] group-hover:text-blue-700 space-x-0.5">
-                    <span>Apply Now</span>
-                    <span className="group-hover:translate-x-0.5 transition-transform text-xs">→</span>
+                  <div className="mt-2.5 pt-2 border-t border-slate-100 w-full">
+                    <a
+                      href={`tel:${siteSettings.phone || '7396962063'}`}
+                      className="w-full py-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-black text-[10.5px] sm:text-[11px] rounded-xl shadow-2xs transition-all flex items-center justify-center gap-1 active:scale-95 text-center"
+                    >
+                      <SVG.Phone className="w-2.5 h-2.5" />
+                      <span>Call Now</span>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* ========================================================================= */}
+          {/* 5.5. ACCOUNT OPENING & CREDIT CARD SERVICES */}
+          {/* ========================================================================= */}
+          <div className="py-2" id="banking-sec">
+            
+            <div className="text-center mb-4 px-1">
+              <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 border border-blue-200 px-3.5 py-1 rounded-full uppercase tracking-wider">
+                {siteSettings.bankingBadge || "🏦 Banking & Card Solutions"}
+              </span>
+              <h2 className="text-base sm:text-xl md:text-2xl font-black text-slate-900 tracking-wide brand-font mt-2 flex items-center justify-center space-x-2">
+                <span className="text-slate-300 font-light">—◇—</span>
+                <span>{siteSettings.bankingHeading || "Account Opening & Credit Card Services"}</span>
+                <span className="text-slate-300 font-light">—◇—</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-2xl mx-auto mt-1">
+                {siteSettings.bankingSubheading || "Zero Balance Savings Accounts, High-Yield Salary Accounts, Business Current Accounts & Lifetime Free Credit Cards with 100% Free Doorstep Assistance."}
+              </p>
+            </div>
+
+            {/* 4 Cards Grid - Medium Size */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {BANKING_SERVICES.map((srv) => (
+                <div
+                  key={srv.id}
+                  className={`bg-white rounded-2xl border-2 ${srv.border} p-3.5 sm:p-4 flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 relative group overflow-hidden shadow-xs`}
+                >
+                  <div className={`absolute top-0 right-0 left-0 h-20 bg-gradient-to-b ${srv.gradient} pointer-events-none`}></div>
+                  
+                  <div className="relative z-10 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-lg sm:text-xl shadow-2xs ${srv.iconBg}`}>
+                        {srv.icon}
+                      </div>
+                      <span className="text-[9.5px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                        {srv.tag}
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-sm sm:text-base font-black text-slate-900 group-hover:text-[#0B4DA2] transition-colors leading-tight">
+                        {srv.title}
+                      </h3>
+                      <p className="text-[11px] text-slate-500 font-medium leading-snug mt-1 line-clamp-2">
+                        {srv.desc}
+                      </p>
+                    </div>
+
+                    {/* Features checklist */}
+                    <div className="space-y-1 pt-2 border-t border-slate-100 text-[11px]">
+                      {srv.features.map((feat, fIdx) => (
+                        <div key={fIdx} className="flex items-start space-x-1.5 text-slate-700 font-semibold leading-tight">
+                          <span className="text-emerald-600 font-black text-xs shrink-0">✓</span>
+                          <span className="text-[10.5px] sm:text-[11px] leading-tight">{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="relative z-10 pt-2.5 mt-2.5 border-t border-slate-100">
+                    <a
+                      href={`tel:${siteSettings.phone || '7396962063'}`}
+                      className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-black text-[11px] rounded-xl shadow-2xs transition-all flex items-center justify-center gap-1.5 active:scale-95 text-center"
+                    >
+                      <SVG.Phone className="w-3 h-3" />
+                      <span>Call: {siteSettings.phone || '7396962063'}</span>
+                    </a>
                   </div>
                 </div>
               ))}
@@ -4373,15 +5886,14 @@ function App() {
                 {INSURANCE_LIST.map((ins) => (
                   <div
                     key={ins.id}
-                    onClick={() => openApply(ins.title)}
-                    className="rounded-2xl bg-white border-2 border-slate-200 p-3.5 flex flex-col justify-between hover:shadow-lg hover:border-[#0B4DA2] hover:-translate-y-0.5 transition-all cursor-pointer group active:scale-95"
+                    className="rounded-2xl bg-white border-2 border-slate-200 p-3.5 flex flex-col justify-between hover:shadow-md hover:border-[#0B4DA2] transition-all"
                   >
                     <div>
                       <div className="flex items-center space-x-2.5 mb-2">
                         <div className={`p-2 rounded-xl shrink-0 ${ins.badgeBg}`}>
                           {ins.icon}
                         </div>
-                        <span className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-[#0B4DA2] transition-colors leading-tight">
+                        <span className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
                           {ins.title}
                         </span>
                       </div>
@@ -4399,13 +5911,7 @@ function App() {
                           {ins.pct}
                         </div>
                       </div>
-                      <button
-                        type="button"
-                        className="px-3 py-1.5 text-xs font-black text-[#0B4DA2] bg-blue-50 group-hover:bg-[#0B4DA2] group-hover:text-white rounded-lg transition-colors flex items-center space-x-1"
-                      >
-                        <span>Apply</span>
-                        <span>→</span>
-                      </button>
+                      <span className="text-[10.5px] font-bold text-slate-400">Sum Assured</span>
                     </div>
                   </div>
                 ))}
@@ -4815,6 +6321,41 @@ function App() {
           </div>
 
           {/* ========================================================================= */}
+          {/* 10.5. DOORSTEP SERVICE SHOWCASE (COMPACT & PLACED AT THE LAST) */}
+          {/* ========================================================================= */}
+          <div className="bg-gradient-to-r from-blue-50 via-white to-slate-50 rounded-3xl p-4 sm:p-5 border-2 border-blue-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 max-w-4xl mx-auto">
+            <div className="w-full md:w-56 lg:w-64 shrink-0 rounded-2xl overflow-hidden shadow-xs border border-slate-200 bg-[#071E3D]">
+              <img
+                src={siteSettings.doorstepBannerImg || "doorstep_service.png"}
+                alt="Andromeda Doorstep Service - 100% Free Service at Your Doorstep"
+                className="w-full h-auto max-h-36 object-contain mx-auto rounded-xl hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            
+            <div className="flex-1 space-y-1.5 text-center md:text-left">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10.5px] font-black uppercase tracking-wider">
+                <span>{siteSettings.doorstepBadge || "🛵 100% Free Doorstep Service"}</span>
+              </div>
+              <h3 className="text-base sm:text-lg font-black text-slate-900 brand-font leading-tight">
+                {siteSettings.doorstepHeading || "We Provide Services at Your Doorstep"}
+              </h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                {siteSettings.doorstepDescription || "Safe & Reliable • Fast & On Time • 100% Satisfaction with Zero Service Charges."}
+              </p>
+            </div>
+
+            <div className="w-full md:w-auto shrink-0">
+              <a
+                href={`tel:${siteSettings.phone || '7396962063'}`}
+                className="w-full md:w-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-black text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 active:scale-95"
+              >
+                <SVG.Phone className="w-3.5 h-3.5" />
+                <span>Call: {siteSettings.phone || '7396962063'}</span>
+              </a>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
           {/* 11. COMPREHENSIVE FOOTER (Exact Match to Image) */}
           {/* ========================================================================= */}
           <footer className="rounded-3xl bg-[#071E3D] text-white p-6 sm:p-8 space-y-6">
@@ -4828,10 +6369,10 @@ function App() {
                   className="h-20 sm:h-24 md:h-28 w-auto object-contain bg-white p-2 rounded-2xl shadow-lg border border-slate-200"
                 />
                 <p className="leading-relaxed text-slate-300 font-medium text-xs">
-                  Andromeda — India's Largest Loan Distributor. Branch Nalgonda.
+                  {siteSettings.footerAboutText || "Andromeda — India's Largest Loan Distributor. Branch Nalgonda."}
                 </p>
                 <div className="text-[11px] text-amber-300 font-bold">
-                  Authorised Channel Partner for Leading Banks & NBFCs
+                  {siteSettings.footerPartnerTag || "Authorised Channel Partner for Leading Banks & NBFCs"}
                 </div>
               </div>
 
@@ -4844,7 +6385,7 @@ function App() {
                   <div>
                     <div className="text-white font-bold text-[11px]">📍 Corporate Head Office (Mumbai):</div>
                     <p className="text-[11px] leading-snug text-slate-300">
-                      158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098
+                      {siteSettings.headOfficeAddress || '158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098'}
                     </p>
                   </div>
                   <div>
@@ -4878,18 +6419,18 @@ function App() {
                     </button>
                   </li>
                   <li>
-                    <button onClick={() => scrollTo('services-sec')} className="hover:text-amber-300 transition-colors">
+                    <button onClick={() => { setCurrentView('services'); window.scrollTo({top:0, behavior:'smooth'}); }} className="hover:text-amber-300 transition-colors">
                       › Our Loan Services
                     </button>
                   </li>
                   <li>
-                    <button onClick={() => scrollTo('charges-sec')} className="hover:text-amber-300 transition-colors">
+                    <button onClick={() => { setCurrentView('charges'); window.scrollTo({top:0, behavior:'smooth'}); }} className="hover:text-amber-300 transition-colors">
                       › Lead Charges & Commissions
                     </button>
                   </li>
                   <li>
-                    <button onClick={() => { setCurrentView('admin'); window.scrollTo({top:0, behavior:'smooth'}); }} className="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1 font-black">
-                      🔐 Admin CMS Portal
+                    <button onClick={() => { setCurrentView('contact'); window.scrollTo({top:0, behavior:'smooth'}); }} className="hover:text-amber-300 transition-colors">
+                      › Contact & Office Locations
                     </button>
                   </li>
                 </ul>
@@ -4922,8 +6463,8 @@ function App() {
             </div>
 
             <div className="pt-4 border-t border-slate-700/60 text-center text-[10.5px] text-slate-400 font-medium flex flex-col sm:flex-row items-center justify-between gap-2">
-              <div>© 2026 Andromeda Sales & Distribution Pvt. Ltd. All rights reserved.</div>
-              <div>India's Largest Multi-Bank Loan Distribution Network</div>
+              <div>{siteSettings.copyrightText || "© 2026 Andromeda Sales & Distribution Pvt. Ltd. All rights reserved."}</div>
+              <div>{siteSettings.disclaimerText || "India's Largest Multi-Bank Loan Distribution Network"}</div>
             </div>
           </footer>
 
@@ -5013,7 +6554,7 @@ function App() {
 
             <div className="mb-4">
               <span className="text-xs font-black uppercase tracking-wider text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full">
-                Instant Loan Lead Form
+                Instant Online Application
               </span>
               <h3 className="text-2xl font-black text-slate-900 brand-font mt-2">
                 Apply for {selectedLoan}
@@ -5022,7 +6563,39 @@ function App() {
 
             <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Full Name</label>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Select Service / Product *</label>
+                <select
+                  value={selectedLoan}
+                  onChange={(e) => setSelectedLoan(e.target.value)}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-bold text-slate-800 focus:outline-none focus:border-[#0B4DA2]"
+                >
+                  <optgroup label="🏦 Account Opening & Credit Cards">
+                    <option value="Zero Balance Account">🪙 Zero Balance Account (₹0 Balance)</option>
+                    <option value="Savings Account">🏦 Savings Account (Up to 7% Interest)</option>
+                    <option value="Current Account">🏢 Current Account (Business Banking)</option>
+                    <option value="Credit Card Services">💳 Credit Card (Lifetime Free Options)</option>
+                  </optgroup>
+                  <optgroup label="💼 Loan Services">
+                    <option value="Personal Loan">Personal Loan</option>
+                    <option value="Business Loan">Business Loan</option>
+                    <option value="Home Loan">Home Loan</option>
+                    <option value="LAP">Loan Against Property (LAP)</option>
+                    <option value="Vehicle Loan">Vehicle Loan</option>
+                    <option value="Education Loan">Education Loan</option>
+                    <option value="Gold Loan">Gold Loan</option>
+                    <option value="MSME Loan">MSME Loan</option>
+                  </optgroup>
+                  <optgroup label="🛡️ Insurance Services">
+                    <option value="Life Insurance">Life Insurance</option>
+                    <option value="Health Insurance">Health Insurance</option>
+                    <option value="Vehicle Insurance">Vehicle Insurance</option>
+                    <option value="General Insurance">General Insurance</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Full Name *</label>
                 <input
                   type="text"
                   required
@@ -5050,6 +6623,7 @@ function App() {
                   <input
                     type="text"
                     required
+                    placeholder="e.g. Nalgonda"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#0B4DA2]"
@@ -5058,7 +6632,7 @@ function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Email Address (Get Request in Mail) *</label>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Email Address *</label>
                 <input
                   type="email"
                   required
@@ -5070,7 +6644,9 @@ function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-slate-700 uppercase mb-1">Loan Amount *</label>
+                <label className="block text-xs font-black text-slate-700 uppercase mb-1">
+                  {selectedLoan.includes('Account') || selectedLoan.includes('Card') ? 'Required Limit / Initial Deposit (Optional)' : 'Required Loan Amount *'}
+                </label>
                 <input
                   type="text"
                   required
