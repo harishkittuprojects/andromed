@@ -599,11 +599,27 @@ const PROCESS_STEPS_INFOGRAPHIC = [
 ];
 
 // 5.1. SERVICES PAGE COMPONENT
-function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
+function ServicesPage({ siteSettings, loanRates, onOpenApply, onNavigateHome, onGoToPartner }) {
   const [selectedServiceId, setSelectedServiceId] = useState('personal');
   const [calcAmount, setCalcAmount] = useState(500000);
   const [calcRate, setCalcRate] = useState(10.5);
   const [calcTenureYears, setCalcTenureYears] = useState(5);
+
+  const getRateFor = (id, fallback) => {
+    if (!loanRates || !Array.isArray(loanRates)) return fallback;
+    const found = loanRates.find(r => r.id === id);
+    return found && found.rate ? found.rate : fallback;
+  };
+  const getMaxFor = (id, fallback) => {
+    if (!loanRates || !Array.isArray(loanRates)) return fallback;
+    const found = loanRates.find(r => r.id === id);
+    return found && found.maxAmount ? found.maxAmount : fallback;
+  };
+  const getTenureFor = (id, fallback) => {
+    if (!loanRates || !Array.isArray(loanRates)) return fallback;
+    const found = loanRates.find(r => r.id === id);
+    return found && found.tenure ? found.tenure : fallback;
+  };
 
   const monthlyRate = (calcRate / 12) / 100;
   const totalMonths = calcTenureYears * 12;
@@ -617,9 +633,9 @@ function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
   const SERVICE_DETAILS = {
     'personal': {
       title: "Personal Loan",
-      rate: "10.49% p.a.",
-      maxAmount: "Rs. 50,00,000",
-      tenure: "Up to 5 Years",
+      rate: getRateFor('personal', "10.49% p.a."),
+      maxAmount: getMaxFor('personal', "Rs. 50,00,000"),
+      tenure: getTenureFor('personal', "Up to 5 Years"),
       processingFee: "0.5% - 1.5%",
       minScore: "650+",
       desc: "Fast, collateral-free personal loans for emergencies, weddings, home improvements, medical needs, or debt consolidation with minimal documentation.",
@@ -627,9 +643,9 @@ function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
     },
     'business': {
       title: "Business Loan",
-      rate: "11.25% p.a.",
-      maxAmount: "Rs. 5,00,00,000",
-      tenure: "Up to 7 Years",
+      rate: getRateFor('business', "11.25% p.a."),
+      maxAmount: getMaxFor('business', "Rs. 5,00,00,000"),
+      tenure: getTenureFor('business', "Up to 7 Years"),
       processingFee: "Up to 2.0%",
       minScore: "680+",
       desc: "Customized business credit lines, working capital limits, machinery loans, and expansion capital to accelerate enterprise growth.",
@@ -637,9 +653,9 @@ function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
     },
     'home': {
       title: "Home Loan",
-      rate: "8.15% p.a.",
-      maxAmount: "Rs. 10,00,00,000",
-      tenure: "Up to 30 Years",
+      rate: getRateFor('home', "8.15% p.a."),
+      maxAmount: getMaxFor('home', "Rs. 10,00,00,000"),
+      tenure: getTenureFor('home', "Up to 30 Years"),
       processingFee: "0.25% - 0.5%",
       minScore: "700+",
       desc: "Affordable home mortgage solutions for buying ready flats, constructing houses, purchasing plots, or balance transfer with top-up.",
@@ -647,9 +663,9 @@ function ServicesPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
     },
     'lap': {
       title: "Loan Against Property",
-      rate: "9.20% p.a.",
-      maxAmount: "Rs. 7,50,00,000",
-      tenure: "Up to 15 Years",
+      rate: getRateFor('lap', "9.20% p.a."),
+      maxAmount: getMaxFor('lap', "Rs. 7,50,00,000"),
+      tenure: getTenureFor('lap', "Up to 15 Years"),
       processingFee: "1.0%",
       minScore: "670+",
       desc: "Unlock maximum funds at lower interest rates by mortgaging your residential, commercial, or industrial real estate equity.",
@@ -5342,9 +5358,13 @@ function App() {
         </div>
       )}
 
-      {/* Main Container */}
-      <div className="w-full bg-white min-h-screen shadow-none overflow-hidden">
-        
+        {/* Top Announcement Strip */}
+        {siteSettings.topNoticeText && (
+          <div className="w-full bg-gradient-to-r from-[#071E3D] via-[#0B4DA2] to-[#071E3D] text-white text-[11px] sm:text-xs py-2 px-4 text-center font-bold tracking-wide border-b border-blue-900/60 shadow-xs flex items-center justify-center gap-2">
+            <span>{siteSettings.topNoticeText}</span>
+          </div>
+        )}
+
         {/* ========================================================================= */}
         {/* 1. TOP HEADER */}
         {/* ========================================================================= */}
@@ -5540,7 +5560,7 @@ function App() {
               <div className="md:col-span-7 space-y-3 sm:space-y-4 text-left">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight uppercase brand-font leading-tight">
                   <span className="block text-white text-xl sm:text-2xl lg:text-3xl tracking-normal opacity-95">
-                    INDIA'S LARGEST
+                    {siteSettings.heroMainHeading || "INDIA'S LARGEST"}
                   </span>
                   <span className="block text-[#00E5FF] mt-1 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl min-h-[1.3em]">
                     <Typewriter
@@ -5561,7 +5581,7 @@ function App() {
 
                 <div className="flex items-center space-x-2 text-xs sm:text-sm font-extrabold text-amber-300">
                   <SVG.Star className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 shrink-0" />
-                  <span>Authorised Channel Partner for Leading Banks & NBFCs</span>
+                  <span>{siteSettings.heroBadgeText || "Authorised Channel Partner for Leading Banks & NBFCs"}</span>
                 </div>
 
                 <div className="pt-2 flex flex-wrap items-center gap-3">
