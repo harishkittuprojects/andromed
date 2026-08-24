@@ -57,15 +57,11 @@
     }
   </style>
 
-  <!-- Fast Local Vendor Libraries with Reliable CDN Fallbacks -->
-  <script src="/vendor/react.min.js"></script>
-  <script>window.React || document.write('<script src="https://unpkg.com/react@18/umd/react.production.min.js"><\/script>')</script>
-  <script src="/vendor/react-dom.min.js"></script>
-  <script>window.ReactDOM || document.write('<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"><\/script>')</script>
-  <script src="/vendor/supabase.min.js"></script>
-  <script>window.supabase || document.write('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script>')</script>
-  <script src="/vendor/babel.min.js"></script>
-  <script>window.Babel || document.write('<script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"><\/script>')</script>
+  <!-- High-Speed Reliable CDN Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
 </head>
 <body class="text-slate-800 antialiased font-sans">
   <div id="root">
