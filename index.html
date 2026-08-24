@@ -3799,6 +3799,13 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
   // Save Website CMS Settings
   const handleSaveCMS = async () => {
     onUpdateSiteSettings(cmsForm);
+    try {
+      localStorage.setItem('andromeda_site_settings', JSON.stringify(cmsForm));
+      window.dispatchEvent(new CustomEvent('andromeda_settings_updated', { detail: cmsForm }));
+      const bc = new BroadcastChannel('andromeda_settings_channel');
+      bc.postMessage(cmsForm);
+      bc.close();
+    } catch(e) {}
     if (supabaseClient) {
       try {
         await supabaseClient.from('site_settings').upsert({ id: 'main', data: cmsForm, updated_at: new Date().toISOString() });
@@ -3823,6 +3830,8 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
         const updated = { ...cmsForm, [targetField]: res.url };
         setCmsForm(updated);
         onUpdateSiteSettings(updated);
+        localStorage.setItem('andromeda_site_settings', JSON.stringify(updated));
+        window.dispatchEvent(new CustomEvent('andromeda_settings_updated', { detail: updated }));
         setUploadStatus('Upload complete! Updated live on website.');
         showToast('Image uploaded & applied successfully!');
       } else {
@@ -3839,8 +3848,22 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
   };
 
   // Save Loan Rates
-  const handleSaveRates = () => {
+  const handleSaveRates = async () => {
     onUpdateLoanRates(ratesList);
+    try {
+      localStorage.setItem('andromeda_loan_rates', JSON.stringify(ratesList));
+      window.dispatchEvent(new CustomEvent('andromeda_rates_updated', { detail: ratesList }));
+      const bc = new BroadcastChannel('andromeda_rates_channel');
+      bc.postMessage(ratesList);
+      bc.close();
+    } catch(e) {}
+    if (supabaseClient) {
+      try {
+        await supabaseClient.from('loan_rates').upsert({ id: 'main', data: ratesList, updated_at: new Date().toISOString() });
+      } catch (e) {
+        console.warn('Supabase loan rates save notice:', e);
+      }
+    }
     showToast('Loan rates published live!');
   };
 
@@ -5105,6 +5128,42 @@ function App() {
     };
   }, []);
 
+  // Listener for real-time state sync across tabs and events
+  useEffect(() => {
+    const handleSettingsEvent = (e) => {
+      if (e.detail) {
+        setSiteSettings(prev => ({ ...DEFAULT_SITE_SETTINGS, ...prev, ...e.detail }));
+      }
+    };
+    const handleRatesEvent = (e) => {
+      if (e.detail && Array.isArray(e.detail)) {
+        setLoanRates(e.detail);
+      }
+    };
+    window.addEventListener('andromeda_settings_updated', handleSettingsEvent);
+    window.addEventListener('andromeda_rates_updated', handleRatesEvent);
+
+    let bc1 = null;
+    let bc2 = null;
+    try {
+      bc1 = new BroadcastChannel('andromeda_settings_channel');
+      bc1.onmessage = (event) => {
+        if (event.data) setSiteSettings(prev => ({ ...DEFAULT_SITE_SETTINGS, ...prev, ...event.data }));
+      };
+      bc2 = new BroadcastChannel('andromeda_rates_channel');
+      bc2.onmessage = (event) => {
+        if (event.data && Array.isArray(event.data)) setLoanRates(event.data);
+      };
+    } catch(e) {}
+
+    return () => {
+      window.removeEventListener('andromeda_settings_updated', handleSettingsEvent);
+      window.removeEventListener('andromeda_rates_updated', handleRatesEvent);
+      if (bc1) bc1.close();
+      if (bc2) bc2.close();
+    };
+  }, []);
+
   // Sync with Supabase on mount
   useEffect(() => {
     async function syncSupabaseSettings() {
@@ -5112,7 +5171,7 @@ function App() {
       try {
         const { data, error } = await supabaseClient.from('site_settings').select('*').eq('id', 'main').single();
         if (!error && data && data.data) {
-          setSiteSettings(prev => ({ ...prev, ...data.data }));
+          setSiteSettings(prev => ({ ...DEFAULT_SITE_SETTINGS, ...prev, ...data.data }));
           localStorage.setItem('andromeda_site_settings', JSON.stringify(data.data));
         }
       } catch (err) {
@@ -5123,8 +5182,9 @@ function App() {
   }, []);
 
   const handleUpdateSiteSettings = (newSettings) => {
-    setSiteSettings(newSettings);
-    localStorage.setItem('andromeda_site_settings', JSON.stringify(newSettings));
+    const merged = { ...DEFAULT_SITE_SETTINGS, ...newSettings };
+    setSiteSettings(merged);
+    localStorage.setItem('andromeda_site_settings', JSON.stringify(merged));
   };
 
   const handleUpdateLoanRates = (newRates) => {
@@ -5390,6 +5450,8 @@ function App() {
 
         {currentView === 'services' && (
           <ServicesPage
+            siteSettings={siteSettings}
+            loanRates={loanRates}
             onOpenApply={openApply}
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -5398,6 +5460,7 @@ function App() {
 
         {currentView === 'about' && (
           <AboutUsPage
+            siteSettings={siteSettings}
             onOpenApply={openApply}
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -5407,6 +5470,7 @@ function App() {
 
         {currentView === 'partner' && (
           <BecomePartnerPage
+            siteSettings={siteSettings}
             onOpenApply={openApply}
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToDSA={() => { setCurrentView('dsa'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -5415,6 +5479,8 @@ function App() {
 
         {currentView === 'dsa' && (
           <DSACornerPage
+            siteSettings={siteSettings}
+            loanRates={loanRates}
             onOpenApply={openApply}
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -5423,6 +5489,7 @@ function App() {
 
         {currentView === 'bankers' && (
           <BankersPage
+            siteSettings={siteSettings}
             onOpenApply={openApply}
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
