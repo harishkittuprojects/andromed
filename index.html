@@ -3481,11 +3481,28 @@ function AdminPanel({ siteSettings, onUpdateSiteSettings, loanRates, onUpdateLoa
   });
 
   // CMS state
-  const [cmsForm, setCmsForm] = useState(siteSettings);
-  const [ratesList, setRatesList] = useState(loanRates);
+  const [cmsForm, setCmsForm] = useState(siteSettings || DEFAULT_SITE_SETTINGS);
+  const [ratesList, setRatesList] = useState(loanRates || DEFAULT_LOAN_RATES);
   const [chargesList, setChargesList] = useState(payoutCharges || DEFAULT_CHARGES);
   const [bankersList, setBankersList] = useState(bankersCharges || DEFAULT_BANKERS_CHARGES);
   const [newPhrase, setNewPhrase] = useState('');
+
+  // Keep Admin forms synchronized whenever props update from Supabase or storage
+  useEffect(() => {
+    if (siteSettings) setCmsForm(siteSettings);
+  }, [siteSettings]);
+
+  useEffect(() => {
+    if (loanRates && Array.isArray(loanRates) && loanRates.length > 0) setRatesList(loanRates);
+  }, [loanRates]);
+
+  useEffect(() => {
+    if (payoutCharges && Array.isArray(payoutCharges) && payoutCharges.length > 0) setChargesList(payoutCharges);
+  }, [payoutCharges]);
+
+  useEffect(() => {
+    if (bankersCharges && Array.isArray(bankersCharges) && bankersCharges.length > 0) setBankersList(bankersCharges);
+  }, [bankersCharges]);
 
   // Media state
   const [uploadingField, setUploadingField] = useState(null);
@@ -3868,6 +3885,13 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
       }
     }
     showToast('Our Charges & Loan Slabs published live!');
+  };
+
+  // Master Save All (Content + Rates + Charges)
+  const handleSaveAll = async () => {
+    await handleSaveCMS();
+    await handleSaveRates();
+    showToast('🚀 All Website Content, Charges & Rates Published Live!');
   };
 
   // Add typewriter phrase
@@ -4297,7 +4321,10 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
 
           <div className="grid grid-cols-2 gap-2 pt-1">
             <button
-              onClick={onExitAdmin}
+              onClick={async () => {
+                await handleSaveAll();
+                onExitAdmin();
+              }}
               className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs text-center transition-all flex items-center justify-center gap-1"
             >
               <span>👁️ Website</span>
@@ -4351,13 +4378,21 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
           <div className="flex items-center space-x-2">
             <button
               onClick={() => {
-                setCmsForm(siteSettings);
-                setRatesList(loanRates);
-                showToast('🔄 CMS content refreshed!');
+                setCmsForm(siteSettings || DEFAULT_SITE_SETTINGS);
+                setRatesList(loanRates || DEFAULT_LOAN_RATES);
+                setChargesList(payoutCharges || DEFAULT_CHARGES);
+                setBankersList(bankersCharges || DEFAULT_BANKERS_CHARGES);
+                showToast('🔄 CMS content refreshed from database!');
               }}
               className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5"
             >
               <span>🔄 Refresh</span>
+            </button>
+            <button
+              onClick={handleSaveAll}
+              className="px-4 py-2 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black text-xs rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-1.5"
+            >
+              <span>💾 Publish All Live</span>
             </button>
           </div>
         </header>
@@ -5362,6 +5397,11 @@ function App() {
         if (bankersRes && bankersRes.data && Array.isArray(bankersRes.data)) {
           setBankersCharges(bankersRes.data);
           localStorage.setItem('andromeda_bankers_charges', JSON.stringify(bankersRes.data));
+        }
+        const { data: ratesRes } = await supabaseClient.from('loan_rates').select('*').eq('id', 'main').single();
+        if (ratesRes && ratesRes.data && Array.isArray(ratesRes.data)) {
+          setLoanRates(ratesRes.data);
+          localStorage.setItem('andromeda_loan_rates', JSON.stringify(ratesRes.data));
         }
       } catch (err) {
         console.warn('Supabase initial fetch note:', err);
