@@ -360,13 +360,13 @@ function App() {
               </div>
 
               <div className="pt-2">
-                <button
-                  onClick={() => openApply('General Loan Application')}
-                  className="px-6 py-3 bg-white text-[#0B4DA2] hover:bg-blue-50 font-black text-sm sm:text-base rounded-2xl shadow-lg transition-all active:scale-95 flex items-center space-x-2"
+                <a
+                  href="tel:7396962063"
+                  className="px-6 py-3 bg-white text-[#0B4DA2] hover:bg-blue-50 font-black text-sm sm:text-base rounded-2xl shadow-lg transition-all active:scale-95 inline-flex items-center space-x-2"
                 >
-                  <span>Apply Now</span>
-                  <span>→</span>
-                </button>
+                  <SVG.Phone className="w-5 h-5" />
+                  <span>Call Branch: 7396962063</span>
+                </a>
               </div>
 
             </div>
@@ -493,7 +493,7 @@ function App() {
                   </div>
 
                   <div className="mt-3 pt-2 border-t border-slate-100 w-full flex items-center justify-center text-xs font-black text-[#0B4DA2] group-hover:text-blue-700 space-x-1">
-                    <span>Apply</span>
+                    <span>Contact Advisor</span>
                     <span>→</span>
                   </div>
                 </div>
@@ -766,12 +766,13 @@ function App() {
               <h4 className="text-lg sm:text-xl font-black brand-font">Get Started</h4>
               <div className="text-sm sm:text-base font-bold text-yellow-200">Need a Loan? We’re Here to Help.</div>
               <p className="text-xs text-white/90">Get your Free Consultation today.</p>
-              <button
-                onClick={() => openApply('Free Consultation')}
-                className="mt-2 px-6 py-2.5 bg-white text-[#B71C1C] hover:bg-yellow-50 font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95"
+              <a
+                href="tel:7396962063"
+                className="mt-2 inline-flex items-center space-x-2 px-6 py-2.5 bg-white text-[#B71C1C] hover:bg-yellow-50 font-black text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-95"
               >
-                Get Free Consultation Now →
-              </button>
+                <SVG.Phone className="w-4 h-4" />
+                <span>Call Advisor: 7396962063</span>
+              </a>
             </div>
 
           </div>
