@@ -4231,7 +4231,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
           {[
             { id: 'overview', icon: '📊', label: 'Dashboard Overview', desc: 'CMS & Site Status' },
             { id: 'content', icon: '✏️', label: 'Website Content CMS', desc: 'Phone, Text, Offers' },
-            { id: 'rates', icon: '💳', label: 'Loan Rates & Tenures', desc: 'Interest Slabs' }
+            { id: 'rates', icon: '💳', label: 'Loan Slabs & Tenures', desc: 'Limits & Tenures' }
           ].map(tab => {
             const isActive = activeTab === tab.id;
             return (
@@ -4925,33 +4925,19 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
         )}
 
         {/* =================================================================== */}
-        {/* TAB 5: LOAN RATES & TENURES */}
+        {/* TAB 5: LOAN SLABS & TENURES */}
         {/* =================================================================== */}
         {activeTab === 'rates' && (
           <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
             <div>
-              <h3 className="text-base font-black text-slate-900">Loan Rates & Maximum Slabs Manager</h3>
-              <p className="text-xs text-slate-500">Edit interest rates, maximum tenure, and loan limits for all 8 categories.</p>
+              <h3 className="text-base font-black text-slate-900">Loan Slabs & Maximum Tenures Manager</h3>
+              <p className="text-xs text-slate-500">Edit maximum repayment tenure and loan limits for all 8 categories.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {ratesList.map((loan, idx) => (
                 <div key={loan.id} className="p-4 border border-slate-200 rounded-2xl bg-slate-50 space-y-3">
                   <div className="font-black text-slate-900 text-sm">{loan.name}</div>
-                  
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">Interest Rate</label>
-                    <input
-                      type="text"
-                      value={loan.rate}
-                      onChange={(e) => {
-                        const updated = [...ratesList];
-                        updated[idx].rate = e.target.value;
-                        setRatesList(updated);
-                      }}
-                      className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold"
-                    />
-                  </div>
 
                   <div className="grid grid-cols-2 gap-2">
                     <div>
@@ -4990,7 +4976,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 onClick={handleSaveRates}
                 className="px-6 py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm shadow-lg transition-all active:scale-95"
               >
-                💾 Publish Loan Rates Live
+                💾 Publish Loan Slabs Live
               </button>
             </div>
           </div>
