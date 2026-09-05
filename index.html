@@ -347,9 +347,14 @@ const SVG = {
       <path strokeLinecap="round" d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" strokeWidth="2.5" />
     </svg>
   ),
-  Handshake: () => (
-    <svg className="w-8 h-8 sm:w-9 sm:h-9 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M7 11.5V14m0-2.5l3-3m-3 3l-3-3m6 0l2.5 2.5a2.5 2.5 0 003.536 0l4.95-4.95a2.5 2.5 0 000-3.536L18 3.5M7 11.5L9.5 14a2.5 2.5 0 003.536 0l4.95-4.95" />
+  Handshake: ({ className = "w-6 h-6" }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+  ),
+  NavPartner: ({ className = "w-6 h-6" }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
     </svg>
   ),
   DocFile: () => (
@@ -438,25 +443,41 @@ const SERVICES = [
   { id: "msme", title: "MSME Loan", icon: <SVG.Gear className="w-7 h-7 text-teal-600" />, iconBg: "bg-teal-50", desc: "Financial support for MSMEs" }
 ];
 
-// 3. CHARGES ARRAY
-const CHARGES = [
-  { title: "Personal Loan", amount: "Rs. 1,300", pct: "(1.3%)", perLakh: "For 1 Lakh", icon: <SVG.User className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Business Loan", amount: "Rs. 1,200", pct: "(1.2%)", perLakh: "For 1 Lakh", icon: <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "LAP", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh", icon: <SVG.Building className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Vehicle Loan", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh", icon: <SVG.Car className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Home Loan", amount: "Rs. 600", pct: "(1.6%)", perLakh: "For 1 Lakh", icon: <SVG.Home className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Education Loan", amount: "Rs. 500", pct: "(0.5%)", perLakh: "For 1 Lakh", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
+// 3. CHARGES ARRAY & CONFIGURABLE PAYOUTS
+const DEFAULT_CHARGES = [
+  { id: "personal", title: "Personal Loan", amount: "Rs. 1,300", pct: "(1.3%)", perLakh: "For 1 Lakh" },
+  { id: "business", title: "Business Loan", amount: "Rs. 1,200", pct: "(1.2%)", perLakh: "For 1 Lakh" },
+  { id: "lap", title: "LAP", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh" },
+  { id: "vehicle", title: "Vehicle Loan", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh" },
+  { id: "home", title: "Home Loan", amount: "Rs. 600", pct: "(1.6%)", perLakh: "For 1 Lakh" },
+  { id: "education", title: "Education Loan", amount: "Rs. 500", pct: "(0.5%)", perLakh: "For 1 Lakh" }
 ];
 
+const CHARGES = DEFAULT_CHARGES;
+
+const getPayoutIcon = (item) => {
+  const t = ((item && (item.title || item.id)) || '').toLowerCase();
+  if (t.includes('personal')) return <SVG.User className="w-5 h-5 text-[#0B4DA2]" />;
+  if (t.includes('business')) return <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" />;
+  if (t.includes('lap') || t.includes('property')) return <SVG.Building className="w-5 h-5 text-[#0B4DA2]" />;
+  if (t.includes('vehicle') || t.includes('car')) return <SVG.Car className="w-5 h-5 text-[#0B4DA2]" />;
+  if (t.includes('home')) return <SVG.Home className="w-5 h-5 text-[#0B4DA2]" />;
+  if (t.includes('education') || t.includes('grad')) return <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" />;
+  if (t.includes('gold')) return <SVG.Gold className="w-5 h-5 text-[#0B4DA2]" />;
+  return <SVG.User className="w-5 h-5 text-[#0B4DA2]" />;
+};
+
 // 3.0. BANKERS PAYOUT CHARGES ARRAY (For 1 Lakh Disbursal - Without Service)
-const BANKERS_CHARGES = [
-  { title: "Personal Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh", icon: <SVG.User className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Business Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh", icon: <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Home Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh", icon: <SVG.Home className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "LAP", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh", icon: <SVG.Building className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Vehicle Loan", amount: "Rs. 800", pct: "(0.8%)", perLakh: "For 1 Lakh", icon: <SVG.Car className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Education Loan", amount: "Rs. 900", pct: "(0.9%)", perLakh: "For 1 Lakh", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
+const DEFAULT_BANKERS_CHARGES = [
+  { id: "personal", title: "Personal Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh" },
+  { id: "business", title: "Business Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh" },
+  { id: "home", title: "Home Loan", amount: "Rs. 2,000", pct: "(2%)", perLakh: "For 1 Lakh" },
+  { id: "lap", title: "LAP", amount: "Rs. 1,000", pct: "(1%)", perLakh: "For 1 Lakh" },
+  { id: "vehicle", title: "Vehicle Loan", amount: "Rs. 800", pct: "(0.8%)", perLakh: "For 1 Lakh" },
+  { id: "education", title: "Education Loan", amount: "Rs. 900", pct: "(0.9%)", perLakh: "For 1 Lakh" }
 ];
+
+const BANKERS_CHARGES = DEFAULT_BANKERS_CHARGES;
 
 // 3.1. INSURANCE LIST ARRAY
 const INSURANCE_LIST = [
@@ -961,7 +982,6 @@ function ServicesPage({ siteSettings, loanRates, onOpenApply, onNavigateHome, on
                 <th className="p-3">Interest Rate</th>
                 <th className="p-3">Max Amount</th>
                 <th className="p-3">Max Tenure</th>
-                <th className="p-3 text-right">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
@@ -975,14 +995,6 @@ function ServicesPage({ siteSettings, loanRates, onOpenApply, onNavigateHome, on
                     <td className="p-3 font-bold text-blue-700">{det.rate || '8.5%'}</td>
                     <td className="p-3 text-slate-700 font-bold">{det.maxAmount || 'Rs. 50L'}</td>
                     <td className="p-3 text-slate-600">{det.tenure || '5 Years'}</td>
-                    <td className="p-3 text-right">
-                      <button
-                        onClick={() => onOpenApply(item.title)}
-                        className="px-3 py-1.5 bg-[#0B4DA2] text-white text-xs font-black rounded-lg hover:bg-blue-800 transition-colors"
-                      >
-                        Apply
-                      </button>
-                    </td>
                   </tr>
                 );
               })}
@@ -2048,7 +2060,7 @@ function DSACornerPage({ onOpenApply, onNavigateHome, onGoToPartner }) {
 }
 
 // 5.4. BANKERS DEDICATED PAGE COMPONENT
-function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) {
+function BankersPage({ siteSettings, bankersCharges, onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) {
   const [calcType, setCalcType] = useState('Personal Loan');
   const [calcVolume, setCalcVolume] = useState(2500000); // 25 Lakhs default
   const [leadForm, setLeadForm] = useState({
@@ -2151,13 +2163,12 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
             <span>📢 FOR BANKERS & BUSINESS OWNERS</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black brand-font tracking-tight leading-tight">
-            <span className="block text-[#FFD700] text-lg sm:text-2xl font-black uppercase tracking-wide mb-1">FOR BANKERS</span>
-            Do Loan Login in Your Name with <span className="text-[#00E5FF]">ANDROMEDA ID</span>
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black brand-font uppercase leading-tight">
+            Direct Login Partner Program
           </h1>
 
-          <p className="text-xs sm:text-base text-slate-200 font-medium leading-relaxed max-w-2xl">
-            Direct Loan Login Portal for Bankers, Financial Advisors, and Direct Partners. Generate high-margin payouts without service overhead across Personal, Business, Home, LAP, Vehicle, and Educational loans.
+          <p className="text-xs sm:text-base text-blue-100 max-w-2xl leading-relaxed font-semibold">
+            Are you a Branch Manager, Loan Officer, DSA, or Financial Consultant? Get direct login access across India’s top 500+ banks & NBFCs with highest payout slabs.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -2184,11 +2195,11 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
         </div>
       </div>
 
-      {/* 2. 4-STEP WORKFLOW INFOGRAPHIC */}
+      {/* 2. THREE-STEP PROCESS */}
       <div className="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6">
         <div className="text-center space-y-1">
           <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
-            Fast 4-Step Process
+            Fast Onboarding
           </span>
           <h2 className="text-xl sm:text-3xl font-black text-slate-900 brand-font mt-2">
             How Andromeda Direct Login Works
@@ -2241,20 +2252,20 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
           </div>
 
           {/* Step 3 */}
-          <div className="p-5 rounded-2xl bg-slate-50 border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50/30 transition-all space-y-3 shadow-sm">
+          <div className="p-5 rounded-2xl bg-slate-50 border-2 border-indigo-200 hover:border-indigo-400 hover:bg-indigo-50/30 transition-all space-y-3 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="px-3 py-1 bg-purple-600 text-white font-black text-xs rounded-lg uppercase">STEP 03</span>
-              <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center">
+              <span className="px-3 py-1 bg-indigo-600 text-white font-black text-xs rounded-lg uppercase">STEP 03</span>
+              <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
             </div>
             <h3 className="text-sm font-black text-slate-900 leading-snug">
-              Submit Lead to Loan Counsellor
+              Processing & Instant Payout
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed font-medium">
-              Hand over lead details to our dedicated Andromeda Loan Counsellor for processing.
+              Loan Counsellor connects with the lead, completes sanctioning, and disburses your payout.
             </p>
           </div>
 
@@ -2269,10 +2280,10 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
               </div>
             </div>
             <h3 className="text-sm font-black text-slate-900 leading-snug">
-              Processing & Instant Payout
+              Instant Payout Settlement
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed font-medium">
-              Loan Counsellor connects with the lead, completes sanctioning, and disburses your payout.
+              We ensure prompt weekly or monthly payouts directly to your bank account with MIS.
             </p>
           </div>
 
@@ -2294,21 +2305,21 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-          {BANKERS_CHARGES.map((ch, idx) => (
+          {(bankersCharges || DEFAULT_BANKERS_CHARGES).map((ch, idx) => (
             <div
-              key={idx}
+              key={ch.id || idx}
               className="rounded-2xl bg-slate-50 border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 hover:bg-white transition-all"
             >
               <div className="flex items-center space-x-3">
                 <div className="p-2.5 rounded-xl bg-blue-100 text-[#0B4DA2] shrink-0">
-                  {ch.icon}
+                  {getPayoutIcon(ch)}
                 </div>
                 <div>
                   <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight block">
                     {ch.title}
                   </span>
                   <span className="text-[11px] font-bold text-slate-500 block mt-0.5">
-                    For 1 Lakh
+                    {ch.perLakh || 'For 1 Lakh'}
                   </span>
                 </div>
               </div>
@@ -2584,9 +2595,13 @@ function BankersPage({ onOpenApply, onNavigateHome, onGoToPartner, onGoToDSA }) 
 // ============================================================================
 // 5.45. CHARGES DEDICATED PAGE COMPONENT
 // ============================================================================
-function ChargesPage({ siteSettings, onNavigateHome, onGoToPartner, onGoToBankers, onOpenApply }) {
+function ChargesPage({ siteSettings, payoutCharges, bankersCharges, onNavigateHome, onGoToPartner, onGoToBankers, onOpenApply }) {
   const [calcType, setCalcType] = useState('Personal Loan');
   const [calcVolume, setCalcVolume] = useState(1000000); // 10 Lakhs default
+  const [activeChargesTab, setActiveChargesTab] = useState('bankers'); // 'bankers' or 'dsa'
+
+  const dsaList = (payoutCharges && payoutCharges.length > 0) ? payoutCharges : DEFAULT_CHARGES;
+  const bList = (bankersCharges && bankersCharges.length > 0) ? bankersCharges : DEFAULT_BANKERS_CHARGES;
 
   const ratesMap = {
     'Personal Loan': 0.013,
@@ -2665,49 +2680,100 @@ function ChargesPage({ siteSettings, onNavigateHome, onGoToPartner, onGoToBanker
 
       {/* 3. ALL LOAN CHARGES CARDS (FOR 1 LAKH) */}
       <div className="space-y-4">
-        <div className="text-center">
-          <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 border border-blue-200 px-3.5 py-1 rounded-full uppercase tracking-wider">
-            Standard DSA / Connector Payouts
-          </span>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
-            Charges & Payout for Every ₹1 Lakh Disbursed
-          </h2>
-          <p className="text-xs text-slate-500 font-medium mt-0.5">
-            Transparent commission credited directly to your bank account with MIS report.
-          </p>
-        </div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+          <div>
+            <span className="text-xs font-black text-[#0B4DA2] bg-blue-50 border border-blue-200 px-3.5 py-1 rounded-full uppercase tracking-wider">
+              Official Commission Structures
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+              Charges & Payout for Every ₹1 Lakh Disbursed
+            </h2>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">
+              Transparent commission credited directly to your bank account with MIS report.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-          {CHARGES.map((ch, idx) => (
-            <div
-              key={idx}
-              className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
+          <div className="flex items-center gap-2 p-1 bg-slate-200 rounded-xl">
+            <button
+              onClick={() => setActiveChargesTab('bankers')}
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all ${activeChargesTab === 'bankers' ? 'bg-[#0B4DA2] text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'}`}
             >
-              <div className="flex items-center space-x-3">
-                <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
-                  {ch.icon}
-                </div>
-                <div>
-                  <div className="text-sm font-black text-slate-900 leading-tight">
-                    {ch.title}
-                  </div>
-                  <div className="text-xs text-slate-500 font-bold mt-0.5">
-                    {ch.perLakh}
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-right shrink-0">
-                <div className="text-base sm:text-lg font-black text-[#D32F2F] tracking-tight leading-none brand-font">
-                  {ch.amount}
-                </div>
-                <div className="text-xs font-black text-[#D32F2F] mt-0.5">
-                  {ch.pct}
-                </div>
-              </div>
-            </div>
-          ))}
+              💼 Bankers Payout
+            </button>
+            <button
+              onClick={() => setActiveChargesTab('dsa')}
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all ${activeChargesTab === 'dsa' ? 'bg-[#0B4DA2] text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'}`}
+            >
+              🤝 Standard DSA
+            </button>
+          </div>
         </div>
+
+        {activeChargesTab === 'bankers' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            {bList.map((ch, idx) => (
+              <div
+                key={ch.id || idx}
+                className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                    {getPayoutIcon(ch)}
+                  </div>
+                  <div>
+                    <div className="text-sm font-black text-slate-900 leading-tight">
+                      {ch.title}
+                    </div>
+                    <div className="text-xs text-slate-500 font-bold mt-0.5">
+                      {ch.perLakh || 'For 1 Lakh'}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-right shrink-0">
+                  <div className="text-base sm:text-lg font-black text-[#D32F2F] tracking-tight leading-none brand-font">
+                    {ch.amount}
+                  </div>
+                  <div className="text-xs font-black text-[#D32F2F] mt-0.5">
+                    {ch.pct}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            {dsaList.map((ch, idx) => (
+              <div
+                key={ch.id || idx}
+                className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                    {getPayoutIcon(ch)}
+                  </div>
+                  <div>
+                    <div className="text-sm font-black text-slate-900 leading-tight">
+                      {ch.title}
+                    </div>
+                    <div className="text-xs text-slate-500 font-bold mt-0.5">
+                      {ch.perLakh || 'For 1 Lakh'}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-right shrink-0">
+                  <div className="text-base sm:text-lg font-black text-[#D32F2F] tracking-tight leading-none brand-font">
+                    {ch.amount}
+                  </div>
+                  <div className="text-xs font-black text-[#D32F2F] mt-0.5">
+                    {ch.pct}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* 4. INTERACTIVE PAYOUT CALCULATOR */}
@@ -3444,7 +3510,7 @@ function DSALoginPage({ defaultType = 'dsa', onNavigateHome, onGoToRegister, sho
 // ============================================================================
 // 5.9. COMPLETE ADMIN CMS PANEL COMPONENT (Supabase + Cloudinary Powered)
 // ============================================================================
-function AdminPanel({ siteSettings, onUpdateSiteSettings, loanRates, onUpdateLoanRates, onExitAdmin, showToast }) {
+function AdminPanel({ siteSettings, onUpdateSiteSettings, loanRates, onUpdateLoanRates, payoutCharges, onUpdatePayoutCharges, bankersCharges, onUpdateBankersCharges, onExitAdmin, showToast }) {
   const [adminSession, setAdminSession] = useState(() => {
     try {
       const saved = localStorage.getItem('andromeda_admin_auth');
@@ -3456,7 +3522,7 @@ function AdminPanel({ siteSettings, onUpdateSiteSettings, loanRates, onUpdateLoa
 
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [loginError, setLoginError] = useState('');
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'leads', 'content', 'media', 'rates', 'sql'
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'leads', 'content', 'media', 'rates', 'payouts', 'sql'
   
   // Leads state
   const [leads, setLeads] = useState([]);
@@ -3505,6 +3571,9 @@ function AdminPanel({ siteSettings, onUpdateSiteSettings, loanRates, onUpdateLoa
   // CMS state
   const [cmsForm, setCmsForm] = useState(siteSettings);
   const [ratesList, setRatesList] = useState(loanRates);
+  const [payoutsList, setPayoutsList] = useState(payoutCharges || DEFAULT_CHARGES);
+  const [bankersList, setBankersList] = useState(bankersCharges || DEFAULT_BANKERS_CHARGES);
+  const [payoutSubTab, setPayoutSubTab] = useState('bankers'); // 'bankers', 'dsa'
   const [newPhrase, setNewPhrase] = useState('');
 
   // Media state
@@ -3877,6 +3946,142 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
       }
     }
     showToast('Loan rates published live!');
+  };
+
+  // Save Payout & Incentive Slabs
+  const handleSavePayouts = async () => {
+    onUpdatePayoutCharges(payoutsList);
+    try {
+      localStorage.setItem('andromeda_payout_charges', JSON.stringify(payoutsList));
+      window.dispatchEvent(new CustomEvent('andromeda_payout_charges_updated', { detail: payoutsList }));
+      const bc = new BroadcastChannel('andromeda_payout_channel');
+      bc.postMessage(payoutsList);
+      bc.close();
+    } catch(e) {}
+    if (supabaseClient) {
+      try {
+        await supabaseClient.from('site_settings').upsert({ id: 'payout_charges', data: payoutsList, updated_at: new Date().toISOString() });
+      } catch (e) {
+        console.warn('Supabase payout charges save notice:', e);
+      }
+    }
+    showToast('💰 Payout & Incentive rates published live!');
+  };
+
+  const handleResetPayouts = () => {
+    if (!confirm('Are you sure you want to reset all payout slabs to default?')) return;
+    setPayoutsList(DEFAULT_CHARGES);
+    onUpdatePayoutCharges(DEFAULT_CHARGES);
+    try {
+      localStorage.setItem('andromeda_payout_charges', JSON.stringify(DEFAULT_CHARGES));
+      window.dispatchEvent(new CustomEvent('andromeda_payout_charges_updated', { detail: DEFAULT_CHARGES }));
+    } catch(e) {}
+    showToast('Reset payout slabs to default!');
+  };
+
+  const handleAddPayoutCategory = () => {
+    const newId = 'loan_' + Date.now();
+    const newEntry = {
+      id: newId,
+      title: 'New Loan Type',
+      amount: 'Rs. 1,000',
+      pct: '(1.0%)',
+      perLakh: 'For 1 Lakh'
+    };
+    setPayoutsList([...payoutsList, newEntry]);
+    showToast('Added new payout category. Fill details and save!');
+  };
+
+  const handleDeletePayoutCategory = (index) => {
+    if (payoutsList.length <= 1) {
+      alert('You must keep at least one payout category.');
+      return;
+    }
+    const item = payoutsList[index];
+    if (!confirm(`Are you sure you want to delete payout slab for "${item.title || 'this category'}"?`)) return;
+    const updated = payoutsList.filter((_, idx) => idx !== index);
+    setPayoutsList(updated);
+    if (onUpdatePayoutCharges) onUpdatePayoutCharges(updated);
+    try {
+      localStorage.setItem('andromeda_payout_charges', JSON.stringify(updated));
+    } catch(e) {}
+    showToast(`Removed payout slab.`);
+  };
+
+  const updateBankerItem = (idx, field, value) => {
+    const updated = [...bankersList];
+    updated[idx] = { ...updated[idx], [field]: value };
+    setBankersList(updated);
+    if (onUpdateBankersCharges) onUpdateBankersCharges(updated);
+    try {
+      localStorage.setItem('andromeda_bankers_charges', JSON.stringify(updated));
+    } catch(e) {}
+  };
+
+  const updatePayoutItem = (idx, field, value) => {
+    const updated = [...payoutsList];
+    updated[idx] = { ...updated[idx], [field]: value };
+    setPayoutsList(updated);
+    if (onUpdatePayoutCharges) onUpdatePayoutCharges(updated);
+    try {
+      localStorage.setItem('andromeda_payout_charges', JSON.stringify(updated));
+    } catch(e) {}
+  };
+
+  // Save Bankers Payout Slabs (Without Service)
+  const handleSaveBankers = async () => {
+    onUpdateBankersCharges(bankersList);
+    try {
+      localStorage.setItem('andromeda_bankers_charges', JSON.stringify(bankersList));
+      window.dispatchEvent(new CustomEvent('andromeda_bankers_charges_updated', { detail: bankersList }));
+      const bc = new BroadcastChannel('andromeda_bankers_channel');
+      bc.postMessage(bankersList);
+      bc.close();
+    } catch(e) {}
+    if (supabaseClient) {
+      try {
+        await supabaseClient.from('site_settings').upsert({ id: 'bankers_charges', data: bankersList, updated_at: new Date().toISOString() });
+      } catch (e) {
+        console.warn('Supabase bankers charges save notice:', e);
+      }
+    }
+    showToast('💼 Bankers Payout rates published live!');
+  };
+
+  const handleResetBankers = () => {
+    if (!confirm('Are you sure you want to reset all bankers payout slabs to default?')) return;
+    setBankersList(DEFAULT_BANKERS_CHARGES);
+    onUpdateBankersCharges(DEFAULT_BANKERS_CHARGES);
+    try {
+      localStorage.setItem('andromeda_bankers_charges', JSON.stringify(DEFAULT_BANKERS_CHARGES));
+      window.dispatchEvent(new CustomEvent('andromeda_bankers_charges_updated', { detail: DEFAULT_BANKERS_CHARGES }));
+    } catch(e) {}
+    showToast('Reset bankers payout slabs to default!');
+  };
+
+  const handleAddBankerCategory = () => {
+    const newId = 'banker_' + Date.now();
+    const newEntry = {
+      id: newId,
+      title: 'New Loan Type',
+      amount: 'Rs. 1,000',
+      pct: '(1.0%)',
+      perLakh: 'For 1 Lakh'
+    };
+    setBankersList([...bankersList, newEntry]);
+    showToast('Added new bankers payout category. Fill details and save!');
+  };
+
+  const handleDeleteBankerCategory = (index) => {
+    if (bankersList.length <= 1) {
+      alert('You must keep at least one category.');
+      return;
+    }
+    const item = bankersList[index];
+    if (!confirm(`Are you sure you want to delete payout slab for "${item.title || 'this category'}"?`)) return;
+    const updated = bankersList.filter((_, idx) => idx !== index);
+    setBankersList(updated);
+    showToast(`Removed bankers payout slab.`);
   };
 
   // Add typewriter phrase
@@ -4266,7 +4471,8 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
           {[
             { id: 'overview', icon: '📊', label: 'Dashboard Overview', desc: 'CMS & Site Status' },
             { id: 'content', icon: '✏️', label: 'Website Content CMS', desc: 'Phone, Text, Offers' },
-            { id: 'rates', icon: '💳', label: 'Loan Rates & Tenures', desc: 'Interest Slabs' }
+            { id: 'rates', icon: '💳', label: 'Loan Rates & Tenures', desc: 'Interest Slabs' },
+            { id: 'payouts', icon: '💰', label: 'Payouts (For 1 Lakh)', desc: 'Interest & Incentive Slabs' }
           ].map(tab => {
             const isActive = activeTab === tab.id;
             return (
@@ -4353,6 +4559,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 {activeTab === 'overview' && 'Dashboard Overview & Site Management'}
                 {activeTab === 'content' && 'Live Website Content CMS'}
                 {activeTab === 'rates' && 'Loan Rates & Limits Manager'}
+                {activeTab === 'payouts' && 'Payout & Incentive Structure (For 1 Lakh)'}
               </h2>
             </div>
           </div>
@@ -4362,6 +4569,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
               onClick={() => {
                 setCmsForm(siteSettings);
                 setRatesList(loanRates);
+                setPayoutsList(payoutCharges || DEFAULT_CHARGES);
                 showToast('🔄 CMS content refreshed!');
               }}
               className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5"
@@ -4404,10 +4612,10 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
             <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
               <div>
                 <h3 className="text-base font-black text-slate-900 brand-font">Website Management Controls</h3>
-                <p className="text-xs text-slate-500">Quickly navigate to modify live website content, phone numbers, or interest rates.</p>
+                <p className="text-xs text-slate-500">Quickly navigate to modify live website content, interest rates, or payout structure.</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <button
                   onClick={() => setActiveTab('content')}
                   className="p-5 rounded-2xl border-2 border-blue-100 hover:border-blue-500 bg-blue-50/40 hover:bg-blue-50 transition-all text-left group"
@@ -4424,6 +4632,15 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">💳</div>
                   <h4 className="text-sm font-black text-slate-900 group-hover:text-emerald-700">Loan Rates & Tenures →</h4>
                   <p className="text-xs text-slate-600 mt-1 font-medium">Manage starting interest rates, maximum loan limits, and repayment tenures.</p>
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('payouts')}
+                  className="p-5 rounded-2xl border-2 border-amber-100 hover:border-amber-500 bg-amber-50/40 hover:bg-amber-50 transition-all text-left group"
+                >
+                  <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">💰</div>
+                  <h4 className="text-sm font-black text-slate-900 group-hover:text-amber-700">Payouts (For 1 Lakh) →</h4>
+                  <p className="text-xs text-slate-600 mt-1 font-medium">Edit payout amounts (e.g. Rs. 1,300), incentive rates ((1.3%)) per 1 Lakh.</p>
                 </button>
               </div>
             </div>
@@ -4960,13 +5177,13 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
         )}
 
         {/* =================================================================== */}
-        {/* TAB 5: LOAN RATES & TENURES */}
+        {/* TAB 5: LOAN LIMITS & TENURES */}
         {/* =================================================================== */}
         {activeTab === 'rates' && (
           <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
             <div>
-              <h3 className="text-base font-black text-slate-900">Loan Rates & Maximum Slabs Manager</h3>
-              <p className="text-xs text-slate-500">Edit interest rates, maximum tenure, and loan limits for all 8 categories.</p>
+              <h3 className="text-base font-black text-slate-900">Loan Amounts & Tenures Manager</h3>
+              <p className="text-xs text-slate-500">Edit maximum loan limits and repayment tenures for all 8 categories.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -4974,20 +5191,6 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 <div key={loan.id} className="p-4 border border-slate-200 rounded-2xl bg-slate-50 space-y-3">
                   <div className="font-black text-slate-900 text-sm">{loan.name}</div>
                   
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">Interest Rate</label>
-                    <input
-                      type="text"
-                      value={loan.rate}
-                      onChange={(e) => {
-                        const updated = [...ratesList];
-                        updated[idx].rate = e.target.value;
-                        setRatesList(updated);
-                      }}
-                      className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold"
-                    />
-                  </div>
-
                   <div className="grid grid-cols-2 gap-2">
                     <div>
                       <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">Max Amount</label>
@@ -5025,9 +5228,394 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 onClick={handleSaveRates}
                 className="px-6 py-3 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-sm shadow-lg transition-all active:scale-95"
               >
-                💾 Publish Loan Rates Live
+                💾 Publish Loan Limits & Tenures Live
               </button>
             </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 5.5: PAYOUT & INCENTIVE STRUCTURE MANAGER (FOR 1 LAKH) */}
+        {/* =================================================================== */}
+        {/* =================================================================== */}
+        {/* TAB 5.5: PAYOUT & INCENTIVE STRUCTURE MANAGER (FOR 1 LAKH) */}
+        {/* =================================================================== */}
+        {activeTab === 'payouts' && (
+          <div className="space-y-6">
+            {/* Sub-Tab Navigation Bar */}
+            <div className="bg-white p-2.5 sm:p-3 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  onClick={() => setPayoutSubTab('bankers')}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center gap-2 ${payoutSubTab === 'bankers' ? 'bg-[#0B4DA2] text-white shadow-md shadow-blue-900/30' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
+                >
+                  <span>💼 Bankers Payout (Without Service)</span>
+                  <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${payoutSubTab === 'bankers' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-800'}`}>
+                    {bankersList.length}
+                  </span>
+                </button>
+                <button
+                  onClick={() => setPayoutSubTab('dsa')}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center gap-2 ${payoutSubTab === 'dsa' ? 'bg-[#0B4DA2] text-white shadow-md shadow-blue-900/30' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
+                >
+                  <span>🤝 Standard DSA / Partner Payouts</span>
+                  <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${payoutSubTab === 'dsa' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-800'}`}>
+                    {payoutsList.length}
+                  </span>
+                </button>
+              </div>
+
+              <div className="text-[11px] font-bold text-slate-500">
+                {payoutSubTab === 'bankers' ? 'Editing Bankers Direct Login Rates' : 'Editing Standard DSA / Partner Rates'}
+              </div>
+            </div>
+
+            {/* --------------------------------------------------------------- */}
+            {/* SUB-TAB 1: BANKERS PAYOUT (WITHOUT SERVICE)                     */}
+            {/* --------------------------------------------------------------- */}
+            {payoutSubTab === 'bankers' && (
+              <div className="space-y-6">
+                {/* Header Card */}
+                <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-black text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                      💼 Bankers Direct Login Slabs (Without Service)
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+                      Loan Payout (Without Service) — For Every ₹1 Lakh Disbursed
+                    </h3>
+                    <p className="text-xs text-slate-500 font-medium mt-0.5 max-w-2xl">
+                      Configure payout rates for Personal Loan (Rs. 2,000 / 2%), Business Loan (Rs. 2,000 / 2%), Home Loan (Rs. 2,000 / 2%), LAP (Rs. 1,000 / 1%), Vehicle Loan (Rs. 800 / 0.8%), Education Loan (Rs. 900 / 0.9%), etc. Updates reflect live on the Bankers page.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                    <button
+                      onClick={handleAddBankerCategory}
+                      className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-black rounded-xl text-xs transition-all active:scale-95 flex items-center gap-1.5"
+                    >
+                      <span>+ Add Loan Category</span>
+                    </button>
+                    <button
+                      onClick={handleSaveBankers}
+                      className="px-6 py-2.5 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-xs sm:text-sm shadow-lg transition-all active:scale-95 flex items-center gap-1.5"
+                    >
+                      <span>💾 Save & Publish Bankers Rates</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Bankers Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {bankersList.map((item, idx) => (
+                    <div key={item.id || idx} className="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm space-y-4 hover:border-blue-300 transition-all">
+                      
+                      {/* Card Header & Delete Option */}
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <div className="flex items-center space-x-2.5">
+                          <div className="p-2 rounded-xl bg-blue-50 text-[#0B4DA2]">
+                            {getPayoutIcon(item)}
+                          </div>
+                          <span className="text-xs font-black text-slate-900 uppercase">
+                            Banker Category #{idx + 1}
+                          </span>
+                        </div>
+                        {bankersList.length > 1 && (
+                          <button
+                            onClick={() => handleDeleteBankerCategory(idx)}
+                            className="text-red-500 hover:text-red-700 text-xs font-bold px-2 py-1 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Delete Category"
+                          >
+                            🗑️ Remove
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Input Fields */}
+                      <div className="space-y-3">
+                        <div>
+                          <label className="block text-[11px] font-black text-slate-700 uppercase mb-1">
+                            Loan Title / Category Name
+                          </label>
+                          <input
+                            type="text"
+                            value={item.title || ''}
+                            onChange={(e) => updateBankerItem(idx, 'title', e.target.value)}
+                            placeholder="e.g. Personal Loan"
+                            className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-bold focus:outline-none focus:border-blue-600"
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2.5">
+                          <div>
+                            <label className="block text-[11px] font-black text-slate-700 uppercase mb-1">
+                              Payout (₹ Amount)
+                            </label>
+                            <input
+                              type="text"
+                              value={item.amount || ''}
+                              onChange={(e) => updateBankerItem(idx, 'amount', e.target.value)}
+                              placeholder="e.g. Rs. 2,000"
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-black text-[#D32F2F] focus:outline-none focus:border-blue-600"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-[11px] font-black text-slate-700 uppercase mb-1">
+                              Rate / Percentage
+                            </label>
+                            <input
+                              type="text"
+                              value={item.pct || ''}
+                              onChange={(e) => updateBankerItem(idx, 'pct', e.target.value)}
+                              placeholder="e.g. (2%)"
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-black text-[#D32F2F] focus:outline-none focus:border-blue-600"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-black text-slate-700 uppercase mb-1">
+                            Subtext / Slab Label
+                          </label>
+                          <input
+                            type="text"
+                            value={item.perLakh || 'For 1 Lakh'}
+                            onChange={(e) => updateBankerItem(idx, 'perLakh', e.target.value)}
+                            placeholder="e.g. For 1 Lakh"
+                            className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-600"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Live Card Preview Box matching exactly the bankers design */}
+                      <div className="pt-2 border-t border-slate-100">
+                        <span className="text-[10px] font-black text-slate-400 uppercase block mb-1.5">
+                          👁️ Live Website Preview:
+                        </span>
+                        <div className="rounded-2xl bg-white border-2 border-slate-200 p-3.5 flex items-center justify-between shadow-xs">
+                          <div className="flex items-center space-x-2.5">
+                            <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                              {getPayoutIcon(item)}
+                            </div>
+                            <div>
+                              <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight block truncate max-w-[120px]">
+                                {item.title || 'Loan Name'}
+                              </span>
+                              <span className="text-[10.5px] font-bold text-slate-500 block mt-0.5">
+                                {item.perLakh || 'For 1 Lakh'}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="text-right shrink-0">
+                            <div className="text-sm sm:text-base font-black text-[#D32F2F] tracking-tight leading-none">
+                              {item.amount || 'Rs. 0'}
+                            </div>
+                            <div className="text-[11px] font-black text-[#D32F2F] mt-0.5">
+                              {item.pct || '(0%)'}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom Actions */}
+                <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <button
+                    onClick={handleResetBankers}
+                    className="w-full sm:w-auto px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all"
+                  >
+                    ↺ Reset to Original Default Bankers Rates
+                  </button>
+
+                  <button
+                    onClick={handleSaveBankers}
+                    className="w-full sm:w-auto px-8 py-3.5 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-xs sm:text-sm shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2"
+                  >
+                    <span>💾 Save & Publish Bankers Rates Live</span>
+                    <span>→</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* --------------------------------------------------------------- */}
+            {/* SUB-TAB 2: STANDARD DSA / PARTNER PAYOUTS                      */}
+            {/* --------------------------------------------------------------- */}
+            {payoutSubTab === 'dsa' && (
+              <div className="space-y-6">
+                {/* Header Card */}
+                <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-black text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                      💰 Standard DSA & Partner Payout Slabs
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 brand-font mt-2">
+                      Standard Partner Payout Structure (For 1 Lakh)
+                    </h3>
+                    <p className="text-xs text-slate-500 font-medium mt-0.5 max-w-2xl">
+                      Customize the standard payout amounts and incentive rates shown on the DSA Corner and Charges pages across the website.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                    <button
+                      onClick={handleAddPayoutCategory}
+                      className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-black rounded-xl text-xs transition-all active:scale-95 flex items-center gap-1.5"
+                    >
+                      <span>+ Add Loan Category</span>
+                    </button>
+                    <button
+                      onClick={handleSavePayouts}
+                      className="px-6 py-2.5 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-xs sm:text-sm shadow-lg transition-all active:scale-95 flex items-center gap-1.5"
+                    >
+                      <span>💾 Save & Publish Payout Rates</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Payout Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {payoutsList.map((item, idx) => (
+                    <div key={item.id || idx} className="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm space-y-4 hover:border-blue-300 transition-all">
+                      
+                      {/* Card Header & Delete Option */}
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <div className="flex items-center space-x-2.5">
+                          <div className="p-2 rounded-xl bg-blue-50 text-[#0B4DA2]">
+                            {getPayoutIcon(item)}
+                          </div>
+                          <span className="text-xs font-black text-slate-900 uppercase">
+                            DSA Category #{idx + 1}
+                          </span>
+                        </div>
+                        {payoutsList.length > 1 && (
+                          <button
+                            onClick={() => handleDeletePayoutCategory(idx)}
+                            className="text-red-500 hover:text-red-700 text-xs font-bold px-2 py-1 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Delete Category"
+                          >
+                            🗑️ Remove
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Input Fields */}
+                      <div className="space-y-3">
+                        <div>
+                          <label className="block text-[11px] font-black text-slate-700 uppercase mb-1">
+                            Loan Title / Category Name
+                          </label>
+                          <input
+                            type="text"
+                            value={item.title || ''}
+                            onChange={(e) => updatePayoutItem(idx, 'title', e.target.value)}
+                            placeholder="e.g. Personal Loan"
+                            className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-bold focus:outline-none focus:border-blue-600"
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2.5">
+                          <div>
+                            <label className="block text-[11px] font-black text-slate-700 uppercase mb-1">
+                              Payout (₹ Amount)
+                            </label>
+                            <input
+                              type="text"
+                              value={item.amount || ''}
+                              onChange={(e) => updatePayoutItem(idx, 'amount', e.target.value)}
+                              placeholder="e.g. Rs. 1,300"
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-black text-[#D32F2F] focus:outline-none focus:border-blue-600"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-[11px] font-black text-slate-700 uppercase mb-1">
+                              Rate / Percentage
+                            </label>
+                            <input
+                              type="text"
+                              value={item.pct || ''}
+                              onChange={(e) => updatePayoutItem(idx, 'pct', e.target.value)}
+                              placeholder="e.g. (1.3%)"
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-black text-[#D32F2F] focus:outline-none focus:border-blue-600"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-black text-slate-700 uppercase mb-1">
+                            Subtext / Slab Label
+                          </label>
+                          <input
+                            type="text"
+                            value={item.perLakh || 'For 1 Lakh'}
+                            onChange={(e) => updatePayoutItem(idx, 'perLakh', e.target.value)}
+                            placeholder="e.g. For 1 Lakh"
+                            className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-600"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Live Card Preview Box */}
+                      <div className="pt-2 border-t border-slate-100">
+                        <span className="text-[10px] font-black text-slate-400 uppercase block mb-1.5">
+                          👁️ Live Website Preview:
+                        </span>
+                        <div className="rounded-2xl bg-white border-2 border-slate-200 p-3 flex items-center justify-between shadow-xs">
+                          <div className="flex items-center space-x-2.5">
+                            <div className="p-2 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                              {getPayoutIcon(item)}
+                            </div>
+                            <div>
+                              <span className="text-xs font-extrabold text-slate-900 leading-tight block truncate max-w-[110px]">
+                                {item.title || 'Loan Name'}
+                              </span>
+                              <span className="text-[10px] font-bold text-slate-500 block mt-0.5">
+                                {item.perLakh || 'For 1 Lakh'}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="text-right shrink-0">
+                            <div className="text-sm font-black text-[#D32F2F] tracking-tight leading-none">
+                              {item.amount || 'Rs. 0'}
+                            </div>
+                            <div className="text-[11px] font-black text-[#D32F2F] mt-0.5">
+                              {item.pct || '(0%)'}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom Actions */}
+                <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <button
+                    onClick={handleResetPayouts}
+                    className="w-full sm:w-auto px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all"
+                  >
+                    ↺ Reset to Original Default Payout Rates
+                  </button>
+
+                  <button
+                    onClick={handleSavePayouts}
+                    className="w-full sm:w-auto px-8 py-3.5 bg-[#0B4DA2] hover:bg-[#083a7c] text-white font-black rounded-xl text-xs sm:text-sm shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2"
+                  >
+                    <span>💾 Save & Publish Payout Rates Live</span>
+                    <span>→</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
           </div>
         )}
 
@@ -5118,6 +5706,27 @@ function App() {
     }
   });
 
+  // Dynamic Payout & Incentive Charges (For 1 Lakh)
+  // Dynamic Payout & Incentive Charges (For 1 Lakh)
+  const [payoutCharges, setPayoutCharges] = useState(() => {
+    try {
+      const saved = localStorage.getItem('andromeda_payout_charges');
+      return saved ? JSON.parse(saved) : DEFAULT_CHARGES;
+    } catch(e) {
+      return DEFAULT_CHARGES;
+    }
+  });
+
+  // Dynamic Bankers Payout Charges (Without Service - For 1 Lakh)
+  const [bankersCharges, setBankersCharges] = useState(() => {
+    try {
+      const saved = localStorage.getItem('andromeda_bankers_charges');
+      return saved ? JSON.parse(saved) : DEFAULT_BANKERS_CHARGES;
+    } catch(e) {
+      return DEFAULT_BANKERS_CHARGES;
+    }
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
@@ -5152,11 +5761,25 @@ function App() {
         setLoanRates(e.detail);
       }
     };
+    const handlePayoutsEvent = (e) => {
+      if (e.detail && Array.isArray(e.detail)) {
+        setPayoutCharges(e.detail);
+      }
+    };
+    const handleBankersEvent = (e) => {
+      if (e.detail && Array.isArray(e.detail)) {
+        setBankersCharges(e.detail);
+      }
+    };
     window.addEventListener('andromeda_settings_updated', handleSettingsEvent);
     window.addEventListener('andromeda_rates_updated', handleRatesEvent);
+    window.addEventListener('andromeda_payout_charges_updated', handlePayoutsEvent);
+    window.addEventListener('andromeda_bankers_charges_updated', handleBankersEvent);
 
     let bc1 = null;
     let bc2 = null;
+    let bc3 = null;
+    let bc4 = null;
     try {
       bc1 = new BroadcastChannel('andromeda_settings_channel');
       bc1.onmessage = (event) => {
@@ -5166,13 +5789,25 @@ function App() {
       bc2.onmessage = (event) => {
         if (event.data && Array.isArray(event.data)) setLoanRates(event.data);
       };
+      bc3 = new BroadcastChannel('andromeda_payout_channel');
+      bc3.onmessage = (event) => {
+        if (event.data && Array.isArray(event.data)) setPayoutCharges(event.data);
+      };
+      bc4 = new BroadcastChannel('andromeda_bankers_channel');
+      bc4.onmessage = (event) => {
+        if (event.data && Array.isArray(event.data)) setBankersCharges(event.data);
+      };
     } catch(e) {}
 
     return () => {
       window.removeEventListener('andromeda_settings_updated', handleSettingsEvent);
       window.removeEventListener('andromeda_rates_updated', handleRatesEvent);
+      window.removeEventListener('andromeda_payout_charges_updated', handlePayoutsEvent);
+      window.removeEventListener('andromeda_bankers_charges_updated', handleBankersEvent);
       if (bc1) bc1.close();
       if (bc2) bc2.close();
+      if (bc3) bc3.close();
+      if (bc4) bc4.close();
     };
   }, []);
 
@@ -5185,6 +5820,16 @@ function App() {
         if (!error && data && data.data) {
           setSiteSettings(prev => ({ ...DEFAULT_SITE_SETTINGS, ...prev, ...data.data }));
           localStorage.setItem('andromeda_site_settings', JSON.stringify(data.data));
+        }
+        const { data: pData, error: pErr } = await supabaseClient.from('site_settings').select('*').eq('id', 'payout_charges').single();
+        if (!pErr && pData && pData.data && Array.isArray(pData.data)) {
+          setPayoutCharges(pData.data);
+          localStorage.setItem('andromeda_payout_charges', JSON.stringify(pData.data));
+        }
+        const { data: bData, error: bErr } = await supabaseClient.from('site_settings').select('*').eq('id', 'bankers_charges').single();
+        if (!bErr && bData && bData.data && Array.isArray(bData.data)) {
+          setBankersCharges(bData.data);
+          localStorage.setItem('andromeda_bankers_charges', JSON.stringify(bData.data));
         }
       } catch (err) {
         console.warn('Supabase initial fetch note:', err);
@@ -5202,6 +5847,16 @@ function App() {
   const handleUpdateLoanRates = (newRates) => {
     setLoanRates(newRates);
     localStorage.setItem('andromeda_loan_rates', JSON.stringify(newRates));
+  };
+
+  const handleUpdatePayoutCharges = (newCharges) => {
+    setPayoutCharges(newCharges);
+    localStorage.setItem('andromeda_payout_charges', JSON.stringify(newCharges));
+  };
+
+  const handleUpdateBankersCharges = (newCharges) => {
+    setBankersCharges(newCharges);
+    localStorage.setItem('andromeda_bankers_charges', JSON.stringify(newCharges));
   };
 
   const showToast = (msg) => {
@@ -5336,6 +5991,10 @@ function App() {
           onUpdateSiteSettings={handleUpdateSiteSettings}
           loanRates={loanRates}
           onUpdateLoanRates={handleUpdateLoanRates}
+          payoutCharges={payoutCharges}
+          onUpdatePayoutCharges={handleUpdatePayoutCharges}
+          bankersCharges={bankersCharges}
+          onUpdateBankersCharges={handleUpdateBankersCharges}
           onExitAdmin={() => { setCurrentView('home'); window.location.hash = ''; }}
           showToast={showToast}
         />
@@ -5509,6 +6168,7 @@ function App() {
         {currentView === 'bankers' && (
           <BankersPage
             siteSettings={siteSettings}
+            bankersCharges={bankersCharges}
             onOpenApply={openApply}
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -5519,6 +6179,8 @@ function App() {
         {currentView === 'charges' && (
           <ChargesPage
             siteSettings={siteSettings}
+            payoutCharges={payoutCharges}
+            bankersCharges={bankersCharges}
             onNavigateHome={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToPartner={() => { setCurrentView('partner'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             onGoToBankers={() => { setCurrentView('bankers'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -5909,21 +6571,21 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              {CHARGES.map((ch, idx) => (
+              {(payoutCharges || DEFAULT_CHARGES).map((ch, idx) => (
                 <div
-                  key={idx}
+                  key={ch.id || idx}
                   className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
                 >
                   <div className="flex items-center space-x-3">
                     <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
-                      {ch.icon}
+                      {getPayoutIcon(ch)}
                     </div>
                     <div>
                       <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight block">
                         {ch.title}
                       </span>
                       <span className="text-[11px] font-bold text-slate-500 block mt-0.5">
-                        For 1 Lakh
+                        {ch.perLakh || 'For 1 Lakh'}
                       </span>
                     </div>
                   </div>
@@ -6014,21 +6676,21 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              {BANKERS_CHARGES.map((ch, idx) => (
+              {(bankersCharges || DEFAULT_BANKERS_CHARGES).map((ch, idx) => (
                 <div
-                  key={idx}
+                  key={ch.id || idx}
                   className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
                 >
                   <div className="flex items-center space-x-3">
                     <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
-                      {ch.icon}
+                      {getPayoutIcon(ch)}
                     </div>
                     <div>
                       <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight block">
                         {ch.title}
                       </span>
                       <span className="text-[11px] font-bold text-slate-500 block mt-0.5">
-                        For 1 Lakh
+                        {ch.perLakh || 'For 1 Lakh'}
                       </span>
                     </div>
                   </div>

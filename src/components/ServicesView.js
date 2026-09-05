@@ -167,7 +167,6 @@ export const ServicesView = ({ onApplyNow, onViewDetails }) => {
                   <th className="py-3.5 px-4">Max Amount</th>
                   <th className="py-3.5 px-4">Max Tenure</th>
                   <th className="py-3.5 px-4">Min Score</th>
-                  <th className="py-3.5 px-4 text-right">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -186,14 +185,6 @@ export const ServicesView = ({ onApplyNow, onViewDetails }) => {
                       <span className="px-2 py-0.5 text-xs font-semibold bg-slate-100 rounded-md text-slate-700">
                         {item.minCreditScore}+
                       </span>
-                    </td>
-                    <td className="py-3.5 px-4 text-right">
-                      <button
-                        onClick={() => onApplyNow(item)}
-                        className="px-3 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-xs transition-colors"
-                      >
-                        Apply
-                      </button>
                     </td>
                   </tr>
                 ))}
