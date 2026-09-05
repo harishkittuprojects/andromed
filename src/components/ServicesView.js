@@ -77,10 +77,6 @@ export const ServicesView = ({ onApplyNow, onViewDetails }) => {
                       </p>
                     </div>
                   </div>
-                  <div className="bg-blue-50 px-4 py-2 rounded-xl text-center border border-blue-100">
-                    <span className="text-[11px] text-slate-500 font-semibold block">Interest Rate</span>
-                    <span className="text-lg font-black text-blue-600">{activeService.interestRate}</span>
-                  </div>
                 </div>
 
                 {/* Description */}
