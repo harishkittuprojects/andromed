@@ -3894,18 +3894,31 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
     showToast('🚀 All Website Content, Charges & Rates Published Live!');
   };
 
+  // Real-time Field Updater for CMS Settings
+  const updateCmsField = (field, value) => {
+    setCmsForm(prev => {
+      const updated = { ...prev, [field]: value };
+      if (onUpdateSiteSettings) onUpdateSiteSettings(updated);
+      try {
+        localStorage.setItem('andromeda_site_settings', JSON.stringify(updated));
+        window.dispatchEvent(new CustomEvent('andromeda_settings_updated', { detail: updated }));
+      } catch(e) {}
+      return updated;
+    });
+  };
+
   // Add typewriter phrase
   const handleAddPhrase = () => {
     if (!newPhrase.trim()) return;
     const updated = [...(cmsForm.typewriterWords || []), newPhrase.trim()];
-    setCmsForm({ ...cmsForm, typewriterWords: updated });
+    updateCmsField('typewriterWords', updated);
     setNewPhrase('');
   };
 
   // Remove typewriter phrase
   const handleRemovePhrase = (index) => {
     const updated = (cmsForm.typewriterWords || []).filter((_, idx) => idx !== index);
-    setCmsForm({ ...cmsForm, typewriterWords: updated });
+    updateCmsField('typewriterWords', updated);
   };
 
   // Copy SQL
@@ -4499,7 +4512,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.brandName || 'ANDROMEDA'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, brandName: e.target.value })}
+                    onChange={(e) => updateCmsField('brandName', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4509,7 +4522,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.headerTagline || "India's Largest Loan Distributor"}
-                    onChange={(e) => setCmsForm({ ...cmsForm, headerTagline: e.target.value })}
+                    onChange={(e) => updateCmsField('headerTagline', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4519,7 +4532,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.branchName || 'NALGONDA'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, branchName: e.target.value })}
+                    onChange={(e) => updateCmsField('branchName', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4531,7 +4544,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.phone || ''}
-                    onChange={(e) => setCmsForm({ ...cmsForm, phone: e.target.value })}
+                    onChange={(e) => updateCmsField('phone', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4541,7 +4554,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.phone2 || ''}
-                    onChange={(e) => setCmsForm({ ...cmsForm, phone2: e.target.value })}
+                    onChange={(e) => updateCmsField('phone2', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4551,7 +4564,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="email"
                     value={cmsForm.email || ''}
-                    onChange={(e) => setCmsForm({ ...cmsForm, email: e.target.value })}
+                    onChange={(e) => updateCmsField('email', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4574,7 +4587,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.heroBadgeText || 'Official Loan Channel Partner'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, heroBadgeText: e.target.value })}
+                    onChange={(e) => updateCmsField('heroBadgeText', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4584,7 +4597,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.heroMainHeading || "India's Largest"}
-                    onChange={(e) => setCmsForm({ ...cmsForm, heroMainHeading: e.target.value })}
+                    onChange={(e) => updateCmsField('heroMainHeading', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4594,7 +4607,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.heroSubHeading || 'Personal, Business & Home Loan Specialist in Nalgonda'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, heroSubHeading: e.target.value })}
+                    onChange={(e) => updateCmsField('heroSubHeading', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4657,7 +4670,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.doorstepBadge || '🛵 100% Free Doorstep Service'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, doorstepBadge: e.target.value })}
+                    onChange={(e) => updateCmsField('doorstepBadge', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4667,7 +4680,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.doorstepHeading || 'We Provide Services at Your Doorstep'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, doorstepHeading: e.target.value })}
+                    onChange={(e) => updateCmsField('doorstepHeading', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4678,7 +4691,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 <input
                   type="text"
                   value={cmsForm.doorstepDescription || 'Safe & Reliable • Fast & On Time • 100% Satisfaction with Zero Service Charges.'}
-                  onChange={(e) => setCmsForm({ ...cmsForm, doorstepDescription: e.target.value })}
+                  onChange={(e) => updateCmsField('doorstepDescription', e.target.value)}
                   className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                 />
               </div>
@@ -4700,7 +4713,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.partnerBadge || '⭐ High Incentive Program'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, partnerBadge: e.target.value })}
+                    onChange={(e) => updateCmsField('partnerBadge', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4710,7 +4723,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.partnerHeadline || 'Partner With Us & Earn More!'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, partnerHeadline: e.target.value })}
+                    onChange={(e) => updateCmsField('partnerHeadline', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4720,7 +4733,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.cashIncentiveAmount || '1000'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, cashIncentiveAmount: e.target.value })}
+                    onChange={(e) => updateCmsField('cashIncentiveAmount', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4731,7 +4744,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 <input
                   type="text"
                   value={cmsForm.partnerSubheadline || "Unlimited Earning Opportunities with India's Largest Loan Distributor"}
-                  onChange={(e) => setCmsForm({ ...cmsForm, partnerSubheadline: e.target.value })}
+                  onChange={(e) => updateCmsField('partnerSubheadline', e.target.value)}
                   className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                 />
               </div>
@@ -4753,7 +4766,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.bankingBadge || '🏦 Banking & Card Solutions'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, bankingBadge: e.target.value })}
+                    onChange={(e) => updateCmsField('bankingBadge', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4763,7 +4776,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.bankingHeading || 'Account Opening & Credit Card Services'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, bankingHeading: e.target.value })}
+                    onChange={(e) => updateCmsField('bankingHeading', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4774,7 +4787,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 <textarea
                   rows="2"
                   value={cmsForm.bankingSubheading || 'Zero Balance Savings Accounts, High-Yield Salary Accounts, Business Current Accounts & Lifetime Free Credit Cards with 100% Free Doorstep Assistance.'}
-                  onChange={(e) => setCmsForm({ ...cmsForm, bankingSubheading: e.target.value })}
+                  onChange={(e) => updateCmsField('bankingSubheading', e.target.value)}
                   className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                 />
               </div>
@@ -4796,7 +4809,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <textarea
                     rows="2"
                     value={cmsForm.footerAboutText || "Andromeda — India's Largest Loan Distributor. Branch Nalgonda."}
-                    onChange={(e) => setCmsForm({ ...cmsForm, footerAboutText: e.target.value })}
+                    onChange={(e) => updateCmsField('footerAboutText', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4806,7 +4819,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <textarea
                     rows="2"
                     value={cmsForm.footerPartnerTag || "Authorised Channel Partner for Leading Banks & NBFCs"}
-                    onChange={(e) => setCmsForm({ ...cmsForm, footerPartnerTag: e.target.value })}
+                    onChange={(e) => updateCmsField('footerPartnerTag', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4818,7 +4831,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <textarea
                     rows="2"
                     value={cmsForm.headOfficeAddress || '158, Dani Corporate Park, C.S.T Road Kalina, Santacruz (E), Mumbai - 400098'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, headOfficeAddress: e.target.value })}
+                    onChange={(e) => updateCmsField('headOfficeAddress', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4828,7 +4841,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <textarea
                     rows="2"
                     value={cmsForm.branchAddress || 'Maruti Nagar, Near H.P. Petrol Bunk, Sagar Road, Nalgonda.'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, branchAddress: e.target.value })}
+                    onChange={(e) => updateCmsField('branchAddress', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4840,7 +4853,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.copyrightText || '© 2026 Andromeda Loans Nalgonda Branch. All Rights Reserved.'}
-                    onChange={(e) => setCmsForm({ ...cmsForm, copyrightText: e.target.value })}
+                    onChange={(e) => updateCmsField('copyrightText', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -4850,7 +4863,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                   <input
                     type="text"
                     value={cmsForm.disclaimerText || "India's Largest Multi-Bank Loan Distribution Network"}
-                    onChange={(e) => setCmsForm({ ...cmsForm, disclaimerText: e.target.value })}
+                    onChange={(e) => updateCmsField('disclaimerText', e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:border-blue-600"
                   />
                 </div>
@@ -5718,11 +5731,9 @@ function App() {
       <div className="w-full bg-white min-h-screen shadow-none overflow-hidden">
 
         {/* Top Announcement Strip */}
-        {siteSettings.topNoticeText && (
-          <div className="w-full bg-gradient-to-r from-[#071E3D] via-[#0B4DA2] to-[#071E3D] text-white text-[11px] sm:text-xs py-2 px-4 text-center font-bold tracking-wide border-b border-blue-900/60 shadow-xs flex items-center justify-center gap-2">
-            <span>{siteSettings.topNoticeText}</span>
-          </div>
-        )}
+        <div className="w-full bg-gradient-to-r from-[#071E3D] via-[#0B4DA2] to-[#071E3D] text-white text-[11px] sm:text-xs py-2 px-4 text-center font-bold tracking-wide border-b border-blue-900/60 shadow-xs flex flex-wrap items-center justify-center gap-2">
+          <span>✨ {siteSettings.headerTagline || "India's Largest Loan Distributor"} • Branch: {siteSettings.branchName || "NALGONDA"} • Call: {siteSettings.phone || "7396962063"}</span>
+        </div>
 
         {/* ========================================================================= */}
         {/* 1. TOP HEADER */}
@@ -5736,9 +5747,17 @@ function App() {
           >
             <img 
               src={siteSettings.headerLogoImg || "header_logo.png"} 
-              alt="Andromeda Nalgonda Official Logo" 
-              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain hover:scale-105 transition-transform duration-200"
+              alt="Andromeda Official Logo" 
+              className="h-14 sm:h-18 md:h-20 w-auto object-contain hover:scale-105 transition-transform duration-200"
             />
+            <div className="hidden sm:block border-l-2 border-slate-200 pl-3">
+              <div className="text-sm md:text-base font-black text-[#0B4DA2] brand-font uppercase leading-tight">
+                {siteSettings.brandName || "ANDROMEDA"}
+              </div>
+              <div className="text-[10.5px] font-black text-amber-600 uppercase tracking-wider">
+                Branch: {siteSettings.branchName || "NALGONDA"}
+              </div>
+            </div>
           </div>
 
           {/* Desktop Navigation Links */}
