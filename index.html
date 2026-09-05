@@ -5167,6 +5167,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                             const updated = [...bankersList];
                             updated[idx].amount = e.target.value;
                             setBankersList(updated);
+                            if (onUpdateBankersCharges) onUpdateBankersCharges(updated);
                           }}
                           placeholder="e.g. Rs. 2,000"
                           className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-red-700 focus:border-red-500"
@@ -5181,14 +5182,84 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                             const updated = [...bankersList];
                             updated[idx].pct = e.target.value;
                             setBankersList(updated);
+                            if (onUpdateBankersCharges) onUpdateBankersCharges(updated);
                           }}
                           placeholder="e.g. (2%)"
                           className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-red-700 focus:border-red-500"
                         />
                       </div>
                     </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase text-slate-400 mb-0.5">Subtitle Tag</label>
+                      <input
+                        type="text"
+                        value={ch.perLakh || 'For 1 Lakh'}
+                        onChange={(e) => {
+                          const updated = [...bankersList];
+                          updated[idx].perLakh = e.target.value;
+                          setBankersList(updated);
+                          if (onUpdateBankersCharges) onUpdateBankersCharges(updated);
+                        }}
+                        className="w-full px-3 py-1 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-600 font-semibold"
+                      />
+                    </div>
                   </div>
                 ))}
+              </div>
+
+              {/* Bankers Live Preview Box */}
+              <div className="p-4 sm:p-5 bg-slate-100/80 border border-slate-200 rounded-2xl space-y-3 mt-4">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-black uppercase tracking-wider text-red-700 flex items-center gap-1.5">
+                    <span>👁️ Bankers Live Preview</span>
+                    <span className="text-[10px] text-slate-500 font-semibold">(For Bankers section on Home & Bankers page)</span>
+                  </div>
+                  <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">Real-Time Sync</span>
+                </div>
+                
+                <div className="text-center py-1">
+                  <h4 className="text-sm sm:text-base font-black text-[#0B4DA2] tracking-wide brand-font flex items-center justify-center space-x-2">
+                    <span className="text-slate-300 font-light">—◇—</span>
+                    <span className="uppercase">For Bankers (For 1 Lakh Disbursement)</span>
+                    <span className="text-slate-300 font-light">—◇—</span>
+                  </h4>
+                  <p className="text-[11px] text-slate-500 font-bold mt-0.5">
+                    Loan Payout (Without Service) Structure for Every ₹1 Lakh Disbursed
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {bankersList.map((ch, idx) => (
+                    <div
+                      key={ch.id || idx}
+                      className="rounded-2xl bg-white border-2 border-slate-200 p-3.5 flex items-center justify-between shadow-xs"
+                    >
+                      <div className="flex items-center space-x-2.5">
+                        <div className="p-2 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                          {getPayoutIcon(ch)}
+                        </div>
+                        <div>
+                          <span className="text-xs font-black text-slate-900 leading-tight block">
+                            {ch.title}
+                          </span>
+                          <span className="text-[10px] font-bold text-slate-500 block mt-0.5">
+                            {ch.perLakh || 'For 1 Lakh'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-right shrink-0 pl-2">
+                        <div className="text-sm sm:text-base font-black text-[#D32F2F] tracking-tight leading-none">
+                          {ch.amount}
+                        </div>
+                        <div className="text-[11px] font-black text-[#D32F2F] mt-0.5">
+                          {ch.pct}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -6298,21 +6369,21 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              {BANKERS_CHARGES.map((ch, idx) => (
+              {(bankersCharges || DEFAULT_BANKERS_CHARGES).map((ch, idx) => (
                 <div
-                  key={idx}
+                  key={ch.id || idx}
                   className="rounded-2xl bg-white border-2 border-slate-200 p-4 flex items-center justify-between hover:shadow-md hover:border-blue-300 transition-all"
                 >
                   <div className="flex items-center space-x-3">
                     <div className="p-2.5 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
-                      {ch.icon}
+                      {getPayoutIcon(ch)}
                     </div>
                     <div>
                       <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight block">
                         {ch.title}
                       </span>
                       <span className="text-[11px] font-bold text-slate-500 block mt-0.5">
-                        For 1 Lakh
+                        {ch.perLakh || "For 1 Lakh"}
                       </span>
                     </div>
                   </div>
