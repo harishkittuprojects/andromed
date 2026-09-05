@@ -360,13 +360,13 @@ function App() {
               </div>
 
               <div className="pt-2">
-                <button
-                  onClick={() => openApply('General Loan Application')}
-                  className="px-6 py-3 bg-white text-[#0B4DA2] hover:bg-blue-50 font-black text-sm sm:text-base rounded-2xl shadow-lg transition-all active:scale-95 flex items-center space-x-2"
+                <a
+                  href="tel:7396962063"
+                  className="px-5 py-3 bg-white text-[#0B4DA2] hover:bg-blue-50 font-black text-xs sm:text-sm rounded-2xl shadow-lg transition-all active:scale-95 inline-flex items-center space-x-1.5"
                 >
-                  <span>Apply Now</span>
-                  <span>→</span>
-                </button>
+                  <SVG.Phone className="w-4 h-4" />
+                  <span>Call: 7396962063</span>
+                </a>
               </div>
 
             </div>
