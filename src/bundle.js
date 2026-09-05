@@ -105,9 +105,9 @@ const SVG = {
       <path strokeLinecap="round" d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" strokeWidth="2.5" />
     </svg>
   ),
-  Handshake: () => (
-    <svg className="w-8 h-8 sm:w-9 sm:h-9 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M7 11.5V14m0-2.5l3-3m-3 3l-3-3m6 0l2.5 2.5a2.5 2.5 0 003.536 0l4.95-4.95a2.5 2.5 0 000-3.536L18 3.5M7 11.5L9.5 14a2.5 2.5 0 003.536 0l4.95-4.95" />
+  Handshake: ({ className = "w-6 h-6" }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
     </svg>
   ),
   DocFile: () => (
@@ -415,8 +415,8 @@ function App() {
           {/* 4. PARTNER WITH US & EARN MORE! CARD */}
           {/* ========================================================================= */}
           <div className="rounded-3xl bg-gradient-to-r from-[#071E3D] via-[#0B3A75] to-[#071E3D] text-white p-4 sm:p-6 shadow-md flex items-center space-x-4">
-            <div className="w-13 h-13 rounded-full bg-[#D32F2F] text-white flex items-center justify-center shrink-0 shadow-md">
-              <SVG.Phone className="w-6 h-6" />
+            <div className="w-13 h-13 rounded-full bg-[#0B4DA2] text-white flex items-center justify-center shrink-0 shadow-md">
+              <SVG.Handshake className="w-6 h-6 text-white" />
             </div>
 
             <div className="flex-1 space-y-1">
