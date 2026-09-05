@@ -5016,6 +5016,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                 </button>
               </div>
 
+              {/* 1. Editable Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                 {chargesList.map((ch, idx) => (
                   <div key={ch.id || idx} className="p-4 border-2 border-slate-200 rounded-2xl bg-slate-50 space-y-3 hover:border-blue-300 transition-colors">
@@ -5036,6 +5037,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                             const updated = [...chargesList];
                             updated[idx].amount = e.target.value;
                             setChargesList(updated);
+                            if (onUpdatePayoutCharges) onUpdatePayoutCharges(updated);
                           }}
                           placeholder="e.g. Rs. 1,300"
                           className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-[#D32F2F] focus:border-[#0B4DA2]"
@@ -5050,6 +5052,7 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                             const updated = [...chargesList];
                             updated[idx].pct = e.target.value;
                             setChargesList(updated);
+                            if (onUpdatePayoutCharges) onUpdatePayoutCharges(updated);
                           }}
                           placeholder="e.g. (1.3%)"
                           className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-[#D32F2F] focus:border-[#0B4DA2]"
@@ -5066,12 +5069,67 @@ CREATE POLICY "Allow public update to site_settings" ON public.site_settings FOR
                           const updated = [...chargesList];
                           updated[idx].perLakh = e.target.value;
                           setChargesList(updated);
+                          if (onUpdatePayoutCharges) onUpdatePayoutCharges(updated);
                         }}
                         className="w-full px-3 py-1 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-600 font-semibold"
                       />
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* 2. Live Preview Box */}
+              <div className="p-4 sm:p-5 bg-slate-100/80 border border-slate-200 rounded-2xl space-y-3 mt-4">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-black uppercase tracking-wider text-[#0B4DA2] flex items-center gap-1.5">
+                    <span>👁️ Live Preview</span>
+                    <span className="text-[10px] text-slate-500 font-semibold">(How it appears on website)</span>
+                  </div>
+                  <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">Real-Time Sync</span>
+                </div>
+                
+                <div className="text-center py-1">
+                  <h4 className="text-sm sm:text-base font-black text-[#0B4DA2] tracking-wide brand-font flex items-center justify-center space-x-2">
+                    <span className="text-slate-300 font-light">—◇—</span>
+                    <span className="uppercase">Our Charges (For 1 Lakh Disbursement)</span>
+                    <span className="text-slate-300 font-light">—◇—</span>
+                  </h4>
+                  <p className="text-[11px] text-slate-500 font-bold mt-0.5">
+                    Payout & Incentive Structure for Every ₹1 Lakh Disbursed
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {chargesList.map((ch, idx) => (
+                    <div
+                      key={ch.id || idx}
+                      className="rounded-2xl bg-white border-2 border-slate-200 p-3.5 flex items-center justify-between shadow-xs"
+                    >
+                      <div className="flex items-center space-x-2.5">
+                        <div className="p-2 rounded-xl bg-blue-50 text-[#0B4DA2] shrink-0">
+                          {getPayoutIcon(ch)}
+                        </div>
+                        <div>
+                          <span className="text-xs font-black text-slate-900 leading-tight block">
+                            {ch.title}
+                          </span>
+                          <span className="text-[10px] font-bold text-slate-500 block mt-0.5">
+                            {ch.perLakh || 'For 1 Lakh'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-right shrink-0 pl-2">
+                        <div className="text-sm sm:text-base font-black text-[#D32F2F] tracking-tight leading-none">
+                          {ch.amount}
+                        </div>
+                        <div className="text-[11px] font-black text-[#D32F2F] mt-0.5">
+                          {ch.pct}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
