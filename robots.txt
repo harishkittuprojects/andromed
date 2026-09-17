@@ -1,0 +1,35 @@
+# robots.txt for Andromeda Loans Nalgonda Branch
+# https://andromedanalgondabranch.in
+
+User-agent: *
+Allow: /
+Allow: /logo.png
+Allow: /andromeda_logo.png
+Allow: /favicon.png
+Allow: /site.webmanifest
+Allow: /sitemap.xml
+Allow: /src/
+
+# Disallow private administrative consoles and internal config
+Disallow: /admin
+Disallow: /admin/
+Disallow: /#admin
+Disallow: /api/private/
+
+# Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.svg$
+Allow: /*.webp$
+
+User-agent: Bingbot
+Allow: /
+
+# XML Sitemap Location
+Sitemap: https://andromedanalgondabranch.in/sitemap.xml
