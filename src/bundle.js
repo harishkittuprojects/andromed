@@ -199,11 +199,11 @@ const SERVICES = [
 // 3. CHARGES ARRAY
 const CHARGES = [
   { title: "Personal Loan", amount: "Rs. 1,300", pct: "(1.3%)", icon: <SVG.User className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Business Loan", amount: "Rs. 1,200", pct: "(1.2%)", icon: <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "LAP", amount: "Rs. 1,000", pct: "(1%)", icon: <SVG.Building className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Vehicle Loan", amount: "Rs. 1,000", pct: "(1%)", icon: <SVG.Car className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Home Loan", amount: "Rs. 600", pct: "(1.6%)", icon: <SVG.Home className="w-5 h-5 text-[#0B4DA2]" /> },
-  { title: "Education Loan", amount: "Rs. 500", pct: "(0.5%)", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
+  { title: "Business Loan", amount: "Rs. 1,300", pct: "(1.3%)", icon: <SVG.Briefcase className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "LAP", amount: "Rs. 900", pct: "(0.9%)", icon: <SVG.Building className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Vehicle Loan", amount: "Rs. 700", pct: "(0.7%)", icon: <SVG.Car className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Home Loan", amount: "Rs. 600", pct: "(0.6%)", icon: <SVG.Home className="w-5 h-5 text-[#0B4DA2]" /> },
+  { title: "Education Loan", amount: "Rs. 700", pct: "(0.7%)", icon: <SVG.Graduation className="w-5 h-5 text-[#0B4DA2]" /> }
 ];
 
 // 4. WHY CHOOSE US POINTS
